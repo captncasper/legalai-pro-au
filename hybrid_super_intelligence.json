@@ -1,0 +1,82 @@
+{
+  "settlement_intelligence": {
+    "count": 47111,
+    "average": 108046.6752987625,
+    "median": 55000.0,
+    "percentiles": {
+      "10th": 10000.0,
+      "25th": 20000.0,
+      "50th": 55000.0,
+      "75th": 155000.0,
+      "90th": 300000.0,
+      "95th": 387500.0
+    },
+    "distribution": {
+      "under_10k": 4215,
+      "under_25k": 14129,
+      "under_50k": 21216,
+      "over_50k": 25895
+    }
+  },
+  "outcome_patterns": {
+    "unknown": 20975,
+    "settled": 6758,
+    "applicant_lost": 3959,
+    "applicant_won": 1967
+  },
+  "success_rates": {
+    "overall": 0.05843905047684126,
+    "settlement_rate": 0.20077839508006773
+  },
+  "precedent_network": {
+    "size": 38796,
+    "top_precedents": [
+      [
+        "House v The King (1936) 55 CLR 499; [1936] HCA 40",
+        551
+      ],
+      [
+        "Briginshaw v Briginshaw [1938] HCA 34",
+        509
+      ],
+      [
+        "Muldrock v The Queen [2011] HCA 39",
+        489
+      ],
+      [
+        "Bugmy v The Queen (2013) 249 CLR 571; [2013] HCA 37",
+        469
+      ],
+      [
+        "Markarian v The Queen (2005) 228 CLR 357; [2005] HCA 25",
+        461
+      ],
+      [
+        "Kentwell v The Queen (2014) 252 CLR 601; [2014] HCA 37",
+        448
+      ],
+      [
+        "Muldrock v The Queen (2011) 244 CLR 120; [2011] HCA 39",
+        386
+      ],
+      [
+        "Markarian v The Queen [2005] HCA 25",
+        359
+      ],
+      [
+        "Bugmy v The Queen [2013] HCA 37",
+        345
+      ],
+      [
+        "Tribunal v Bond [1990] HCA 33",
+        305
+      ]
+    ],
+    "average_citations": 3.00417568821528
+  },
+  "corpus_stats": {
+    "local_cases": 254,
+    "hf_cases": 33659,
+    "total_intelligence_from": 33913
+  }
+}

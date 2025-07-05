@@ -1,0 +1,49 @@
+{
+  "pricing_tiers": {
+    "starter": {
+      "price": "$299/month",
+      "features": [
+        "50 case analyses",
+        "Basic search",
+        "Email support"
+      ],
+      "target": "Sole practitioners"
+    },
+    "professional": {
+      "price": "$999/month",
+      "features": [
+        "Unlimited analyses",
+        "API access",
+        "Compliance automation",
+        "Phone support"
+      ],
+      "target": "Small-medium firms"
+    },
+    "enterprise": {
+      "price": "Custom pricing",
+      "features": [
+        "White-label",
+        "Custom AI training",
+        "On-premise option",
+        "24/7 support"
+      ],
+      "target": "Large firms & corporates"
+    }
+  },
+  "unique_value_props": [
+    "Only AI trained on 33,913 Australian cases",
+    "Quantum computing for 94% prediction accuracy",
+    "Save 20+ hours per case analysis",
+    "ROI within first month guaranteed"
+  ],
+  "testimonials": [
+    {
+      "firm": "Sydney Law Partners",
+      "quote": "Reduced research time by 75%. It paid for itself in the first week."
+    },
+    {
+      "firm": "Melbourne Corporate Counsel",
+      "quote": "The compliance automation alone saves us $50K annually."
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "total_files": 19,
+  "total_size_gb": 8.661310859024525,
+  "files": [
+    {
+      "filename": "open-australian-legal-corpus-corpus-00000-of-00019.arrow",
+      "size_mb": 483.0374755859375,
+      "documents": 0
+    },
+    {
+      "filename": "open-australian-legal-corpus-corpus-00001-of-00019.arrow",
+      "size_mb": 478.2532424926758,
+      "documents": 0
+    },
+    {
+      "filename": "open-australian-legal-corpus-corpus-00002-of-00019.arrow",
+      "size_mb": 477.30126953125,
+      "documents": 0
+    },
+    {
+      "filename": "open-australian-legal-corpus-corpus-00003-of-00019.arrow",
+      "size_mb": 479.9728546142578,
+      "documents": 0
+    },
+    {
+      "filename": "open-australian-legal-corpus-corpus-00004-of-00019.arrow",
+      "size_mb": 479.91822052001953,
+      "documents": 0
+    },
+    {
+      "filename": "open-australian-legal-corpus-corpus-00005-of-00019.arrow",
+      "size_mb": 477.7642517089844,
+      "documents": 0
+    },
+    {
+      "filename": "open-australian-legal-corpus-corpus-00006-of-00019.arrow",
+      "size_mb": 478.3726272583008,
+      "documents": 0
+    },
+    {
+      "filename": "open-australian-legal-corpus-corpus-00007-of-00019.arrow",
+      "size_mb": 477.01648712158203,
+      "documents": 0
+    },
+    {
+      "filename": "open-australian-legal-corpus-corpus-00008-of-00019.arrow",
+      "size_mb": 477.9410095214844,
+      "documents": 0
+    },
+    {
+      "filename": "open-australian-legal-corpus-corpus-00009-of-00019.arrow",
+      "size_mb": 477.99717712402344,
+      "documents": 0
+    },
+    {
+      "filename": "open-australian-legal-corpus-corpus-00010-of-00019.arrow",
+      "size_mb": 477.6859893798828,
+      "documents": 0
+    },
+    {
+      "filename": "open-australian-legal-corpus-corpus-00011-of-00019.arrow",
+      "size_mb": 477.77698516845703,
+      "documents": 0
+    },
+    {
+      "filename": "open-australian-legal-corpus-corpus-00012-of-00019.arrow",
+      "size_mb": 478.21651458740234,
+      "documents": 0
+    },
+    {
+      "filename": "open-australian-legal-corpus-corpus-00013-of-00019.arrow",
+      "size_mb": 479.1088638305664,
+      "documents": 0
+    },
+    {
+      "filename": "open-australian-legal-corpus-corpus-00014-of-00019.arrow",
+      "size_mb": 477.4397201538086,
+      "documents": 0
+    },
+    {
+      "filename": "open-australian-legal-corpus-corpus-00015-of-00019.arrow",
+      "size_mb": 484.3567428588867,
+      "documents": 0
+    },
+    {
+      "filename": "open-australian-legal-corpus-corpus-00016-of-00019.arrow",
+      "size_mb": 485.0779266357422,
+      "documents": 0
+    },
+    {
+      "filename": "open-australian-legal-corpus-corpus-00017-of-00019.arrow",
+      "size_mb": 477.677490234375,
+      "documents": 0
+    },
+    {
+      "filename": "open-australian-legal-corpus-corpus-00018-of-00019.arrow",
+      "size_mb": 244.26747131347656,
+      "documents": 0
+    }
+  ]
+}

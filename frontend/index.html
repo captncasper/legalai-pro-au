@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Australian Legal AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 20px;
+            font-size: 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            outline: none;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .search-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .result-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .case-citation {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .api-config {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>��️ Australian Legal AI</h1>
+            <p>AI-Powered Legal Research & Case Analysis</p>
+        </div>
+
+        <div class="main-content">
+            <!-- API Configuration -->
+            <div class="api-config">
+                <h3>🔧 API Configuration</h3>
+                <label>Backend API URL:</label>
+                <input type="text" id="api-url" class="search-input" 
+                       value="https://your-backend-app.railway.app" 
+                       placeholder="Enter your backend API URL">
+                <small>Update this with your Railway backend URL</small>
+            </div>
+
+            <!-- Search Section -->
+            <div class="search-section">
+                <h2>🔍 Legal Case Search</h2>
+                <input type="text" id="search-input" class="search-input" 
+                       placeholder="Enter your legal query (e.g., 'employment law unfair dismissal')" />
+                
+                <button onclick="searchCases()" class="search-btn">🔍 Search Cases</button>
+                <button onclick="testAPI()" class="search-btn">🧪 Test API</button>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section">
+                <div id="loading" class="loading" style="display: none;">
+                    Searching legal database...
+                </div>
+                <div id="results-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get API URL from input
+        function getAPIUrl() {
+            return document.getElementById('api-url').value || 'http://localhost:8000';
+        }
+
+        // Test API connection
+        async function testAPI() {
+            const apiUrl = getAPIUrl();
+            showLoading(true);
+            
+            try {
+                const response = await fetch(`${apiUrl}/health`);
+                const data = await response.json();
+                
+                displayResults({
+                    results: [{
+                        citation: "API Test",
+                        case_name: "Connection Successful! ✅",
+                        summary: `API Status: ${data.status || 'Connected'}\nResponse: ${JSON.stringify(data, null, 2)}`,
+                        court: "System Test",
+                        year: new Date().getFullYear(),
+                        jurisdiction: "test"
+                    }]
+                });
+            } catch (error) {
+                displayError(`API Connection Failed: ${error.message}\nCheck if your backend URL is correct and the API is running.`);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // Search cases function
+        async function searchCases() {
+            const query = document.getElementById('search-input').value;
+            const apiUrl = getAPIUrl();
+            
+            if (!query.trim()) {
+                alert('Please enter a search query');
+                return;
+            }
+
+            showLoading(true);
+            
+            try {
+                // Try multiple endpoints that might exist
+                const endpoints = [
+                    '/api/v1/search/cases',
+                    '/api/v1/search',
+                    '/search'
+                ];
+
+                let response;
+                let data;
+                
+                for (const endpoint of endpoints) {
+                    try {
+                        response = await fetch(`${apiUrl}${endpoint}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                query: query,
+                                jurisdiction: "all",
+                                limit: 10,
+                                api_key: "demo_key"
+                            })
+                        });
+
+                        if (response.ok) {
+                            data = await response.json();
+                            break;
+                        }
+                    } catch (e) {
+                        continue;
+                    }
+                }
+
+                if (data) {
+                    displayResults(data);
+                } else {
+                    displayError('No valid search endpoint found. Check your API endpoints.');
+                }
+            } catch (error) {
+                console.error('Search error:', error);
+                displayError(`Search failed: ${error.message}`);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // Display functions
+        function displayResults(data) {
+            const container = document.getElementById('results-container');
+            
+            if (!data.results || data.results.length === 0) {
+                container.innerHTML = '<p>No cases found for your query.</p>';
+                return;
+            }
+
+            const resultsHTML = data.results.map(case => `
+                <div class="result-card">
+                    <div class="case-citation">${case.citation || 'No citation'}</div>
+                    <div class="case-name">${case.case_name || case.title || 'Untitled Case'}</div>
+                    <div class="case-summary">${case.summary || case.description || 'No summary available'}</div>
+                    <div style="margin-top: 15px; font-size: 0.9em; color: #666;">
+                        Court: ${case.court || 'Unknown'} | 
+                        Year: ${case.year || 'Unknown'} | 
+                        Jurisdiction: ${case.jurisdiction || 'Unknown'}
+                        ${case.relevance_score ? ` | Relevance: ${Math.round(case.relevance_score * 100)}%` : ''}
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = `
+                <h2>Search Results (${data.results.length} found)</h2>
+                ${resultsHTML}
+            `;
+        }
+
+        function displayError(message) {
+            const container = document.getElementById('results-container');
+            container.innerHTML = `
+                <div style="color: red; padding: 20px; background: #ffe6e6; border-radius: 10px; border: 1px solid #ffcccc;">
+                    <strong>Error:</strong> ${message}
+                </div>
+            `;
+        }
+
+        function showLoading(show) {
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
+        }
+
+        // Enter key support for search
+        document.getElementById('search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchCases();
+            }
+        });
+
+        // Auto-test API on load
+        window.addEventListener('load', function() {
+            setTimeout(testAPI, 1000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1211 @@
+{
+  "summary": {
+    "total_files_analyzed": 57,
+    "features_found": {
+      "data_extraction": 32,
+      "quantum_analysis": 24,
+      "semantic_search": 23,
+      "ml_prediction": 36,
+      "rag_implementation": 34,
+      "api_endpoints": 25,
+      "settlement_extraction": 23,
+      "case_duration": 18,
+      "judge_analysis": 7,
+      "austlii_scraping": 1
+    },
+    "ml_models_found": 8,
+    "data_extractors_found": 2,
+    "data_sources_found": 2
+  },
+  "detailed_findings": {
+    "data_extraction": [
+      {
+        "file": "test_supreme.py",
+        "pattern": "extract.*amount|settlement.*\\$|damages.*\\d",
+        "context": "    \"arguments\": [\"No warnings\", \"Good performance\", \"Retaliation\"],\n    \"evidence_strength\": 85,\n    \"damages_claimed\": 150000\n}\n"
+      },
+      {
+        "file": "legal_ai_mega.py",
+        "pattern": "extract.*amount|settlement.*\\$|damages.*\\d",
+        "context": "                    \"summary\": f\"Legal case involving {query}\",\n                    \"outcome\": random.choice([\"Plaintiff success\", \"Defendant success\", \"Settlement\"]),\n                    \"damages\": random.randint(50000, 500000) if random.random() > 0.5 else None\n                }\n                for i in range(min(kwargs.get('limit', 10), 10))"
+      },
+      {
+        "file": "load_real_aussie_corpus.py",
+        "pattern": "judge.*pattern|judge.*analysis",
+        "context": "        self.case_outcomes = []\n        self.precedent_network = []\n        self.judge_patterns = {}\n        self.winning_patterns = {}\n        self.corpus_loaded = False"
+      },
+      {
+        "file": "legal_ai_reasoning.py",
+        "pattern": "duration|timeline|days|months",
+        "context": "    checklist = [\n        {\"document\": \"Employment contract\", \"priority\": \"HIGH\"},\n        {\"document\": \"Pay slips (last 12 months)\", \"priority\": \"HIGH\"},\n        {\"document\": \"Termination letter\", \"priority\": \"CRITICAL\"}\n    ]"
+      },
+      {
+        "file": "test_enhanced.py",
+        "pattern": "duration|timeline|days|months",
+        "context": "        \"parties\": [\"ABC Corp\", \"John Smith\"],\n        \"purpose\": \"Software development services\",\n        \"duration\": \"6 months\",\n        \"compensation\": \"$50,000\"\n    }"
+      },
+      {
+        "file": "test_mega_api.py",
+        "pattern": "duration|timeline|days|months",
+        "context": "            },\n            \"risk_factors\": [\"novel_legal_theory\", \"media_attention\", \"precedent_setting\"],\n            \"timeline\": \"18_months\"\n        }\n        self.test_endpoint(\"Risk Assessment\", \"POST\", \"/api/v1/analysis/risk\", risk_data)"
+      },
+      {
+        "file": "ultimate_smart_legal_ai_optimized.py",
+        "pattern": "duration|timeline|days|months",
+        "context": "            steps.append({\n                'action': '\u26a1 File F8C with Fair Work',\n                'deadline': '21 days from dismissal',\n                'priority': 'CRITICAL',\n                'status': 'URGENT'"
+      },
+      {
+        "file": "ultimate_smart_legal_ai.py",
+        "pattern": "duration|timeline|days|months",
+        "context": "- Settlement Calculator\n- Legal Reasoning Engine\n- Timeline Analysis\n\"\"\"\n"
+      },
+      {
+        "file": "quantum_legal_predictor.py",
+        "pattern": "duration|timeline|days|months",
+        "context": "        'description': 'Breach of software development contract with penalty clauses',\n        'arguments': {\n            'plaintiff': 'Clear breach of delivery timeline, documented losses',\n            'defendant': 'Force majeure due to COVID-19, good faith efforts'\n        },"
+      },
+      {
+        "file": "implement_real_endpoints.py",
+        "pattern": "judge.*pattern|judge.*analysis",
+        "context": "        \"outcome_distribution\": outcome_dist,\n        \"precedent_relationships\": len(corpus.precedent_network),\n        \"judges_analyzed\": len(corpus.judge_patterns),\n        \"data_source\": \"Open Australian Legal Corpus\"\n    }"
+      },
+      {
+        "file": "ultimate_ai_quick.py",
+        "pattern": "duration|timeline|days|months",
+        "context": "[Name]\"\"\"\n    \n    # 5. Timeline check\n    if '21 days' in text or 'deadline' in text:\n        timeline = \"\u26a0\ufe0f URGENT: 21 day deadline for unfair dismissal!\""
+      },
+      {
+        "file": "corpus_intelligence_extractor.py",
+        "pattern": "extract.*amount|settlement.*\\$|damages.*\\d",
+        "context": "        \n        # 3. Extract settlement ranges\n        settlement_data = self._extract_settlement_amounts(documents)\n        print(f\"\u2705 Found {len(settlement_data)} settlement amounts\")\n        "
+      },
+      {
+        "file": "intelligent_corpus_sampler.py",
+        "pattern": "extract.*amount|settlement.*\\$|damages.*\\d",
+        "context": "    @staticmethod\n    def _extract_settlements(chunk: List[Dict]) -> List[int]:\n        \"\"\"Extract settlement amounts\"\"\"\n        amounts = []\n        "
+      },
+      {
+        "file": "comprehensive.py",
+        "pattern": "duration|timeline|days|months",
+        "context": "        \"constraints\": {\n            \"budget\": 50000,\n            \"timeline\": \"6_months\"\n        },\n        \"risk_tolerance\": \"medium\""
+      },
+      {
+        "file": "analyze_judge_patterns.py",
+        "pattern": "judge.*pattern|judge.*analysis",
+        "context": "#!/usr/bin/env python3\n\"\"\"Analyze judge patterns from your corpus\"\"\"\n\nimport re"
+      },
+      {
+        "file": "strategic_hf_integration.py",
+        "pattern": "extract.*amount|settlement.*\\$|damages.*\\d",
+        "context": "        print(f\"\\n\u2705 Processed {docs_processed} documents\")\n        print(f\"\u2705 Selected {docs_selected} high-value documents\")\n        print(f\"\u2705 Extracted {len(extracted_data['settlement_database'])} settlement amounts\")\n        print(f\"\u2705 Built precedent network with {len(extracted_data['precedent_network'])} nodes\")\n        "
+      },
+      {
+        "file": "legal_qa_light.py",
+        "pattern": "duration|timeline|days|months",
+        "context": "**Eligibility Requirements:**\n1. **Minimum Employment Period:**\n   \u2022 6 months for businesses with 15+ employees\n   \u2022 12 months for smaller businesses\n   "
+      },
+      {
+        "file": "ultimate_intelligent_legal_api.py",
+        "pattern": "duration|timeline|days|months",
+        "context": "    salary: Optional[float] = None\n    years_service: Optional[int] = None\n    days_since_dismissal: Optional[int] = None\n    desired_outcome: Optional[str] = \"compensation\"\n"
+      },
+      {
+        "file": "legal_ai_supreme_au.py",
+        "pattern": "extract.*amount|settlement.*\\$|damages.*\\d",
+        "context": "            ],\n            \"damage_estimation\": {\n                \"likely_award\": round(request.damages_claimed * (success_probability/100) * 0.8) if request.damages_claimed else None,\n                \"range\": {\n                    \"minimum\": round(request.damages_claimed * 0.4) if request.damages_claimed else None,"
+      },
+      {
+        "file": "extract_settlement_amounts.py",
+        "pattern": "extract.*amount|settlement.*\\$|damages.*\\d",
+        "context": "#!/usr/bin/env python3\n\"\"\"Extract settlement amounts from your existing corpus\"\"\"\n\nimport re"
+      },
+      {
+        "file": "test_corpus_unit.py",
+        "pattern": "judge.*pattern|judge.*analysis",
+        "context": "            self._fail(\"Precedent count\", f\"Expected {expected_precedents}, got {len(corpus.precedent_network)}\")\n        \n        if len(corpus.judge_patterns) >= expected_judges:\n            self._pass(f\"Loaded patterns for {len(corpus.judge_patterns)} judges\")\n        else:"
+      },
+      {
+        "file": "ultimate_smart_legal_ai_complete.py",
+        "pattern": "duration|timeline|days|months",
+        "context": "- Settlement Calculator\n- Legal Reasoning Engine\n- Timeline Analysis\n- Evidence Analysis\n\"\"\""
+      },
+      {
+        "file": "market_ready_features.py",
+        "pattern": "extract.*amount|settlement.*\\$|damages.*\\d",
+        "context": "            },\n            \"key_decision_points\": [\n                {\"month\": 3, \"decision\": \"Settlement opportunity\", \"impact\": \"Save $200K\"},\n                {\"month\": 6, \"decision\": \"Discovery deadline\", \"impact\": \"Critical evidence\"}\n            ]"
+      },
+      {
+        "file": "enhanced_legal_api_with_intelligence.py",
+        "pattern": "extract.*amount|settlement.*\\$|damages.*\\d",
+        "context": "    print(f\"   - {len(corpus_intelligence.get('winning_patterns', {}))} winning patterns\")\n    print(f\"   - {len(corpus_intelligence.get('case_outcomes', []))} analyzed cases\")\n    print(f\"   - Settlement data: ${corpus_intelligence.get('settlement_intelligence', {}).get('average', 0):,.0f} average\")\nexcept Exception as e:\n    print(f\"\u26a0\ufe0f Could not load corpus intelligence: {e}\")"
+      },
+      {
+        "file": "complete.py",
+        "pattern": "extract.*amount|settlement.*\\$|damages.*\\d",
+        "context": "    \"\"\"Prediction request\"\"\"\n    case_data: Dict[str, Any]\n    prediction_type: str = Field(\"outcome\", pattern=\"^(outcome|duration|cost|settlement)$\")\n    confidence_required: float = Field(0.7, ge=0, le=1)\n"
+      },
+      {
+        "file": "legal_ai_enhanced.py",
+        "pattern": "duration|timeline|days|months",
+        "context": "TERMS:\n1. Scope: {context.get('scope', 'To be determined')}\n2. Duration: {context.get('duration', '12 months')}\n3. Compensation: {context.get('compensation', 'To be negotiated')}\n"
+      },
+      {
+        "file": "legal_qa_enhanced.py",
+        "pattern": "duration|timeline|days|months",
+        "context": "\n1. **Eligibility Requirements:**\n   - Minimum employment period: 6 months (12 months for small business with <15 employees)\n   - Must be an employee (not contractor)\n   - Annual earnings below high income threshold ($175,000 as of 2024)"
+      },
+      {
+        "file": "data_quality_engine.py",
+        "pattern": "duration|timeline|days|months",
+        "context": "    consistency: float\n    accuracy: float\n    timeliness: float\n    uniqueness: float\n    validity: float"
+      },
+      {
+        "file": "scrape_austlii.py",
+        "pattern": "extract.*amount|settlement.*\\$|damages.*\\d",
+        "context": "    \n    # Example: Get recent negligence cases from NSW\n    cases = scraper.search_cases(\"negligence damages\", \"nsw\", 2024, 10)\n    \n    if cases:"
+      },
+      {
+        "file": "ultimate_legal_ai_ultra.py",
+        "pattern": "duration|timeline|days|months",
+        "context": "            'witness_statement': self._witness_template,\n            'settlement_letter': self._settlement_template,\n            'timeline': self._timeline_template,\n            'evidence_list': self._evidence_template\n        }"
+      },
+      {
+        "file": "next_gen_legal_ai_features.py",
+        "pattern": "extract.*amount|settlement.*\\$|damages.*\\d",
+        "context": "timing = settlement_optimizer.optimize_timing(case_strength=75, days_elapsed=45)\nprint(f\"Current Phase: {timing['current_phase']}\")\nprint(f\"Optimal Settlement Value: ${timing['optimal_settlement_value']:,}\")\nprint(f\"Negotiation Leverage: {timing['negotiation_leverage']['score']}/100\")\n"
+      },
+      {
+        "file": "ultimate_legal_ai_supreme.py",
+        "pattern": "extract.*amount|settlement.*\\$|damages.*\\d",
+        "context": "        \n        elif command_type == 'calculate' and 'typical' in result:\n            return f\"You could expect a typical settlement of ${result['typical']:,.0f}, with a range from ${result['minimum']:,.0f} to ${result['maximum']:,.0f}\"\n        \n        elif command_type == 'timeline' and 'unfair_dismissal_deadline' in result:"
+      }
+    ],
+    "quantum_analysis": [
+      {
+        "file": "test_supreme.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "test_endpoint(\"Health\", \"GET\", \"/health\")\n\n# Test quantum analysis\nquantum_data = {\n    \"case_type\": \"employment\","
+      },
+      {
+        "file": "legal_ai_mega.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "    \n    # Feature flags\n    ENABLE_QUANTUM: bool = True\n    ENABLE_EMOTION: bool = True\n    ENABLE_VOICE: bool = True"
+      },
+      {
+        "file": "test_data_usability.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "    \n    @pytest.mark.asyncio\n    async def test_quantum_analysis_compatibility(self, legal_corpus):\n        \"\"\"Test data compatibility with quantum analysis\"\"\"\n        quantum_ready_cases = 0"
+      },
+      {
+        "file": "test_enhanced.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "test_endpoint(\"Health\", \"GET\", \"/health\")\n\n# Quantum Analysis\ntest_endpoint(\"Quantum Analysis\", \"POST\", \"/api/v1/analysis/quantum\", {\n    \"case_type\": \"employment\","
+      },
+      {
+        "file": "test_mega_api.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "        self.test_endpoint(\"Health Check\", \"GET\", \"/health\")\n        \n        # 2. Quantum Analysis\n        print(\"\\n\ud83c\udf0c TESTING QUANTUM ANALYSIS\")\n        quantum_data = {"
+      },
+      {
+        "file": "test_api_simple.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "        for case_data in real_cases[:1]:  # Test first case\n            status, data = self.make_request(\n                \"/api/v1/analysis/quantum-supreme\",\n                \"POST\",\n                case_data"
+      },
+      {
+        "file": "quantum_legal_predictor.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "#!/usr/bin/env python3\n\"\"\"Quantum-Enhanced Legal Prediction with Explainable AI\"\"\"\n\nimport numpy as np"
+      },
+      {
+        "file": "implement_real_endpoints.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "    return {\"results\": formatted_results, \"count\": len(formatted_results)}\n\n@app.post(\"/api/v1/analysis/quantum-supreme\")\nasync def analyze_case(request: dict):\n    # Use real case data for analysis"
+      },
+      {
+        "file": "test_api.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "    print(\"Health Check:\", response.json())\n\ndef test_quantum_analysis():\n    \"\"\"Test quantum analysis\"\"\"\n    data = {"
+      },
+      {
+        "file": "test_with_real_data.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "                \n                async with self.session.post(\n                    f\"{self.base_url}/api/v1/analysis/quantum-supreme\",\n                    json=request_data\n                ) as resp:"
+      },
+      {
+        "file": "comprehensive.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "# Test data fixtures\n@pytest.fixture\ndef quantum_analysis_data():\n    return {\n        \"case_type\": \"employment\","
+      },
+      {
+        "file": "test_performance.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "    \n    # Test data\n    quantum_data = {\n        \"case_type\": \"employment\",\n        \"description\": \"Test case\","
+      },
+      {
+        "file": "ultimate_intelligent_legal_api.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "    SettlementTimingOptimizer,\n    ArgumentStrengthScorer,\n    QuantumSuccessPredictor\n)\n"
+      },
+      {
+        "file": "legal_ai_supreme_au.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "    metadata: Optional[Dict[str, Any]] = {}\n\nclass QuantumAnalysisSupreme(SupremeRequest):\n    case_type: str\n    description: str"
+      },
+      {
+        "file": "optimized_main.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "    timestamp: datetime = Field(default_factory=datetime.utcnow)\n\nclass QuantumAnalysisRequest(BaseRequest):\n    case_type: str\n    description: str"
+      },
+      {
+        "file": "market_ready_features.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "    \"unique_value_props\": [\n        \"Only AI trained on 33,913 Australian cases\",\n        \"Quantum computing for 94% prediction accuracy\",\n        \"Save 20+ hours per case analysis\",\n        \"ROI within first month guaranteed\""
+      },
+      {
+        "file": "integrate_features.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "print(\"\\n\ud83c\udfaf Key features to integrate:\")\npriority_features = [\n    \"QuantumSuccessPredictor\",\n    \"PatternRecognitionEngine\", \n    \"RiskAnalysisEngine\","
+      },
+      {
+        "file": "optimised_legal_ai_api.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "from app.core.legal_rag import LegalRAG\nfrom app.core.corpus_intelligence import CorpusIntelligence\nfrom app.services.quantum_predictor import QuantumSuccessPredictor\nfrom app.services.monte_carlo import MonteCarloSimulator\nfrom app.services.precedent_analyzer import PrecedentAnalyzer"
+      },
+      {
+        "file": "complete.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "    metadata: Optional[Dict[str, Any]] = None\n\nclass QuantumAnalysisRequest(AnalysisRequest):\n    \"\"\"Quantum success prediction request\"\"\"\n    arguments: List[str] = Field(..., description=\"Legal arguments\")"
+      },
+      {
+        "file": "legal_ai_enhanced.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "    title=\"Australian Legal AI - Enhanced Edition\",\n    version=\"1.5.0\",\n    description=\"Legal AI with quantum analysis, patterns, emotions, and more\"\n)\n"
+      },
+      {
+        "file": "legal_ai_working.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "\n# Request Models\nclass QuantumRequest(BaseModel):\n    case_type: str\n    description: str"
+      },
+      {
+        "file": "implement_smart_features.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "        \"precedents_cited\": precedents,\n        \"legislation_referenced\": legislation,\n        \"quantum\": quantum\n    }\n    for year, court, num, plaintiff, defendant, jurisdiction, court_full, month, day, judge, issues, outcome, headnotes, reasoning, precedents, legislation, quantum in ["
+      },
+      {
+        "file": "next_gen_legal_ai_features.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "        return counters\n\nclass QuantumSuccessPredictor:\n    \"\"\"Multi-dimensional success prediction\"\"\"\n    "
+      },
+      {
+        "file": "ultimate_legal_ai_supreme.py",
+        "pattern": "quantum|superposition|entanglement",
+        "context": "\"\"\"\nULTIMATE LEGAL AI - SUPREME EDITION\nFixed + Enhanced with Quantum Features\n\"\"\"\n"
+      }
+    ],
+    "semantic_search": [
+      {
+        "file": "legal_ai_mega.py",
+        "pattern": "embeddings?|encode\\(",
+        "context": "    def get_key(self, prefix: str, data: Any) -> str:\n        content = json.dumps(data, sort_keys=True)\n        return f\"{prefix}:{hashlib.md5(content.encode()).hexdigest()}\"\n    \n    def get(self, key: str) -> Optional[Any]:"
+      },
+      {
+        "file": "legal_rag.py",
+        "pattern": "SentenceTransformer|sentence_transformers",
+        "context": "\"\"\"\n\nfrom sentence_transformers import SentenceTransformer\nimport chromadb\nfrom typing import List, Dict"
+      },
+      {
+        "file": "test_data_usability.py",
+        "pattern": "SentenceTransformer|sentence_transformers",
+        "context": "    async def test_search_performance(self, legal_corpus):\n        \"\"\"Test search functionality performance\"\"\"\n        from sentence_transformers import SentenceTransformer\n        \n        model = SentenceTransformer('all-MiniLM-L6-v2')"
+      },
+      {
+        "file": "test_api_simple.py",
+        "pattern": "embeddings?|encode\\(",
+        "context": "        try:\n            if method == \"POST\" and data:\n                json_data = json.dumps(data).encode('utf-8')\n                req = urllib.request.Request(url, data=json_data, method=method)\n                req.add_header('Content-Type', 'application/json')"
+      },
+      {
+        "file": "rag_indexer.py",
+        "pattern": "SentenceTransformer|sentence_transformers",
+        "context": "\nimport pickle\nfrom sentence_transformers import SentenceTransformer\nimport chromadb\nimport re"
+      },
+      {
+        "file": "ultimate_smart_legal_ai.py",
+        "pattern": "cosine_similarity|semantic",
+        "context": "    print(\"=\" * 60)\n    print(\"\u2705 Original keyword search\")\n    print(\"\u2705 RAG semantic search\") \n    print(\"\u2705 Smart legal reasoning\")\n    print(\"\u2705 Document generation\")"
+      },
+      {
+        "file": "quantum_legal_predictor.py",
+        "pattern": "embeddings?|encode\\(",
+        "context": "        \"\"\"Extract multi-modal features from case data\"\"\"\n        features = {\n            'text_embeddings': [],\n            'temporal_features': [],\n            'entity_features': [],"
+      },
+      {
+        "file": "corpus_intelligence_extractor.py",
+        "pattern": "SentenceTransformer|sentence_transformers",
+        "context": "import json\nfrom datetime import datetime\nfrom sentence_transformers import SentenceTransformer\nimport numpy as np\nfrom tqdm import tqdm"
+      },
+      {
+        "file": "setup.py",
+        "pattern": "cosine_similarity|semantic",
+        "context": "    version=\"1.0.0\",\n    author=\"Your Name\",\n    description=\"Australian Legal AI - Semantic Search System\",\n    packages=find_packages(),\n    install_requires=["
+      },
+      {
+        "file": "comprehensive.py",
+        "pattern": "cosine_similarity|semantic",
+        "context": "            json={\n                \"query\": \"employment discrimination age\",\n                \"search_type\": \"semantic\",\n                \"limit\": 5\n            }"
+      },
+      {
+        "file": "update_api_smart.py",
+        "pattern": "cosine_similarity|semantic",
+        "context": "Add this to your legal_ai_supreme_au.py:\n\nfrom add_semantic_search import SemanticSearchEngine\nfrom train_outcome_predictor import OutcomePredictor\nimport pickle"
+      },
+      {
+        "file": "strategic_hf_integration.py",
+        "pattern": "embeddings?|encode\\(",
+        "context": "    \n    @staticmethod\n    def download_embeddings_only():\n        \"\"\"Download just the embeddings from the legal LLM\"\"\"\n        "
+      },
+      {
+        "file": "ultimate_legal_api.py",
+        "pattern": "cosine_similarity|semantic",
+        "context": "            \"search\": {\n                \"/search/keyword\": \"Original keyword search\",\n                \"/search/semantic\": \"RAG semantic search with citations\"\n            },\n            \"ai\": {"
+      },
+      {
+        "file": "rag_indexer_fixed.py",
+        "pattern": "SentenceTransformer|sentence_transformers",
+        "context": "\nimport pickle\nfrom sentence_transformers import SentenceTransformer\nimport chromadb\nfrom tqdm import tqdm"
+      },
+      {
+        "file": "optimized_main.py",
+        "pattern": "cosine_similarity|semantic",
+        "context": "class SearchRequest(BaseRequest):\n    query: str\n    search_type: str = \"semantic\"\n    limit: int = 10\n"
+      },
+      {
+        "file": "ultimate_smart_legal_ai_complete.py",
+        "pattern": "cosine_similarity|semantic",
+        "context": "            \"search\": {\n                \"/search/keyword\": \"Original keyword search\",\n                \"/search/semantic\": \"RAG semantic search with citations\"\n            },\n            \"ai\": {"
+      },
+      {
+        "file": "index_corpus.py",
+        "pattern": "embeddings?|encode\\(",
+        "context": "# Add parent directory to path\nsys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))\nfrom src.embeddings import LegalEmbedder\n\n"
+      },
+      {
+        "file": "complete.py",
+        "pattern": "embeddings?|encode\\(",
+        "context": "    \n    # Model Settings\n    EMBEDDING_MODEL: str = \"all-MiniLM-L6-v2\"\n    \n    # Cache Settings"
+      },
+      {
+        "file": "data_quality_engine.py",
+        "pattern": "SentenceTransformer|sentence_transformers",
+        "context": "from transformers import AutoTokenizer, AutoModel\nimport torch\nfrom sentence_transformers import SentenceTransformer\nimport networkx as nx\nfrom sklearn.cluster import DBSCAN"
+      },
+      {
+        "file": "ultimate_legal_ai_ultra.py",
+        "pattern": "embeddings?|encode\\(",
+        "context": "    \n    # Create case monitoring\n    case_id = hashlib.md5(case_details.encode()).hexdigest()[:8]\n    await case_monitor.track_case(case_id, {'dismissal_date': datetime.now()})\n    "
+      },
+      {
+        "file": "add_semantic_search.py",
+        "pattern": "SentenceTransformer|sentence_transformers",
+        "context": "\nimport numpy as np\nfrom sentence_transformers import SentenceTransformer\nimport pickle\nfrom load_real_aussie_corpus import corpus"
+      },
+      {
+        "file": "implement_smart_features.py",
+        "pattern": "SentenceTransformer|sentence_transformers",
+        "context": "        models = {}\n        try:\n            from sentence_transformers import SentenceTransformer\n            models['embedder'] = SentenceTransformer('all-MiniLM-L6-v2')\n        except:"
+      },
+      {
+        "file": "ultimate_legal_ai_supreme.py",
+        "pattern": "embeddings?|encode\\(",
+        "context": "        \"\"\"Create new collaboration space\"\"\"\n        \n        collab_id = hashlib.md5(f\"{case_id}{datetime.now()}\".encode()).hexdigest()[:8]\n        \n        self.active_collaborations[collab_id] = {"
+      }
+    ],
+    "ml_prediction": [
+      {
+        "file": "legal_ai_mega.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "    evidence_strength: Optional[float] = None\n\nclass PredictionRequest(BaseRequest):\n    case_data: Dict[str, Any]\n    prediction_type: str = \"outcome\""
+      },
+      {
+        "file": "legal_ai_reasoning.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "# Feature 2: Document Checklist\n@app.post(\"/checklist\")\nasync def document_checklist(request: PredictRequest):\n    \"\"\"Generate personalized document checklist\"\"\"\n    case_details = request.case_details.lower()"
+      },
+      {
+        "file": "test_data_usability.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "    async def test_analysis_pipeline_speed(self, benchmark, legal_corpus):\n        \"\"\"Benchmark full analysis pipeline\"\"\"\n        from quantum_legal_predictor import QuantumLegalPredictor\n        \n        predictor = QuantumLegalPredictor()"
+      },
+      {
+        "file": "test_enhanced.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "\n# Monte Carlo (different types)\ntest_endpoint(\"Monte Carlo - Standard\", \"POST\", \"/api/v1/prediction/simulate\", {\n    \"case_data\": {\"strength_score\": 75},\n    \"simulation_type\": \"standard\""
+      },
+      {
+        "file": "test_mega_api.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "                \"jurisdiction\": \"NSW\"\n            },\n            \"prediction_type\": \"outcome\",\n            \"num_simulations\": 5000\n        }"
+      },
+      {
+        "file": "ultimate_smart_legal_ai_optimized.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "        }\n\n# ============= PREDICTIVE ANALYTICS =============\nclass PredictiveAnalytics:\n    @staticmethod"
+      },
+      {
+        "file": "ultimate_smart_legal_ai.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "ULTIMATE SMART Legal AI - Combines ALL features:\n- Original search + RAG\n- Smart AI predictions  \n- Document Generation\n- Settlement Calculator"
+      },
+      {
+        "file": "quantum_legal_predictor.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "#!/usr/bin/env python3\n\"\"\"Quantum-Enhanced Legal Prediction with Explainable AI\"\"\"\n\nimport numpy as np"
+      },
+      {
+        "file": "implement_real_endpoints.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "    return {\n        \"success\": True,\n        \"prediction\": {\n            \"outcome_probability\": base_probability,\n            \"confidence_interval\": [base_probability - 0.1, base_probability + 0.1],"
+      },
+      {
+        "file": "ultimate_ai_quick.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "        top_docs.append(documents[doc_id]['text'][:200])\n    \n    # 2. Predict outcome\n    score = 50\n    if 'no warning' in text: score += 20"
+      },
+      {
+        "file": "test_api.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "            \"precedent_support\": 80\n        },\n        \"prediction_type\": \"outcome\"\n    }\n    response = requests.post(f\"{BASE_URL}/api/v1/prediction/simulate\", json=data)"
+      },
+      {
+        "file": "corpus_intelligence_extractor.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "        n_clusters = min(10, len(embeddings) // 10)\n        kmeans = KMeans(n_clusters=n_clusters, random_state=42)\n        clusters = kmeans.fit_predict(embeddings)\n        \n        # Analyze clusters"
+      },
+      {
+        "file": "build_hybrid_intelligence.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "print(f\"\\n\u2705 Created hybrid_super_intelligence.json\")\nprint(f\"\ud83e\udde0 Your AI now has intelligence from {hybrid_intelligence['corpus_stats']['total_intelligence_from']} cases!\")\nprint(f\"\ud83d\udcb0 Settlement predictions will be {len(all_settlements)/100:.0f}x more accurate!\")\n"
+      },
+      {
+        "file": "test_with_real_data.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "                        \n                        # Verify some kind of analysis response\n                        assert any(key in data for key in ['prediction', 'analysis', 'outcome_probability', 'success'])\n                        \n                        self._pass(f\"Analysis: {case['case_name'][:50]}\")"
+      },
+      {
+        "file": "train_outcome_predictor.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "#!/usr/bin/env python3\n\"\"\"Train ML model to predict case outcomes\"\"\"\n\nimport numpy as np"
+      },
+      {
+        "file": "comprehensive.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "\n@pytest.fixture\ndef prediction_data():\n    return {\n        \"case_data\": {"
+      },
+      {
+        "file": "update_api_smart.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "\nfrom add_semantic_search import SemanticSearchEngine\nfrom train_outcome_predictor import OutcomePredictor\nimport pickle\n"
+      },
+      {
+        "file": "strategic_hf_integration.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "                hf_extracted_intel.get('precedent_network', {})\n            ),\n            'outcome_predictor': self._build_outcome_predictor(\n                current_corpus_intel,\n                hf_extracted_intel.get('outcome_patterns', {})"
+      },
+      {
+        "file": "ultimate_legal_api.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "ULTIMATE Legal API - Combines ALL features:\n- Original search\n- Smart AI predictions\n- RAG with citations\n\"\"\""
+      },
+      {
+        "file": "test_performance.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "    # Test different endpoints under load\n    await concurrent_load_test(\"/api/v1/analysis/quantum\", quantum_data, 5, 10)\n    await concurrent_load_test(\"/api/v1/prediction/simulate\", simulation_data, 3, 5)\n    await concurrent_load_test(\"/api/v1/search/cases\", {\"query\": \"test\", \"limit\": 10}, 10, 20)\n    "
+      },
+      {
+        "file": "ultimate_intelligent_legal_api.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "    SettlementTimingOptimizer,\n    ArgumentStrengthScorer,\n    QuantumSuccessPredictor\n)\n"
+      },
+      {
+        "file": "optimized_main.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "    precedents: Optional[List[str]] = []\n\nclass PredictionRequest(BaseRequest):\n    case_data: Dict[str, Any]\n    prediction_type: str = \"outcome\""
+      },
+      {
+        "file": "intelligent_cache_manager.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "#!/usr/bin/env python3\n\"\"\"Intelligent Predictive Caching System\"\"\"\n\nimport asyncio"
+      },
+      {
+        "file": "fix_smart_ai.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "import numpy as np\n# Add this to smart_legal_ai.py after line 60 (in predict_case_outcome function)\n\n# BETTER pattern matching - more flexible"
+      },
+      {
+        "file": "ultimate_smart_legal_ai_complete.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "ULTIMATE SMART Legal AI - Complete Edition\n- Original search + RAG\n- Smart AI predictions  \n- Document Generation\n- Settlement Calculator"
+      },
+      {
+        "file": "market_ready_features.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "    \"unique_value_props\": [\n        \"Only AI trained on 33,913 Australian cases\",\n        \"Quantum computing for 94% prediction accuracy\",\n        \"Save 20+ hours per case analysis\",\n        \"ROI within first month guaranteed\""
+      },
+      {
+        "file": "integrate_features.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "print(\"\\n\ud83c\udfaf Key features to integrate:\")\npriority_features = [\n    \"QuantumSuccessPredictor\",\n    \"PatternRecognitionEngine\", \n    \"RiskAnalysisEngine\","
+      },
+      {
+        "file": "enhanced_legal_api_with_intelligence.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "    corpus_intelligence = {}\n\nclass IntelligentPredictionRequest(BaseModel):\n    case_details: str\n    salary: Optional[float] = None"
+      },
+      {
+        "file": "optimised_legal_ai_api.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "\n# Import routers (we'll create these next)\nfrom app.routers import analysis, prediction, strategy, search, admin\nfrom app.core.config import settings\nfrom app.core.legal_rag import LegalRAG"
+      },
+      {
+        "file": "complete.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "\nclass QuantumAnalysisRequest(AnalysisRequest):\n    \"\"\"Quantum success prediction request\"\"\"\n    arguments: List[str] = Field(..., description=\"Legal arguments\")\n    precedents: Optional[List[str]] = Field(default_factory=list)"
+      },
+      {
+        "file": "legal_ai_enhanced.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "        \n        return {\n            \"prediction\": max(probs, key=probs.get),\n            \"confidence\": round(max(probs.values()), 3),\n            \"distribution\": ["
+      },
+      {
+        "file": "data_quality_engine.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "            embeddings = self._generate_case_embeddings(data[:100])\n            clustering = DBSCAN(eps=0.1, min_samples=2, metric='cosine')\n            clusters = clustering.fit_predict(embeddings)\n            \n            for cluster_id in set(clusters):"
+      },
+      {
+        "file": "legal_ai_working.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "            \"/health\",\n            \"/api/v1/analysis/quantum\",\n            \"/api/v1/prediction/simulate\",\n            \"/api/v1/search/cases\"\n        ]"
+      },
+      {
+        "file": "implement_smart_features.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "        return {\n            \"success\": True,\n            \"prediction\": {\n                \"outcome_probability\": round(final_probability, 3),\n                \"confidence_interval\": ["
+      },
+      {
+        "file": "next_gen_legal_ai_features.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "\nclass SettlementTimingOptimizer:\n    \"\"\"Predicts WHEN to settle for maximum benefit\"\"\"\n    \n    def __init__(self, settlement_data: Dict):"
+      },
+      {
+        "file": "ultimate_legal_ai_supreme.py",
+        "pattern": "predict|prediction|classifier",
+        "context": "async def parallel_analysis(case_details: str, salary: Optional[float] = None):\n    \"\"\"Fixed parallel analysis function\"\"\"\n    from ultimate_legal_api import keyword_search, predict_outcome\n    \n    # Create tasks"
+      }
+    ],
+    "rag_implementation": [
+      {
+        "file": "legal_ai_mega.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "\n# ============= Advanced Service Classes =============\nclass LegalRAG:\n    \"\"\"Enhanced Legal RAG with caching and advanced search\"\"\"\n    def __init__(self):"
+      },
+      {
+        "file": "legal_ai_reasoning.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "        \"weekly_pay\": round(weekly, 2),\n        \"minimum_likely\": round(weekly * 4, 2),\n        \"average_settlement\": round(weekly * 8, 2),\n        \"maximum_possible\": round(weekly * 26, 2),\n        \"your_case_estimate\": round(weekly * min(years * 2, 26), 2)"
+      },
+      {
+        "file": "legal_rag.py",
+        "pattern": "ChromaDB|FAISS|vector.*store",
+        "context": "\nfrom sentence_transformers import SentenceTransformer\nimport chromadb\nfrom typing import List, Dict\n"
+      },
+      {
+        "file": "test_mega_api.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "        if response_times:\n            print(f\"\\n\u23f1\ufe0f  Performance Metrics:\")\n            print(f\"   Average Response Time: {sum(response_times)/len(response_times)*1000:.0f}ms\")\n            print(f\"   Fastest: {min(response_times)*1000:.0f}ms\")\n            print(f\"   Slowest: {max(response_times)*1000:.0f}ms\")"
+      },
+      {
+        "file": "test_api_simple.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "        if times:\n            avg_time = sum(times) / len(times)\n            print(f\"   Average response time: {avg_time:.3f}s\")\n            if avg_time < 1.0:\n                self._pass(\"Performance test\")"
+      },
+      {
+        "file": "ultimate_smart_legal_ai_optimized.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "from collections import Counter, defaultdict\nimport uvicorn\nfrom legal_rag import LegalRAG\nfrom datetime import datetime, timedelta\nimport json"
+      },
+      {
+        "file": "rag_indexer.py",
+        "pattern": "ChromaDB|FAISS|vector.*store",
+        "context": "import pickle\nfrom sentence_transformers import SentenceTransformer\nimport chromadb\nimport re\nfrom tqdm import tqdm"
+      },
+      {
+        "file": "ultimate_smart_legal_ai.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "\"\"\"\nULTIMATE SMART Legal AI - Combines ALL features:\n- Original search + RAG\n- Smart AI predictions  \n- Document Generation"
+      },
+      {
+        "file": "quantum_legal_predictor.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "                \"Proceed with confidence - strong case merits\",\n                \"Consider early motion for summary judgment\",\n                \"Leverage strong position in settlement negotiations\"\n            ])\n        "
+      },
+      {
+        "file": "corpus_intelligence_extractor.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "            if total > 5:  # Minimum sample size\n                win_rate = win_count / total\n                impact = win_rate - 0.5  # How much better than average\n                \n                pattern_scores[factor] = {"
+      },
+      {
+        "file": "intelligent_corpus_sampler.py",
+        "pattern": "chunk|split.*text",
+        "context": "    \n    @staticmethod\n    def process_in_chunks(file_path: str, chunk_size: int = 10000):\n        \"\"\"Process corpus in chunks\"\"\"\n        "
+      },
+      {
+        "file": "build_hybrid_intelligence.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "print(f\"\\n\ud83d\udcca SETTLEMENT ANALYSIS\")\nprint(f\"Total settlements: {len(all_settlements)}\")\nprint(f\"Average: ${np.mean(all_settlements):,.0f}\")\nprint(f\"Median: ${np.median(all_settlements):,.0f}\")\n"
+      },
+      {
+        "file": "setup.py",
+        "pattern": "ChromaDB|FAISS|vector.*store",
+        "context": "        \"torch>=2.0.0\",\n        \"transformers>=4.30.0\",\n        \"faiss-cpu>=1.7.4\",\n        \"fastapi>=0.100.0\",\n        \"numpy>=1.24.0\","
+      },
+      {
+        "file": "strategic_hf_integration.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "        for pattern, count in pattern_counts.items():\n            if pattern in merged:\n                # Weighted average with HF data\n                merged[pattern]['occurrences'] += count\n                merged[pattern]['confidence'] = 'VERY_HIGH'"
+      },
+      {
+        "file": "ultimate_legal_api.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "- Original search\n- Smart AI predictions\n- RAG with citations\n\"\"\"\n"
+      },
+      {
+        "file": "test_performance.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "            print(f\"   \u2705 Total requests: {total_requests}\")\n            print(f\"   \u274c Total errors: {total_errors}\")\n            print(f\"   \u23f1\ufe0f  Average response time: {avg_response_time*1000:.0f}ms\")\n            print(f\"   \ud83d\udcca Requests per second: {total_requests/total_time:.1f}\")\n        else:"
+      },
+      {
+        "file": "legal_qa_light.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "        for sentence in sentences:\n            if any(word in sentence.lower() for word in ['require', 'must', 'include', 'means', 'defined']):\n                if len(sentence) > 30:  # Avoid fragments\n                    key_points.append(sentence.strip())\n    "
+      },
+      {
+        "file": "rag_indexer_fixed.py",
+        "pattern": "ChromaDB|FAISS|vector.*store",
+        "context": "import pickle\nfrom sentence_transformers import SentenceTransformer\nimport chromadb\nfrom tqdm import tqdm\n"
+      },
+      {
+        "file": "ultimate_intelligent_legal_api.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "import re\nimport uvicorn\nfrom legal_rag import LegalRAG\nfrom datetime import datetime, timedelta\nimport asyncio"
+      },
+      {
+        "file": "legal_ai_supreme_au.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "                \"cache_entries\": len(cache_store)\n            },\n            \"coverage_stats\": {\n                \"jurisdictions\": len(AUSTRALIAN_JURISDICTIONS),\n                \"legal_areas\": len(LEGAL_AREAS)"
+      },
+      {
+        "file": "extract_settlement_amounts.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "                outcomes[outcome].append(data['max_amount'])\n            \n            print(\"\\n\ud83d\udcca Average amounts by outcome:\")\n            for outcome, amounts in outcomes.items():\n                avg = sum(amounts) / len(amounts)"
+      },
+      {
+        "file": "optimized_main.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "\n# Service Classes\nclass LegalRAG:\n    def __init__(self):\n        logger.info(\"Initializing Legal RAG\")"
+      },
+      {
+        "file": "intelligent_cache_manager.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "        \n        if len(user_patterns) < 5:\n            # Not enough data, use global average\n            return time.time() + 3600  # Default 1 hour\n        "
+      },
+      {
+        "file": "ultimate_smart_legal_ai_complete.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "\"\"\"\nULTIMATE SMART Legal AI - Complete Edition\n- Original search + RAG\n- Smart AI predictions  \n- Document Generation"
+      },
+      {
+        "file": "index_corpus.py",
+        "pattern": "ChromaDB|FAISS|vector.*store",
+        "context": "import pickle\nimport numpy as np\nimport faiss\nfrom tqdm import tqdm\nfrom typing import List, Dict, Any"
+      },
+      {
+        "file": "enhanced_legal_api_with_intelligence.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "import pickle\nimport re\nfrom legal_rag import LegalRAG\nimport uvicorn\n"
+      },
+      {
+        "file": "optimised_legal_ai_api.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "from app.routers import analysis, prediction, strategy, search, admin\nfrom app.core.config import settings\nfrom app.core.legal_rag import LegalRAG\nfrom app.core.corpus_intelligence import CorpusIntelligence\nfrom app.services.quantum_predictor import QuantumSuccessPredictor"
+      },
+      {
+        "file": "complete.py",
+        "pattern": "ChromaDB|FAISS|vector.*store",
+        "context": "    # Database/Index Settings\n    RAG_INDEX_PATH: str = \"./rag_index\"\n    FAISS_INDEX_PATH: str = \"data/legal_index.faiss\"\n    DOCUMENTS_PATH: str = \"data/legal_documents.pkl\"\n    "
+      },
+      {
+        "file": "check_index.py",
+        "pattern": "ChromaDB|FAISS|vector.*store",
+        "context": "    \n# Check file sizes\nif os.path.exists(\"data/legal_index.faiss\"):\n    size_mb = os.path.getsize(\"data/legal_index.faiss\") / 1024 / 1024\n    print(f\"\\n\ud83d\udcbe Index size: {size_mb:.2f} MB\")"
+      },
+      {
+        "file": "legal_ai_enhanced.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "            \"recommendations\": [\n                \"Focus on strongest arguments\" if success_prob > 70 else \"Strengthen evidence\",\n                \"Leverage favorable precedents\" if len(request.precedents) > 2 else \"Research more precedents\",\n                \"Consider settlement\" if success_prob < 50 else \"Proceed with confidence\"\n            ]"
+      },
+      {
+        "file": "ultimate_legal_ai_ultra.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "from collections import Counter, defaultdict\nimport uvicorn\nfrom legal_rag import LegalRAG\nfrom datetime import datetime, timedelta\nimport json"
+      },
+      {
+        "file": "implement_smart_features.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "        # Add case-specific strategies\n        if similar_cases:\n            strategies.append(f\"Leverage precedent from {similar_cases[0]['case_name']}\")\n        \n        return strategies"
+      },
+      {
+        "file": "next_gen_legal_ai_features.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "            'net_benefit': round(current_value - legal_costs),\n            'recommendation': self._timing_recommendation(phase, case_strength),\n            'negotiation_leverage': self._calculate_leverage(phase, case_strength)\n        }\n    "
+      },
+      {
+        "file": "ultimate_legal_ai_supreme.py",
+        "pattern": "retrieval.*augmented|RAG",
+        "context": "from collections import Counter, defaultdict\nimport uvicorn\nfrom legal_rag import LegalRAG\nfrom datetime import datetime, timedelta\nimport json"
+      }
+    ],
+    "api_endpoints": [
+      {
+        "file": "legal_ai_mega.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "\n# ============= Health & Info Endpoints =============\n@app.get(\"/\", tags=[\"General\"])\nasync def root():\n    \"\"\"Root endpoint with comprehensive API information\"\"\""
+      },
+      {
+        "file": "legal_ai_reasoning.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "\n# Feature 1: Success Rate Trends\n@app.get(\"/trends/{case_type}\")\nasync def success_trends(case_type: str):\n    \"\"\"Show success rate trends over time\"\"\""
+      },
+      {
+        "file": "ultimate_smart_legal_ai_optimized.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "# ============= OPTIMIZED ENDPOINTS =============\n\n@app.get(\"/\")\nasync def root():\n    return {"
+      },
+      {
+        "file": "ultimate_smart_legal_ai.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "# ============= SUPER SMART ENDPOINTS =============\n\n@app.post(\"/analyze/smart\")\nasync def smart_analysis(request: SmartAnalysisRequest):\n    \"\"\"Complete smart analysis with all features\"\"\""
+      },
+      {
+        "file": "implement_real_endpoints.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "corpus.load_corpus()\n\n@app.post(\"/api/v1/search/cases\")\nasync def search_cases(request: dict):\n    query = request.get(\"query\", \"\")"
+      },
+      {
+        "file": "ultimate_ai_quick.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "\n# Combine all your features\n@app.post(\"/do-everything\")\nasync def do_everything(request: Request):\n    \"\"\"One endpoint that does EVERYTHING\"\"\""
+      },
+      {
+        "file": "update_api_smart.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "    outcome_model = pickle.load(f)\n\n@app.post(\"/api/v1/search/semantic\")\nasync def semantic_search(request: dict):\n    query = request.get(\"query\", \"\")"
+      },
+      {
+        "file": "ultimate_legal_api.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "# ============= API ENDPOINTS =============\n\n@app.get(\"/\")\nasync def root():\n    return {"
+      },
+      {
+        "file": "test_performance.py",
+        "pattern": "async def.*\\(.*request",
+        "context": "BASE_URL = \"http://localhost:8000\"\n\nasync def test_endpoint_performance(session, endpoint, data, num_requests=10):\n    \"\"\"Test endpoint performance\"\"\"\n    times = []"
+      },
+      {
+        "file": "legal_qa_api.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "\n# Main Q&A endpoint\n@app.post(\"/ask\", response_model=AnswerResponse)\nasync def ask_legal_question(\n    request: QuestionRequest,"
+      },
+      {
+        "file": "legal_qa_light.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "\n# Main Q&A endpoint\n@app.post(\"/ask\", response_model=AnswerResponse)\nasync def ask_question(\n    request: QuestionRequest,"
+      },
+      {
+        "file": "ultimate_intelligent_legal_api.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "# ============= API ENDPOINTS =============\n\n@app.get(\"/\")\nasync def root():\n    return {"
+      },
+      {
+        "file": "legal_ai_supreme_au.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "\n# Endpoints\n@app.get(\"/\")\nasync def root():\n    return {"
+      },
+      {
+        "file": "optimized_main.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "\n# Endpoints\n@app.get(\"/\")\nasync def root():\n    return {"
+      },
+      {
+        "file": "ultimate_smart_legal_ai_complete.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "# ============= API ENDPOINTS =============\n\n@app.get(\"/\")\nasync def root():\n    return {"
+      },
+      {
+        "file": "enhanced_legal_api_with_intelligence.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "# ============= ENHANCED ENDPOINTS =============\n\n@app.get(\"/\")\nasync def root():\n    return {"
+      },
+      {
+        "file": "optimised_legal_ai_api.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "\n# Root endpoint\n@app.get(\"/\", tags=[\"General\"])\nasync def root():\n    \"\"\"Root endpoint with API information\"\"\""
+      },
+      {
+        "file": "complete.py",
+        "pattern": "@router\\.(post|get|put)",
+        "context": "logger = logging.getLogger(__name__)\n\n@router.post(\"/quantum\", response_model=AnalysisResponse)\nasync def analyze_quantum(\n    request: QuantumAnalysisRequest,"
+      },
+      {
+        "file": "legal_ai_enhanced.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "# ========== API Endpoints ==========\n\n@app.get(\"/\")\nasync def root():\n    return {"
+      },
+      {
+        "file": "legal_qa_enhanced.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "    return results\n\n@app.post(\"/search\")\nasync def search_endpoint(request: SearchRequest):\n    results = search(request.query, request.num_results)"
+      },
+      {
+        "file": "legal_ai_working.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "\n# Endpoints\n@app.get(\"/\")\nasync def root():\n    return {"
+      },
+      {
+        "file": "ultimate_legal_ai_ultra.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "# ============= ULTRA SMART ENDPOINTS =============\n\n@app.get(\"/\")\nasync def root():\n    return {"
+      },
+      {
+        "file": "legal_qa_working.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "    return results\n\n@app.post(\"/search\")\nasync def search_endpoint(request: SearchRequest):\n    results = search(request.query, request.num_results)"
+      },
+      {
+        "file": "implement_smart_features.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "# Update the endpoints to use smart_engine:\n\n@app.post(\"/api/v1/analysis/quantum-supreme\")\nasync def quantum_supreme_analysis(request: dict):\n    return await smart_engine.quantum_analysis(request)"
+      },
+      {
+        "file": "ultimate_legal_ai_supreme.py",
+        "pattern": "@app\\.(post|get|put)",
+        "context": "# ============= SUPREME ENDPOINTS =============\n\n@app.get(\"/\")\nasync def root():\n    return {"
+      }
+    ],
+    "settlement_extraction": [
+      {
+        "file": "legal_ai_mega.py",
+        "pattern": "settlement.*amount|\\$[\\d,]+",
+        "context": "        \n        # Base calculation\n        base_settlement = claim_amount * 0.6  # Start at 60% of claim\n        \n        # Adjustments"
+      },
+      {
+        "file": "test_enhanced.py",
+        "pattern": "settlement.*amount|\\$[\\d,]+",
+        "context": "        \"purpose\": \"Software development services\",\n        \"duration\": \"6 months\",\n        \"compensation\": \"$50,000\"\n    }\n})"
+      },
+      {
+        "file": "test_mega_api.py",
+        "pattern": "settlement.*amount|\\$[\\d,]+",
+        "context": "                \"parties\": [\"Tech Innovations Pty Ltd\", \"John Smith\"],\n                \"purpose\": \"software development services\",\n                \"compensation\": \"$150,000 AUD\",\n                \"start_date\": \"July 1, 2024\",\n                \"end_date\": \"December 31, 2024\""
+      },
+      {
+        "file": "ultimate_smart_legal_ai_optimized.py",
+        "pattern": "damages.*awarded|compensation",
+        "context": "                'approach': 'aggressive',\n                'recommendation': f'Strong {claim_type} case - file immediately',\n                'negotiation_position': 'Start high - aim for maximum compensation',\n                'fallback': 'Be prepared to negotiate but from position of strength'\n            }"
+      },
+      {
+        "file": "ultimate_ai_quick.py",
+        "pattern": "damages.*awarded|compensation",
+        "context": "3. Disproportionate to alleged conduct\n\nI seek reinstatement or compensation.\n\nYours faithfully,"
+      },
+      {
+        "file": "test_api.py",
+        "pattern": "damages.*awarded|compensation",
+        "context": "    data = {\n        \"case_summary\": \"Employment dispute with strong evidence\",\n        \"objectives\": [\"Maximize compensation\", \"Quick resolution\"],\n        \"risk_tolerance\": \"medium\"\n    }"
+      },
+      {
+        "file": "corpus_intelligence_extractor.py",
+        "pattern": "settlement.*amount|\\$[\\d,]+",
+        "context": "            'winning_cases': defaultdict(list),\n            'losing_cases': defaultdict(list),\n            'settlement_amounts': [],\n            'time_to_resolution': [],\n            'judge_patterns': defaultdict(list),"
+      },
+      {
+        "file": "intelligent_corpus_sampler.py",
+        "pattern": "settlement.*amount|\\$[\\d,]+",
+        "context": "    @staticmethod\n    def _extract_settlements(chunk: List[Dict]) -> List[int]:\n        \"\"\"Extract settlement amounts\"\"\"\n        amounts = []\n        "
+      },
+      {
+        "file": "build_hybrid_intelligence.py",
+        "pattern": "settlement.*amount|\\$[\\d,]+",
+        "context": "print(f\"\u2705 Loaded intelligence from {len(corpus_intel.get('case_outcomes', []))} local cases\")\nprint(f\"\u2705 Loaded intelligence from {len(hf_intel.get('high_value_docs', []))} HF cases\")\nprint(f\"\u2705 Found {len(hf_intel.get('settlement_database', []))} settlement amounts!\")\n\n# Merge settlement data"
+      },
+      {
+        "file": "comprehensive.py",
+        "pattern": "damages.*awarded|compensation",
+        "context": "        \"case_summary\": \"Complex employment dispute involving wrongful termination and discrimination\",\n        \"objectives\": [\n            \"Maximize compensation\",\n            \"Achieve quick resolution\",\n            \"Avoid publicity\""
+      },
+      {
+        "file": "strategic_hf_integration.py",
+        "pattern": "settlement.*amount|\\$[\\d,]+",
+        "context": "        print(f\"\\n\u2705 Processed {docs_processed} documents\")\n        print(f\"\u2705 Selected {docs_selected} high-value documents\")\n        print(f\"\u2705 Extracted {len(extracted_data['settlement_database'])} settlement amounts\")\n        print(f\"\u2705 Built precedent network with {len(extracted_data['precedent_network'])} nodes\")\n        "
+      },
+      {
+        "file": "legal_qa_api.py",
+        "pattern": "settlement.*amount|\\$[\\d,]+",
+        "context": "app = FastAPI(\n    title=\"Australian Legal Q&A API\",\n    description=\"AI-powered legal Q&A for Australian law - $0.10 per question\",\n    version=\"1.0.0\"\n)"
+      },
+      {
+        "file": "legal_qa_light.py",
+        "pattern": "settlement.*amount|\\$[\\d,]+",
+        "context": "app = FastAPI(\n    title=\"Australian Legal Q&A API - Lightweight\",\n    description=\"AI-powered legal Q&A - $0.10 per question\",\n    version=\"1.0.0\"\n)"
+      },
+      {
+        "file": "ultimate_intelligent_legal_api.py",
+        "pattern": "settlement.*amount|\\$[\\d,]+",
+        "context": "            \n            if success:\n                # Random settlement amount based on percentiles\n                percentiles = super_intel['settlement_intelligence']['percentiles']\n                amount = np.random.choice(["
+      },
+      {
+        "file": "extract_settlement_amounts.py",
+        "pattern": "settlement.*amount|\\$[\\d,]+",
+        "context": "#!/usr/bin/env python3\n\"\"\"Extract settlement amounts from your existing corpus\"\"\"\n\nimport re"
+      },
+      {
+        "file": "market_ready_features.py",
+        "pattern": "settlement.*amount|\\$[\\d,]+",
+        "context": "            \"executive_summary\": {\n                \"win_probability\": \"73%\",\n                \"estimated_costs\": \"$45,000 - $120,000\",\n                \"timeline\": \"6-12 months\",\n                \"key_risks\": [\"Weak evidence on point 3\", \"Adverse precedent in Smith v Jones\"],"
+      },
+      {
+        "file": "optimised_legal_ai_api.py",
+        "pattern": "settlement.*amount|\\$[\\d,]+",
+        "context": "{'='*60}\n\u2705 Corpus Intelligence: {stats.get('cases', 0):,} cases\n\u2705 Settlement Data: {stats.get('settlements', 0):,} amounts  \n\u2705 Precedent Network: {stats.get('precedents', 0):,} precedents\n\u2705 AI Engines: ACTIVE"
+      },
+      {
+        "file": "legal_ai_enhanced.py",
+        "pattern": "settlement.*amount|\\$[\\d,]+",
+        "context": "\nclass SettlementCalculator:\n    \"\"\"Calculate optimal settlement amounts\"\"\"\n    \n    @staticmethod"
+      },
+      {
+        "file": "legal_qa_enhanced.py",
+        "pattern": "settlement.*amount|\\$[\\d,]+",
+        "context": "   - Minimum employment period: 6 months (12 months for small business with <15 employees)\n   - Must be an employee (not contractor)\n   - Annual earnings below high income threshold ($175,000 as of 2024)\n\n2. **The dismissal must be:**"
+      },
+      {
+        "file": "ultimate_legal_ai_ultra.py",
+        "pattern": "settlement.*amount|\\$[\\d,]+",
+        "context": "\nThis represents a fair commercial resolution avoiding:\n- Legal costs (estimated $20,000-50,000)\n- Management time\n- Reputational risk"
+      },
+      {
+        "file": "implement_smart_features.py",
+        "pattern": "settlement.*amount|\\$[\\d,]+",
+        "context": "         [\"Paciocco v ANZ Banking Group [2016] HCA 28\", \"ASIC v Kobelt [2019] HCA 18\"],\n         [\"Competition and Consumer Act 2010 (Cth) s 21\", \"National Consumer Credit Protection Act 2009\"],\n         \"$2.3M compensation\"),\n        \n        (2024, \"NSWSC\", 287, \"Zhang\", \"Construction Corp\", \"NSW\", \"Supreme Court of NSW\", 3, 22, \"Stevenson J\","
+      },
+      {
+        "file": "next_gen_legal_ai_features.py",
+        "pattern": "settlement.*amount|\\$[\\d,]+",
+        "context": "        \n        # Legal costs accumulation\n        legal_costs = min(days_elapsed * 100, 20000)  # $100/day up to $20k\n        \n        return {"
+      },
+      {
+        "file": "ultimate_legal_ai_supreme.py",
+        "pattern": "damages.*awarded|compensation",
+        "context": "                'outcomes_distribution': self._analyze_outcomes(outcomes),\n                'confidence_interval': self._calculate_confidence_interval(outcomes),\n                'best_case': max(outcomes, key=lambda x: x['compensation']),\n                'worst_case': min(outcomes, key=lambda x: x['compensation']),\n                'most_likely': self._get_most_likely_outcome(outcomes)"
+      }
+    ],
+    "case_duration": [
+      {
+        "file": "legal_ai_mega.py",
+        "pattern": "duration|timeline|days.*between",
+        "context": "    case_data: Dict[str, Any]\n    risk_factors: List[str]\n    timeline: Optional[str] = \"12_months\"\n\nclass VoiceCommandRequest(BaseRequest):"
+      },
+      {
+        "file": "test_enhanced.py",
+        "pattern": "duration|timeline|days.*between",
+        "context": "        \"parties\": [\"ABC Corp\", \"John Smith\"],\n        \"purpose\": \"Software development services\",\n        \"duration\": \"6 months\",\n        \"compensation\": \"$50,000\"\n    }"
+      },
+      {
+        "file": "test_mega_api.py",
+        "pattern": "duration|timeline|days.*between",
+        "context": "            },\n            \"risk_factors\": [\"novel_legal_theory\", \"media_attention\", \"precedent_setting\"],\n            \"timeline\": \"18_months\"\n        }\n        self.test_endpoint(\"Risk Assessment\", \"POST\", \"/api/v1/analysis/risk\", risk_data)"
+      },
+      {
+        "file": "ultimate_smart_legal_ai_optimized.py",
+        "pattern": "duration|timeline|days.*between",
+        "context": "class PredictiveAnalytics:\n    @staticmethod\n    def predict_timeline(case_type: str, complexity: str = 'medium') -> Dict:\n        \"\"\"Predict case timeline based on historical data\"\"\"\n        "
+      },
+      {
+        "file": "ultimate_smart_legal_ai.py",
+        "pattern": "duration|timeline|days.*between",
+        "context": "- Settlement Calculator\n- Legal Reasoning Engine\n- Timeline Analysis\n\"\"\"\n"
+      },
+      {
+        "file": "quantum_legal_predictor.py",
+        "pattern": "duration|timeline|days.*between",
+        "context": "        'description': 'Breach of software development contract with penalty clauses',\n        'arguments': {\n            'plaintiff': 'Clear breach of delivery timeline, documented losses',\n            'defendant': 'Force majeure due to COVID-19, good faith efforts'\n        },"
+      },
+      {
+        "file": "ultimate_ai_quick.py",
+        "pattern": "duration|timeline|days.*between",
+        "context": "[Name]\"\"\"\n    \n    # 5. Timeline check\n    if '21 days' in text or 'deadline' in text:\n        timeline = \"\u26a0\ufe0f URGENT: 21 day deadline for unfair dismissal!\""
+      },
+      {
+        "file": "comprehensive.py",
+        "pattern": "duration|timeline|days.*between",
+        "context": "        \"constraints\": {\n            \"budget\": 50000,\n            \"timeline\": \"6_months\"\n        },\n        \"risk_tolerance\": \"medium\""
+      },
+      {
+        "file": "ultimate_intelligent_legal_api.py",
+        "pattern": "duration|timeline|days.*between",
+        "context": "    case_analysis: Dict\n    risk_tolerance: str = \"medium\"  # low, medium, high\n    timeline_preference: str = \"balanced\"  # fast, balanced, thorough\n\n# ============= INTELLIGENT FEATURES ============="
+      },
+      {
+        "file": "intelligent_cache_manager.py",
+        "pattern": "calculate.*time|processing.*time",
+        "context": "        for key, entry in self.cache.items():\n            # Calculate eviction score (lower is better)\n            score = self._calculate_eviction_score(entry, current_time)\n            heapq.heappush(candidates, (score, key))\n        "
+      },
+      {
+        "file": "ultimate_smart_legal_ai_complete.py",
+        "pattern": "duration|timeline|days.*between",
+        "context": "- Settlement Calculator\n- Legal Reasoning Engine\n- Timeline Analysis\n- Evidence Analysis\n\"\"\""
+      },
+      {
+        "file": "market_ready_features.py",
+        "pattern": "duration|timeline|days.*between",
+        "context": "                \"win_probability\": \"73%\",\n                \"estimated_costs\": \"$45,000 - $120,000\",\n                \"timeline\": \"6-12 months\",\n                \"key_risks\": [\"Weak evidence on point 3\", \"Adverse precedent in Smith v Jones\"],\n                \"recommended_action\": \"Proceed with caution - strengthen evidence first\""
+      },
+      {
+        "file": "complete.py",
+        "pattern": "duration|timeline|days.*between",
+        "context": "    \"\"\"Prediction request\"\"\"\n    case_data: Dict[str, Any]\n    prediction_type: str = Field(\"outcome\", pattern=\"^(outcome|duration|cost|settlement)$\")\n    confidence_required: float = Field(0.7, ge=0, le=1)\n"
+      },
+      {
+        "file": "legal_ai_enhanced.py",
+        "pattern": "duration|timeline|days.*between",
+        "context": "TERMS:\n1. Scope: {context.get('scope', 'To be determined')}\n2. Duration: {context.get('duration', '12 months')}\n3. Compensation: {context.get('compensation', 'To be negotiated')}\n"
+      },
+      {
+        "file": "data_quality_engine.py",
+        "pattern": "duration|timeline|days.*between",
+        "context": "    consistency: float\n    accuracy: float\n    timeliness: float\n    uniqueness: float\n    validity: float"
+      },
+      {
+        "file": "ultimate_legal_ai_ultra.py",
+        "pattern": "duration|timeline|days.*between",
+        "context": "            'witness_statement': self._witness_template,\n            'settlement_letter': self._settlement_template,\n            'timeline': self._timeline_template,\n            'evidence_list': self._evidence_template\n        }"
+      },
+      {
+        "file": "next_gen_legal_ai_features.py",
+        "pattern": "duration|timeline|days.*between",
+        "context": "        \n        return {\n            'timeline_days': days,\n            'success_probability': success_curve,\n            'settlement_probability': settlement_curve,"
+      },
+      {
+        "file": "ultimate_legal_ai_supreme.py",
+        "pattern": "duration|timeline|days.*between",
+        "context": "            'calculate': ['calculate', 'compute', 'how much', 'estimate'],\n            'explain': ['explain', 'what is', 'tell me about', 'help me understand'],\n            'timeline': ['when', 'deadline', 'how long', 'timeline']\n        }\n    "
+      }
+    ],
+    "judge_analysis": [
+      {
+        "file": "load_real_aussie_corpus.py",
+        "pattern": "judge.*pattern|judge.*behavior",
+        "context": "        self.case_outcomes = []\n        self.precedent_network = []\n        self.judge_patterns = {}\n        self.winning_patterns = {}\n        self.corpus_loaded = False"
+      },
+      {
+        "file": "implement_real_endpoints.py",
+        "pattern": "judge.*pattern|judge.*behavior",
+        "context": "        \"outcome_distribution\": outcome_dist,\n        \"precedent_relationships\": len(corpus.precedent_network),\n        \"judges_analyzed\": len(corpus.judge_patterns),\n        \"data_source\": \"Open Australian Legal Corpus\"\n    }"
+      },
+      {
+        "file": "corpus_intelligence_extractor.py",
+        "pattern": "judge.*pattern|judge.*behavior",
+        "context": "            'settlement_amounts': [],\n            'time_to_resolution': [],\n            'judge_patterns': defaultdict(list),\n            'precedent_chains': []\n        }"
+      },
+      {
+        "file": "analyze_judge_patterns.py",
+        "pattern": "judge.*pattern|judge.*behavior",
+        "context": "#!/usr/bin/env python3\n\"\"\"Analyze judge patterns from your corpus\"\"\"\n\nimport re"
+      },
+      {
+        "file": "test_corpus_unit.py",
+        "pattern": "judge.*pattern|judge.*behavior",
+        "context": "            self._fail(\"Precedent count\", f\"Expected {expected_precedents}, got {len(corpus.precedent_network)}\")\n        \n        if len(corpus.judge_patterns) >= expected_judges:\n            self._pass(f\"Loaded patterns for {len(corpus.judge_patterns)} judges\")\n        else:"
+      },
+      {
+        "file": "enhanced_legal_api_with_intelligence.py",
+        "pattern": "judge.*pattern|judge.*behavior",
+        "context": "        self.winning_patterns = intelligence.get('winning_patterns', {})\n        self.settlement_data = intelligence.get('settlement_intelligence', {})\n        self.judge_patterns = intelligence.get('judge_patterns', {})\n        \n    def predict_with_intelligence(self, case_details: str) -> Dict:"
+      },
+      {
+        "file": "ultimate_legal_ai_supreme.py",
+        "pattern": "judge.*pattern|judge.*behavior",
+        "context": "        self.winning_patterns = self.intelligence.get('winning_patterns', {})\n        self.settlement_data = self.intelligence.get('settlement_intelligence', {})\n        self.judge_patterns = self.intelligence.get('judge_patterns', {})\n    \n    def predict_with_intelligence(self, case_details: str) -> Dict:"
+      }
+    ],
+    "austlii_scraping": [
+      {
+        "file": "scrape_austlii.py",
+        "pattern": "austlii\\.edu\\.au|AustLII",
+        "context": "#!/usr/bin/env python3\n\"\"\"Scrape more cases from AustLII\"\"\"\n\nimport requests"
+      }
+    ]
+  },
+  "ml_models": [
+    {
+      "file": "legal_ai_mega.py",
+      "class": "QuantumSuccessPredictor"
+    },
+    {
+      "file": "quantum_legal_predictor.py",
+      "class": "QuantumLegalPredictor"
+    },
+    {
+      "file": "train_outcome_predictor.py",
+      "class": "OutcomePredictor"
+    },
+    {
+      "file": "strategic_hf_integration.py",
+      "class": "IntelligentModelIntegration"
+    },
+    {
+      "file": "optimized_main.py",
+      "class": "QuantumPredictor"
+    },
+    {
+      "file": "intelligent_cache_manager.py",
+      "class": "CacheAccessPredictor"
+    },
+    {
+      "file": "enhanced_legal_api_with_intelligence.py",
+      "class": "IntelligentCasePredictor"
+    },
+    {
+      "file": "next_gen_legal_ai_features.py",
+      "class": "QuantumSuccessPredictor"
+    }
+  ],
+  "data_extractors": [
+    {
+      "file": "corpus_intelligence_extractor.py",
+      "class": "CorpusIntelligenceExtractor"
+    },
+    {
+      "file": "extract_settlement_amounts.py",
+      "class": "SettlementExtractor"
+    }
+  ],
+  "data_sources": [
+    {
+      "file": "strategic_hf_integration.py",
+      "function": "download_embeddings_only"
+    },
+    {
+      "file": "scrape_austlii.py",
+      "function": "scrape_recent_cases"
+    }
+  ]
+}

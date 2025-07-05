@@ -1,0 +1,5143 @@
+{
+  "modules": {
+    "api/__init__.py": {
+      "content": "\"\"\"Australian Legal AI API\"\"\"\n",
+      "size": 30,
+      "imports": [],
+      "functions": [],
+      "classes": []
+    },
+    "api/legal_qa_light.py": {
+      "content": "\"\"\"\nLightweight Australian Legal Q&A API - Works in Codespaces!\nNo large model downloads - uses search + templates or HF Inference API\n\"\"\"\nfrom fastapi import FastAPI, HTTPException, Depends, Header\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import HTMLResponse\nfrom fastapi.security import HTTPBearer, HTTPAuthorizationCredentials\nfrom pydantic import BaseModel\nfrom typing import List, Dict, Optional\nimport os\nimport sys\nimport uuid\nfrom datetime import datetime\nimp...",
+      "size": 13846,
+      "imports": [
+        "fastapi.FastAPI",
+        "fastapi.HTTPException",
+        "fastapi.Depends",
+        "fastapi.Header",
+        "fastapi.middleware.cors.CORSMiddleware",
+        "fastapi.responses.HTMLResponse",
+        "fastapi.security.HTTPBearer",
+        "fastapi.security.HTTPAuthorizationCredentials",
+        "pydantic.BaseModel",
+        "typing.List",
+        "typing.Dict",
+        "typing.Optional",
+        "os",
+        "sys",
+        "uuid",
+        "datetime.datetime",
+        "httpx",
+        "src.search.LegalSearchEngine",
+        "uvicorn"
+      ],
+      "functions": [
+        {
+          "name": "validate_api_key",
+          "args": [
+            "credentials"
+          ],
+          "lineno": 80
+        },
+        {
+          "name": "get_template_response",
+          "args": [
+            "question"
+          ],
+          "lineno": 92
+        },
+        {
+          "name": "generate_answer",
+          "args": [
+            "question",
+            "use_search"
+          ],
+          "lineno": 135
+        }
+      ],
+      "classes": [
+        {
+          "name": "QuestionRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 66
+        },
+        {
+          "name": "AnswerResponse",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 71
+        }
+      ]
+    },
+    "api/main.py": {
+      "content": "\"\"\"Australian Legal LLM API - Integrate fine-tuned model with search\"\"\"\nfrom fastapi import FastAPI, HTTPException, Depends\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom pydantic import BaseModel\nfrom typing import List, Dict, Any, Optional\nimport torch\nfrom transformers import AutoModelForCausalLM, AutoTokenizer\nimport os\nimport sys\n\n# Add parent directory\nsys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))\nfrom src.search import LegalSearchEngine\n\n# Initializ...",
+      "size": 9517,
+      "imports": [
+        "fastapi.FastAPI",
+        "fastapi.HTTPException",
+        "fastapi.Depends",
+        "fastapi.middleware.cors.CORSMiddleware",
+        "pydantic.BaseModel",
+        "typing.List",
+        "typing.Dict",
+        "typing.Any",
+        "typing.Optional",
+        "torch",
+        "transformers.AutoModelForCausalLM",
+        "transformers.AutoTokenizer",
+        "os",
+        "sys",
+        "src.search.LegalSearchEngine",
+        "uvicorn"
+      ],
+      "functions": [
+        {
+          "name": "root",
+          "args": [],
+          "lineno": 251
+        },
+        {
+          "name": "health_check",
+          "args": [],
+          "lineno": 278
+        }
+      ],
+      "classes": [
+        {
+          "name": "ChatRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 37
+        },
+        {
+          "name": "SearchRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 43
+        },
+        {
+          "name": "ChatResponse",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 47
+        }
+      ]
+    },
+    "app_analyzer.py": {
+      "content": "#!/usr/bin/env python3\n\"\"\"\nApplication Structure Analyzer\nScans a Python project directory to understand data flow and module interactions\n\"\"\"\n\nimport os\nimport ast\nimport sys\nfrom pathlib import Path\nfrom collections import defaultdict\nimport json\n\nclass AppAnalyzer:\n    def __init__(self, root_dir=\".\"):\n        self.root_dir = Path(root_dir)\n        self.modules = {}\n        self.imports = defaultdict(list)\n        self.functions = defaultdict(list)\n        self.classes = defaultdict(list)\n   ...",
+      "size": 9139,
+      "imports": [
+        "os",
+        "ast",
+        "sys",
+        "pathlib.Path",
+        "collections.defaultdict",
+        "json"
+      ],
+      "functions": [
+        {
+          "name": "__init__",
+          "args": [
+            "self",
+            "root_dir"
+          ],
+          "lineno": 15
+        },
+        {
+          "name": "find_python_files",
+          "args": [
+            "self"
+          ],
+          "lineno": 23
+        },
+        {
+          "name": "parse_file",
+          "args": [
+            "self",
+            "filepath"
+          ],
+          "lineno": 33
+        },
+        {
+          "name": "get_name",
+          "args": [
+            "self",
+            "node"
+          ],
+          "lineno": 87
+        },
+        {
+          "name": "analyze_main_py",
+          "args": [
+            "self"
+          ],
+          "lineno": 95
+        },
+        {
+          "name": "generate_import_graph",
+          "args": [
+            "self"
+          ],
+          "lineno": 116
+        },
+        {
+          "name": "generate_summary",
+          "args": [
+            "self"
+          ],
+          "lineno": 139
+        },
+        {
+          "name": "save_analysis",
+          "args": [
+            "self",
+            "output_file"
+          ],
+          "lineno": 170
+        },
+        {
+          "name": "run",
+          "args": [
+            "self"
+          ],
+          "lineno": 186
+        }
+      ],
+      "classes": [
+        {
+          "name": "AppAnalyzer",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "find_python_files",
+            "parse_file",
+            "get_name",
+            "analyze_main_py",
+            "generate_import_graph",
+            "generate_summary",
+            "save_analysis",
+            "run"
+          ],
+          "lineno": 14
+        }
+      ]
+    },
+    "build_hybrid_intelligence.py": {
+      "content": "#!/usr/bin/env python3\n\"\"\"\nBuild Hybrid Intelligence from Both Corpuses\n\"\"\"\n\nimport json\nimport numpy as np\nfrom collections import defaultdict\n\n# Load both intelligence files\nprint(\"Loading intelligence files...\")\n\nwith open('corpus_intelligence.json', 'r') as f:\n    corpus_intel = json.load(f)\n    \nwith open('hf_extracted_intelligence.json', 'r') as f:\n    hf_intel = json.load(f)\n\nprint(f\"\u2705 Loaded intelligence from {len(corpus_intel.get('case_outcomes', []))} local cases\")\nprint(f\"\u2705 Loaded int...",
+      "size": 4359,
+      "imports": [
+        "json",
+        "numpy",
+        "collections.defaultdict"
+      ],
+      "functions": [],
+      "classes": []
+    },
+    "check_index.py": {
+      "content": "# Save as check_index.py\nimport os\nimport json\n\nif os.path.exists(\"data/index_stats.json\"):\n    with open(\"data/index_stats.json\", \"r\") as f:\n        stats = json.load(f)\n    print(\"\u2705 Indexing COMPLETE!\")\n    print(f\"\ud83d\udcca Total documents: {stats['total_documents']}\")\n    print(f\"\ud83c\udfdb\ufe0f Jurisdictions: {stats['jurisdictions']}\")\n    print(f\"\ud83d\udcc4 Document types: {stats['document_types']}\")\n    print(f\"\ud83d\udccf Avg doc length: {stats['average_doc_length']:.0f} chars\")\nelse:\n    print(\"\u274c Index not found - still runni...",
+      "size": 700,
+      "imports": [
+        "os",
+        "json"
+      ],
+      "functions": [],
+      "classes": []
+    },
+    "cli.py": {
+      "content": "#!/usr/bin/env python3\n\"\"\"Command line interface for Australian Legal AI\"\"\"\nimport click\nimport requests\nimport json\nimport os\n\n\ndef get_api_url():\n    \"\"\"Get API URL based on environment\"\"\"\n    if os.environ.get('CODESPACES'):\n        codespace_name = os.environ.get('CODESPACE_NAME', '')\n        return f\"https://{codespace_name}-8000.preview.app.github.dev\"\n    return \"http://localhost:8000\"\n\n\n@click.group()\ndef cli():\n    \"\"\"Australian Legal AI CLI\"\"\"\n    pass\n\n\n@cli.command()\n@click.option('-...",
+      "size": 1325,
+      "imports": [
+        "click",
+        "requests",
+        "json",
+        "os"
+      ],
+      "functions": [
+        {
+          "name": "get_api_url",
+          "args": [],
+          "lineno": 9
+        },
+        {
+          "name": "cli",
+          "args": [],
+          "lineno": 18
+        },
+        {
+          "name": "search",
+          "args": [
+            "query",
+            "api_key"
+          ],
+          "lineno": 26
+        }
+      ],
+      "classes": []
+    },
+    "corpus_intelligence_extractor.py": {
+      "content": "#!/usr/bin/env python3\n\"\"\"\nCorpus Intelligence Extractor\nLearns patterns, outcomes, and strategies from your legal corpus\n\"\"\"\n\nimport pickle\nfrom collections import defaultdict, Counter\nimport re\nfrom typing import Dict, List, Tuple\nimport json\nfrom datetime import datetime\nfrom sentence_transformers import SentenceTransformer\nimport numpy as np\nfrom tqdm import tqdm\n\nclass CorpusIntelligenceExtractor:\n    def __init__(self):\n        self.model = SentenceTransformer('all-MiniLM-L6-v2')\n        s...",
+      "size": 18708,
+      "imports": [
+        "pickle",
+        "collections.defaultdict",
+        "collections.Counter",
+        "re",
+        "typing.Dict",
+        "typing.List",
+        "typing.Tuple",
+        "json",
+        "datetime.datetime",
+        "sentence_transformers.SentenceTransformer",
+        "numpy",
+        "tqdm.tqdm",
+        "sklearn.cluster.KMeans"
+      ],
+      "functions": [
+        {
+          "name": "save_corpus_intelligence",
+          "args": [
+            "intelligence",
+            "filename"
+          ],
+          "lineno": 418
+        },
+        {
+          "name": "__init__",
+          "args": [
+            "self"
+          ],
+          "lineno": 18
+        },
+        {
+          "name": "extract_intelligence",
+          "args": [
+            "self",
+            "documents"
+          ],
+          "lineno": 29
+        },
+        {
+          "name": "_extract_case_outcomes",
+          "args": [
+            "self",
+            "documents"
+          ],
+          "lineno": 71
+        },
+        {
+          "name": "_learn_winning_patterns",
+          "args": [
+            "self",
+            "case_outcomes"
+          ],
+          "lineno": 128
+        },
+        {
+          "name": "_extract_case_factors",
+          "args": [
+            "self",
+            "text"
+          ],
+          "lineno": 167
+        },
+        {
+          "name": "_extract_settlement_amounts",
+          "args": [
+            "self",
+            "documents"
+          ],
+          "lineno": 191
+        },
+        {
+          "name": "_categorize_settlements",
+          "args": [
+            "self",
+            "amounts"
+          ],
+          "lineno": 237
+        },
+        {
+          "name": "_build_precedent_network",
+          "args": [
+            "self",
+            "documents"
+          ],
+          "lineno": 247
+        },
+        {
+          "name": "_analyze_judge_patterns",
+          "args": [
+            "self",
+            "documents"
+          ],
+          "lineno": 274
+        },
+        {
+          "name": "_learn_temporal_patterns",
+          "args": [
+            "self",
+            "documents"
+          ],
+          "lineno": 306
+        },
+        {
+          "name": "_create_case_clusters",
+          "args": [
+            "self",
+            "documents"
+          ],
+          "lineno": 336
+        },
+        {
+          "name": "_generate_insights",
+          "args": [
+            "self",
+            "case_outcomes",
+            "winning_patterns"
+          ],
+          "lineno": 377
+        },
+        {
+          "name": "convert_numpy",
+          "args": [
+            "obj"
+          ],
+          "lineno": 422
+        }
+      ],
+      "classes": [
+        {
+          "name": "CorpusIntelligenceExtractor",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "extract_intelligence",
+            "_extract_case_outcomes",
+            "_learn_winning_patterns",
+            "_extract_case_factors",
+            "_extract_settlement_amounts",
+            "_categorize_settlements",
+            "_build_precedent_network",
+            "_analyze_judge_patterns",
+            "_learn_temporal_patterns",
+            "_create_case_clusters",
+            "_generate_insights"
+          ],
+          "lineno": 17
+        }
+      ]
+    },
+    "enhanced_legal_api_with_intelligence.py": {
+      "content": "#!/usr/bin/env python3\n\"\"\"\nEnhanced Legal API with Corpus Intelligence\nUses patterns learned from your corpus\n\"\"\"\n\nfrom fastapi import FastAPI, HTTPException\nfrom pydantic import BaseModel\nfrom typing import List, Dict, Optional\nimport json\nimport pickle\nimport re\nfrom legal_rag import LegalRAG\nimport uvicorn\n\napp = FastAPI(\n    title=\"Australian Legal AI - Intelligence Enhanced\",\n    description=\"\ud83e\udde0 Powered by patterns from thousands of cases\",\n    version=\"10.0-INTELLIGENCE\"\n)\n\n# Load your orig...",
+      "size": 14212,
+      "imports": [
+        "fastapi.FastAPI",
+        "fastapi.HTTPException",
+        "pydantic.BaseModel",
+        "typing.List",
+        "typing.Dict",
+        "typing.Optional",
+        "json",
+        "pickle",
+        "re",
+        "legal_rag.LegalRAG",
+        "uvicorn"
+      ],
+      "functions": [
+        {
+          "name": "_generate_explanation",
+          "args": [
+            "prediction"
+          ],
+          "lineno": 237
+        },
+        {
+          "name": "_confidence_statement",
+          "args": [
+            "prediction"
+          ],
+          "lineno": 258
+        },
+        {
+          "name": "__init__",
+          "args": [
+            "self",
+            "intelligence"
+          ],
+          "lineno": 48
+        },
+        {
+          "name": "predict_with_intelligence",
+          "args": [
+            "self",
+            "case_details"
+          ],
+          "lineno": 54
+        },
+        {
+          "name": "_calculate_confidence",
+          "args": [
+            "self",
+            "patterns"
+          ],
+          "lineno": 106
+        },
+        {
+          "name": "suggest_settlement",
+          "args": [
+            "self",
+            "salary",
+            "years",
+            "case_strength"
+          ],
+          "lineno": 122
+        },
+        {
+          "name": "_settlement_strategy",
+          "args": [
+            "self",
+            "strength",
+            "target",
+            "weekly"
+          ],
+          "lineno": 168
+        }
+      ],
+      "classes": [
+        {
+          "name": "IntelligentPredictionRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 42
+        },
+        {
+          "name": "IntelligentCasePredictor",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "predict_with_intelligence",
+            "_calculate_confidence",
+            "suggest_settlement",
+            "_settlement_strategy"
+          ],
+          "lineno": 47
+        }
+      ]
+    },
+    "fix_smart_ai.py": {
+      "content": "# Add this to smart_legal_ai.py after line 60 (in predict_case_outcome function)\n\n# BETTER pattern matching - more flexible\npositive_patterns = [\n    (['no warning', 'without warning', 'no written warning'], 20, 'No Written Warnings'),\n    (['good performance', 'excellent performance', 'positive review'], 10, 'Good Performance History'),\n    (['long service', 'years service', 'years of service'], 10, 'Long Service'),\n    (['no opportunity', 'not given chance', 'no chance to respond'], 25, 'No Op...",
+      "size": 1095,
+      "imports": [],
+      "functions": [],
+      "classes": []
+    },
+    "index_corpus.py": {
+      "content": "\"\"\"Build search index from Australian Legal Corpus JSONL file\"\"\"\nimport os\nimport sys\nimport json\nimport pickle\nimport numpy as np\nimport faiss\nfrom tqdm import tqdm\nfrom typing import List, Dict, Any\nfrom collections import defaultdict\n\n# Add parent directory to path\nsys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))\nfrom src.embeddings import LegalEmbedder\n\n\nclass AustralianLegalIndexer:\n    def __init__(self, jsonl_path: str):\n        self.jsonl_path = jsonl_path\n   ...",
+      "size": 9194,
+      "imports": [
+        "os",
+        "sys",
+        "json",
+        "pickle",
+        "numpy",
+        "faiss",
+        "tqdm.tqdm",
+        "typing.List",
+        "typing.Dict",
+        "typing.Any",
+        "collections.defaultdict",
+        "src.embeddings.LegalEmbedder",
+        "argparse"
+      ],
+      "functions": [
+        {
+          "name": "main",
+          "args": [],
+          "lineno": 196
+        },
+        {
+          "name": "__init__",
+          "args": [
+            "self",
+            "jsonl_path"
+          ],
+          "lineno": 18
+        },
+        {
+          "name": "load_corpus",
+          "args": [
+            "self"
+          ],
+          "lineno": 24
+        },
+        {
+          "name": "analyze_corpus",
+          "args": [
+            "self"
+          ],
+          "lineno": 46
+        },
+        {
+          "name": "build_index",
+          "args": [
+            "self",
+            "output_dir",
+            "batch_size"
+          ],
+          "lineno": 80
+        },
+        {
+          "name": "_get_dir_size",
+          "args": [
+            "self",
+            "path"
+          ],
+          "lineno": 161
+        },
+        {
+          "name": "test_search",
+          "args": [
+            "self",
+            "query",
+            "k"
+          ],
+          "lineno": 170
+        }
+      ],
+      "classes": [
+        {
+          "name": "AustralianLegalIndexer",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "load_corpus",
+            "analyze_corpus",
+            "build_index",
+            "_get_dir_size",
+            "test_search"
+          ],
+          "lineno": 17
+        }
+      ]
+    },
+    "intelligent_corpus_sampler.py": {
+      "content": "#!/usr/bin/env python3\n\"\"\"\nIntelligent Corpus Sampler\nSelectively loads the BEST documents from 260k corpus\n\"\"\"\n\nimport pickle\nimport json\nimport re\nfrom typing import List, Dict, Set\nimport random\nfrom collections import defaultdict\nimport hashlib\nimport gzip\nimport numpy as np\n\nclass IntelligentCorpusSampler:\n    def __init__(self):\n        self.priority_patterns = {\n            'high_value_cases': {\n                'patterns': [\n                    r'high\\s*court',\n                    r'feder...",
+      "size": 15272,
+      "imports": [
+        "pickle",
+        "json",
+        "re",
+        "typing.List",
+        "typing.Dict",
+        "typing.Set",
+        "random",
+        "collections.defaultdict",
+        "hashlib",
+        "gzip",
+        "numpy",
+        "os",
+        "collections.Counter"
+      ],
+      "functions": [
+        {
+          "name": "__init__",
+          "args": [
+            "self"
+          ],
+          "lineno": 18
+        },
+        {
+          "name": "smart_sample",
+          "args": [
+            "self",
+            "all_documents",
+            "target_size"
+          ],
+          "lineno": 68
+        },
+        {
+          "name": "_score_document",
+          "args": [
+            "self",
+            "doc"
+          ],
+          "lineno": 137
+        },
+        {
+          "name": "build_compressed_index",
+          "args": [
+            "documents",
+            "output_file"
+          ],
+          "lineno": 180
+        },
+        {
+          "name": "_build_keyword_index",
+          "args": [
+            "documents"
+          ],
+          "lineno": 215
+        },
+        {
+          "name": "_build_citation_index",
+          "args": [
+            "documents"
+          ],
+          "lineno": 235
+        },
+        {
+          "name": "_build_type_index",
+          "args": [
+            "documents"
+          ],
+          "lineno": 244
+        },
+        {
+          "name": "_build_year_index",
+          "args": [
+            "documents"
+          ],
+          "lineno": 253
+        },
+        {
+          "name": "_build_outcome_index",
+          "args": [
+            "documents"
+          ],
+          "lineno": 268
+        },
+        {
+          "name": "_count_types",
+          "args": [
+            "documents"
+          ],
+          "lineno": 287
+        },
+        {
+          "name": "process_in_chunks",
+          "args": [
+            "file_path",
+            "chunk_size"
+          ],
+          "lineno": 298
+        },
+        {
+          "name": "_extract_patterns",
+          "args": [
+            "chunk"
+          ],
+          "lineno": 319
+        },
+        {
+          "name": "_extract_outcomes",
+          "args": [
+            "chunk"
+          ],
+          "lineno": 337
+        },
+        {
+          "name": "_extract_settlements",
+          "args": [
+            "chunk"
+          ],
+          "lineno": 353
+        }
+      ],
+      "classes": [
+        {
+          "name": "IntelligentCorpusSampler",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "smart_sample",
+            "_score_document"
+          ],
+          "lineno": 17
+        },
+        {
+          "name": "CompressedCorpusBuilder",
+          "bases": [],
+          "methods": [
+            "build_compressed_index",
+            "_build_keyword_index",
+            "_build_citation_index",
+            "_build_type_index",
+            "_build_year_index",
+            "_build_outcome_index",
+            "_count_types"
+          ],
+          "lineno": 176
+        },
+        {
+          "name": "StreamingCorpusProcessor",
+          "bases": [],
+          "methods": [
+            "process_in_chunks",
+            "_extract_patterns",
+            "_extract_outcomes",
+            "_extract_settlements"
+          ],
+          "lineno": 294
+        }
+      ]
+    },
+    "legal_ai_reasoning.py": {
+      "content": "\n# Feature 1: Success Rate Trends\n@app.get(\"/trends/{case_type}\")\nasync def success_trends(case_type: str):\n    \"\"\"Show success rate trends over time\"\"\"\n    return {\n        \"case_type\": case_type,\n        \"current_success_rate\": \"67%\",\n        \"trend\": \"increasing\",\n        \"best_arguments\": [\"No warnings\", \"Long service\", \"Inconsistent treatment\"]\n    }\n\n# Feature 2: Document Checklist\n@app.post(\"/checklist\")\nasync def document_checklist(request: PredictRequest):\n    \"\"\"Generate personalized d...",
+      "size": 1589,
+      "imports": [],
+      "functions": [],
+      "classes": []
+    },
+    "legal_qa_api.py": {
+      "content": "\"\"\"\nAustralian Legal Q&A Service - Start Making Money Today!\nUses HuggingFace model - no GPU needed!\n\"\"\"\nfrom fastapi import FastAPI, HTTPException, Depends, Request\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import HTMLResponse\nfrom fastapi.security import HTTPBearer, HTTPAuthorizationCredentials\nfrom pydantic import BaseModel\nfrom typing import List, Dict, Optional\nimport os\nimport time\nimport uuid\nfrom datetime import datetime\nfrom transformers import pipeline\ni...",
+      "size": 12258,
+      "imports": [
+        "fastapi.FastAPI",
+        "fastapi.HTTPException",
+        "fastapi.Depends",
+        "fastapi.Request",
+        "fastapi.middleware.cors.CORSMiddleware",
+        "fastapi.responses.HTMLResponse",
+        "fastapi.security.HTTPBearer",
+        "fastapi.security.HTTPAuthorizationCredentials",
+        "pydantic.BaseModel",
+        "typing.List",
+        "typing.Dict",
+        "typing.Optional",
+        "os",
+        "time",
+        "uuid",
+        "datetime.datetime",
+        "transformers.pipeline",
+        "asyncio",
+        "concurrent.futures.ThreadPoolExecutor",
+        "uvicorn"
+      ],
+      "functions": [
+        {
+          "name": "validate_api_key",
+          "args": [
+            "credentials"
+          ],
+          "lineno": 89
+        },
+        {
+          "name": "generate_legal_answer",
+          "args": [
+            "question",
+            "context",
+            "max_length"
+          ],
+          "lineno": 101
+        }
+      ],
+      "classes": [
+        {
+          "name": "QuestionRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 51
+        },
+        {
+          "name": "AnswerResponse",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 57
+        },
+        {
+          "name": "UsageStats",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 66
+        }
+      ]
+    },
+    "legal_qa_enhanced.py": {
+      "content": "from fastapi import FastAPI, HTTPException\nfrom pydantic import BaseModel\nimport pickle\nimport re\nfrom collections import Counter\nimport uvicorn\n\napp = FastAPI(title=\"Australian Legal Q&A API - Enhanced\")\n\n# Load search index\nwith open('data/simple_index.pkl', 'rb') as f:\n    search_data = pickle.load(f)\nprint(f\"Loaded {len(search_data['documents'])} documents\")\n\nclass QuestionRequest(BaseModel):\n    question: str\n\nclass SearchRequest(BaseModel):\n    query: str\n    num_results: int = 5\n\n# Legal ...",
+      "size": 5708,
+      "imports": [
+        "fastapi.FastAPI",
+        "fastapi.HTTPException",
+        "pydantic.BaseModel",
+        "pickle",
+        "re",
+        "collections.Counter",
+        "uvicorn"
+      ],
+      "functions": [
+        {
+          "name": "search",
+          "args": [
+            "query",
+            "num_results"
+          ],
+          "lineno": 46
+        }
+      ],
+      "classes": [
+        {
+          "name": "QuestionRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 15
+        },
+        {
+          "name": "SearchRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 18
+        }
+      ]
+    },
+    "legal_qa_light.py": {
+      "content": "\"\"\"\nLightweight Australian Legal Q&A API - Works in Codespaces!\nNo large model downloads - uses search + templates or HF Inference API\n\"\"\"\nfrom fastapi import FastAPI, HTTPException, Depends, Header\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom fastapi.responses import HTMLResponse\nfrom fastapi.security import HTTPBearer, HTTPAuthorizationCredentials\nfrom pydantic import BaseModel\nfrom typing import List, Dict, Optional\nimport pickle\nimport re\nfrom collections import Counter\n\n# Load se...",
+      "size": 22446,
+      "imports": [
+        "fastapi.FastAPI",
+        "fastapi.HTTPException",
+        "fastapi.Depends",
+        "fastapi.Header",
+        "fastapi.middleware.cors.CORSMiddleware",
+        "fastapi.responses.HTMLResponse",
+        "fastapi.security.HTTPBearer",
+        "fastapi.security.HTTPAuthorizationCredentials",
+        "pydantic.BaseModel",
+        "typing.List",
+        "typing.Dict",
+        "typing.Optional",
+        "pickle",
+        "re",
+        "collections.Counter",
+        "os",
+        "sys",
+        "uuid",
+        "datetime.datetime",
+        "httpx",
+        "re",
+        "src.search.LegalSearchEngine",
+        "uvicorn",
+        "re"
+      ],
+      "functions": [
+        {
+          "name": "real_search",
+          "args": [
+            "query",
+            "num_results"
+          ],
+          "lineno": 24
+        },
+        {
+          "name": "validate_api_key",
+          "args": [
+            "credentials"
+          ],
+          "lineno": 121
+        },
+        {
+          "name": "get_template_response",
+          "args": [
+            "question"
+          ],
+          "lineno": 133
+        },
+        {
+          "name": "generate_answer",
+          "args": [
+            "question",
+            "use_search"
+          ],
+          "lineno": 261
+        },
+        {
+          "name": "filter_relevant_results",
+          "args": [
+            "question",
+            "results"
+          ],
+          "lineno": 322
+        },
+        {
+          "name": "create_structured_answer",
+          "args": [
+            "question",
+            "results"
+          ],
+          "lineno": 362
+        },
+        {
+          "name": "structure_legal_answer",
+          "args": [
+            "question",
+            "content",
+            "answer_type"
+          ],
+          "lineno": 419
+        }
+      ],
+      "classes": [
+        {
+          "name": "QuestionRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 107
+        },
+        {
+          "name": "AnswerResponse",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 112
+        }
+      ]
+    },
+    "legal_qa_working.py": {
+      "content": "from fastapi import FastAPI, HTTPException\nfrom pydantic import BaseModel\nimport pickle\nimport re\nfrom collections import Counter\nimport uvicorn\n\napp = FastAPI(title=\"Australian Legal Q&A API\")\n\n# Load search index\ntry:\n    with open('data/simple_index.pkl', 'rb') as f:\n        search_data = pickle.load(f)\n    print(f\"Loaded {len(search_data['documents'])} documents\")\nexcept:\n    search_data = None\n\nclass QuestionRequest(BaseModel):\n    question: str\n\nclass SearchRequest(BaseModel):\n    query: s...",
+      "size": 2483,
+      "imports": [
+        "fastapi.FastAPI",
+        "fastapi.HTTPException",
+        "pydantic.BaseModel",
+        "pickle",
+        "re",
+        "collections.Counter",
+        "uvicorn"
+      ],
+      "functions": [
+        {
+          "name": "search",
+          "args": [
+            "query",
+            "num_results"
+          ],
+          "lineno": 25
+        }
+      ],
+      "classes": [
+        {
+          "name": "QuestionRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 18
+        },
+        {
+          "name": "SearchRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 21
+        }
+      ]
+    },
+    "legal_rag.py": {
+      "content": "#!/usr/bin/env python3\n\"\"\"\nLegal RAG Query Engine - No hallucinations, only facts!\n\"\"\"\n\nfrom sentence_transformers import SentenceTransformer\nimport chromadb\nfrom typing import List, Dict\n\nclass LegalRAG:\n    def __init__(self):\n        self.model = SentenceTransformer('all-MiniLM-L6-v2')\n        self.client = chromadb.PersistentClient(path=\"./rag_index\")\n        self.collection = self.client.get_collection(\"aussie_legal\")\n        \n    def query(self, question: str, n_results: int = 5) -> Dict:\n...",
+      "size": 2719,
+      "imports": [
+        "sentence_transformers.SentenceTransformer",
+        "chromadb",
+        "typing.List",
+        "typing.Dict"
+      ],
+      "functions": [
+        {
+          "name": "__init__",
+          "args": [
+            "self"
+          ],
+          "lineno": 11
+        },
+        {
+          "name": "query",
+          "args": [
+            "self",
+            "question",
+            "n_results"
+          ],
+          "lineno": 16
+        },
+        {
+          "name": "_generate_answer",
+          "args": [
+            "self",
+            "question",
+            "sources"
+          ],
+          "lineno": 52
+        }
+      ],
+      "classes": [
+        {
+          "name": "LegalRAG",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "query",
+            "_generate_answer"
+          ],
+          "lineno": 10
+        }
+      ]
+    },
+    "next_gen_legal_ai_features.py": {
+      "content": "#!/usr/bin/env python3\n\"\"\"\nNEXT GENERATION LEGAL AI FEATURES\nFeatures that NO OTHER legal AI system has!\n\"\"\"\n\nimport json\nimport numpy as np\nfrom typing import Dict, List, Tuple\nfrom collections import defaultdict\nimport re\nfrom datetime import datetime\nimport networkx as nx\nfrom scipy import stats\n\n# Load the super intelligence\nwith open('hybrid_super_intelligence.json', 'r') as f:\n    super_intel = json.load(f)\n\nclass PrecedentImpactAnalyzer:\n    \"\"\"Not just WHO cites, but HOW precedents chang...",
+      "size": 20516,
+      "imports": [
+        "json",
+        "numpy",
+        "typing.Dict",
+        "typing.List",
+        "typing.Tuple",
+        "collections.defaultdict",
+        "re",
+        "datetime.datetime",
+        "networkx",
+        "scipy.stats"
+      ],
+      "functions": [
+        {
+          "name": "__init__",
+          "args": [
+            "self",
+            "precedent_network"
+          ],
+          "lineno": 23
+        },
+        {
+          "name": "analyze_precedent_power",
+          "args": [
+            "self",
+            "case_citation"
+          ],
+          "lineno": 32
+        },
+        {
+          "name": "_categorize_influence",
+          "args": [
+            "self",
+            "score"
+          ],
+          "lineno": 56
+        },
+        {
+          "name": "_strategic_use",
+          "args": [
+            "self",
+            "score"
+          ],
+          "lineno": 66
+        },
+        {
+          "name": "find_killer_precedents",
+          "args": [
+            "self",
+            "claim_type"
+          ],
+          "lineno": 74
+        },
+        {
+          "name": "__init__",
+          "args": [
+            "self",
+            "settlement_data"
+          ],
+          "lineno": 103
+        },
+        {
+          "name": "optimize_timing",
+          "args": [
+            "self",
+            "case_strength",
+            "days_elapsed"
+          ],
+          "lineno": 107
+        },
+        {
+          "name": "_timing_recommendation",
+          "args": [
+            "self",
+            "phase",
+            "strength"
+          ],
+          "lineno": 163
+        },
+        {
+          "name": "_calculate_leverage",
+          "args": [
+            "self",
+            "phase",
+            "strength"
+          ],
+          "lineno": 173
+        },
+        {
+          "name": "_get_tactics",
+          "args": [
+            "self",
+            "leverage"
+          ],
+          "lineno": 192
+        },
+        {
+          "name": "__init__",
+          "args": [
+            "self",
+            "case_outcomes",
+            "winning_patterns"
+          ],
+          "lineno": 215
+        },
+        {
+          "name": "score_arguments",
+          "args": [
+            "self",
+            "arguments"
+          ],
+          "lineno": 219
+        },
+        {
+          "name": "_get_historical_rate",
+          "args": [
+            "self",
+            "patterns"
+          ],
+          "lineno": 267
+        },
+        {
+          "name": "_recommend_usage",
+          "args": [
+            "self",
+            "score"
+          ],
+          "lineno": 279
+        },
+        {
+          "name": "_predict_counters",
+          "args": [
+            "self",
+            "argument"
+          ],
+          "lineno": 289
+        },
+        {
+          "name": "__init__",
+          "args": [
+            "self",
+            "all_data"
+          ],
+          "lineno": 310
+        },
+        {
+          "name": "quantum_predict",
+          "args": [
+            "self",
+            "case_details",
+            "variables"
+          ],
+          "lineno": 313
+        },
+        {
+          "name": "_extract_features",
+          "args": [
+            "self",
+            "text"
+          ],
+          "lineno": 343
+        },
+        {
+          "name": "_predict_legal_merit",
+          "args": [
+            "self",
+            "features"
+          ],
+          "lineno": 357
+        },
+        {
+          "name": "_predict_settlement",
+          "args": [
+            "self",
+            "features"
+          ],
+          "lineno": 372
+        },
+        {
+          "name": "_predict_timing_success",
+          "args": [
+            "self",
+            "features"
+          ],
+          "lineno": 386
+        },
+        {
+          "name": "_predict_financial",
+          "args": [
+            "self",
+            "features",
+            "salary"
+          ],
+          "lineno": 392
+        },
+        {
+          "name": "_predict_emotional_cost",
+          "args": [
+            "self",
+            "features"
+          ],
+          "lineno": 411
+        },
+        {
+          "name": "_predict_reputation",
+          "args": [
+            "self",
+            "features"
+          ],
+          "lineno": 424
+        },
+        {
+          "name": "_generate_probability_curves",
+          "args": [
+            "self",
+            "features",
+            "dimensions"
+          ],
+          "lineno": 435
+        },
+        {
+          "name": "_determine_optimal_strategy",
+          "args": [
+            "self",
+            "dimensions"
+          ],
+          "lineno": 457
+        },
+        {
+          "name": "_calculate_risk_adjusted_value",
+          "args": [
+            "self",
+            "dimensions",
+            "variables"
+          ],
+          "lineno": 470
+        }
+      ],
+      "classes": [
+        {
+          "name": "PrecedentImpactAnalyzer",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "analyze_precedent_power",
+            "_categorize_influence",
+            "_strategic_use",
+            "find_killer_precedents"
+          ],
+          "lineno": 20
+        },
+        {
+          "name": "SettlementTimingOptimizer",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "optimize_timing",
+            "_timing_recommendation",
+            "_calculate_leverage",
+            "_get_tactics"
+          ],
+          "lineno": 100
+        },
+        {
+          "name": "ArgumentStrengthScorer",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "score_arguments",
+            "_get_historical_rate",
+            "_recommend_usage",
+            "_predict_counters"
+          ],
+          "lineno": 212
+        },
+        {
+          "name": "QuantumSuccessPredictor",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "quantum_predict",
+            "_extract_features",
+            "_predict_legal_merit",
+            "_predict_settlement",
+            "_predict_timing_success",
+            "_predict_financial",
+            "_predict_emotional_cost",
+            "_predict_reputation",
+            "_generate_probability_curves",
+            "_determine_optimal_strategy",
+            "_calculate_risk_adjusted_value"
+          ],
+          "lineno": 307
+        }
+      ]
+    },
+    "rag_indexer.py": {
+      "content": "#!/usr/bin/env python3\n\"\"\"\nLegal RAG System - Build semantic index with citations\n\"\"\"\n\nimport pickle\nfrom sentence_transformers import SentenceTransformer\nimport chromadb\nimport re\nfrom tqdm import tqdm\n\nprint(\"\ud83d\ude80 Building Legal RAG System...\")\n\n# Load embedding model\nprint(\"Loading embedding model...\")\nmodel = SentenceTransformer('all-MiniLM-L6-v2')\n\n# Initialize ChromaDB\nprint(\"Initializing vector database...\")\nclient = chromadb.PersistentClient(path=\"./rag_index\")\ncollection = client.get_or_cr...",
+      "size": 1899,
+      "imports": [
+        "pickle",
+        "sentence_transformers.SentenceTransformer",
+        "chromadb",
+        "re",
+        "tqdm.tqdm"
+      ],
+      "functions": [],
+      "classes": []
+    },
+    "rag_indexer_fixed.py": {
+      "content": "#!/usr/bin/env python3\n\"\"\"\nFixed Legal RAG System - Handles missing metadata\n\"\"\"\n\nimport pickle\nfrom sentence_transformers import SentenceTransformer\nimport chromadb\nfrom tqdm import tqdm\n\nprint(\"\ud83d\ude80 Building Legal RAG System...\")\n\n# Load documents\nprint(\"Loading legal documents...\")\nwith open('data/simple_index.pkl', 'rb') as f:\n    data = pickle.load(f)\n    documents = data['documents']\n\nprint(f\"Found {len(documents)} documents\")\n\n# Setup ChromaDB\nclient = chromadb.PersistentClient(path=\"./rag_i...",
+      "size": 3382,
+      "imports": [
+        "pickle",
+        "sentence_transformers.SentenceTransformer",
+        "chromadb",
+        "tqdm.tqdm"
+      ],
+      "functions": [],
+      "classes": []
+    },
+    "search_engine.py": {
+      "content": "import pickle\nimport re\nfrom collections import Counter\n\nclass SimpleSearchEngine:\n    def __init__(self, index_path='data/simple_index.pkl'):\n        with open(index_path, 'rb') as f:\n            data = pickle.load(f)\n        self.documents = data['documents']\n        self.keyword_index = data['keyword_index']\n        print(f\"Loaded search index with {len(self.documents)} documents\")\n    \n    def search(self, query, num_results=5):\n        # Clean and split query\n        query_words = re.findal...",
+      "size": 1294,
+      "imports": [
+        "pickle",
+        "re",
+        "collections.Counter"
+      ],
+      "functions": [
+        {
+          "name": "__init__",
+          "args": [
+            "self",
+            "index_path"
+          ],
+          "lineno": 6
+        },
+        {
+          "name": "search",
+          "args": [
+            "self",
+            "query",
+            "num_results"
+          ],
+          "lineno": 13
+        }
+      ],
+      "classes": [
+        {
+          "name": "SimpleSearchEngine",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "search"
+          ],
+          "lineno": 5
+        }
+      ]
+    },
+    "setup.py": {
+      "content": "from setuptools import setup, find_packages\n\nsetup(\n    name=\"aussie-legal-ai\",\n    version=\"1.0.0\",\n    author=\"Your Name\",\n    description=\"Australian Legal AI - Semantic Search System\",\n    packages=find_packages(),\n    install_requires=[\n        \"torch>=2.0.0\",\n        \"transformers>=4.30.0\",\n        \"faiss-cpu>=1.7.4\",\n        \"fastapi>=0.100.0\",\n        \"numpy>=1.24.0\",\n    ],\n    python_requires=\">=3.8\",\n)\n",
+      "size": 417,
+      "imports": [
+        "setuptools.setup",
+        "setuptools.find_packages"
+      ],
+      "functions": [],
+      "classes": []
+    },
+    "simple_index.py": {
+      "content": "import json\nimport re\nfrom collections import Counter\nimport pickle\nimport os\n\nprint(\"Building simple legal search index...\")\nos.makedirs('data', exist_ok=True)\n\ndocuments = []\nkeyword_index = {}\n\nwith open('corpus_export/australian_legal_corpus.jsonl', 'r') as f:\n    for i, line in enumerate(f):\n        doc = json.loads(line.strip())\n        doc_id = len(documents)\n        documents.append(doc)\n        \n        # Extract keywords\n        text = doc['text'].lower()\n        words = re.findall(r'\\...",
+      "size": 1871,
+      "imports": [
+        "json",
+        "re",
+        "collections.Counter",
+        "pickle",
+        "os"
+      ],
+      "functions": [
+        {
+          "name": "search",
+          "args": [
+            "query",
+            "num_results"
+          ],
+          "lineno": 44
+        }
+      ],
+      "classes": []
+    },
+    "src/__init__.py": {
+      "content": "\"\"\"Australian Legal AI - Core functionality\"\"\"\n__version__ = \"1.0.0\"\n",
+      "size": 69,
+      "imports": [],
+      "functions": [],
+      "classes": []
+    },
+    "src/build_index.py": {
+      "content": "\"\"\"Build FAISS index from legal documents\"\"\"\nimport os\nimport sys\nimport torch\nimport faiss\nimport numpy as np\nimport pickle\nfrom datasets import load_from_disk\nfrom transformers import AutoTokenizer\nfrom tqdm import tqdm\nfrom embeddings import LegalEmbedder\n\n\ndef main():\n    print(\"\ud83c\udfd7\ufe0f Building Australian Legal Search Index...\")\n    \n    # Check for data\n    data_path = os.environ.get('LEGAL_DATA_PATH', '/home/user/australian_legal_combined_finetune_data')\n    if not os.path.exists(data_path):\n ...",
+      "size": 1815,
+      "imports": [
+        "os",
+        "sys",
+        "torch",
+        "faiss",
+        "numpy",
+        "pickle",
+        "datasets.load_from_disk",
+        "transformers.AutoTokenizer",
+        "tqdm.tqdm",
+        "embeddings.LegalEmbedder"
+      ],
+      "functions": [
+        {
+          "name": "main",
+          "args": [],
+          "lineno": 14
+        }
+      ],
+      "classes": []
+    },
+    "src/embeddings.py": {
+      "content": "\"\"\"Generate and manage document embeddings\"\"\"\nimport torch\nfrom transformers import AutoTokenizer, AutoModel\nimport numpy as np\nfrom tqdm import tqdm\nfrom typing import List, Tuple\n\n\nclass LegalEmbedder:\n    def __init__(self, model_name: str = \"BAAI/bge-base-en-v1.5\"):\n        self.device = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\n        self.tokenizer = AutoTokenizer.from_pretrained(model_name)\n        self.model = AutoModel.from_pretrained(model_name).to(self.device)\n    ...",
+      "size": 1301,
+      "imports": [
+        "torch",
+        "transformers.AutoTokenizer",
+        "transformers.AutoModel",
+        "numpy",
+        "tqdm.tqdm",
+        "typing.List",
+        "typing.Tuple"
+      ],
+      "functions": [
+        {
+          "name": "__init__",
+          "args": [
+            "self",
+            "model_name"
+          ],
+          "lineno": 10
+        },
+        {
+          "name": "encode",
+          "args": [
+            "self",
+            "texts",
+            "batch_size"
+          ],
+          "lineno": 16
+        }
+      ],
+      "classes": [
+        {
+          "name": "LegalEmbedder",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "encode"
+          ],
+          "lineno": 9
+        }
+      ]
+    },
+    "src/search.py": {
+      "content": "\"\"\"Legal document search functionality with demo mode\"\"\"\nimport os\nimport sys\nimport pickle\nimport numpy as np\nfrom typing import List, Dict, Any, Optional\n\n# Try to import dependencies with fallbacks\ntry:\n    import faiss\n    FAISS_AVAILABLE = True\nexcept ImportError:\n    print(\"\u26a0\ufe0f  FAISS not available, using simple search\")\n    FAISS_AVAILABLE = False\n\ntry:\n    from .embeddings import LegalEmbedder\n    EMBEDDER_AVAILABLE = True\nexcept ImportError:\n    print(\"\u26a0\ufe0f  Embedder not available, using m...",
+      "size": 14210,
+      "imports": [
+        "os",
+        "sys",
+        "pickle",
+        "numpy",
+        "typing.List",
+        "typing.Dict",
+        "typing.Any",
+        "typing.Optional",
+        "faiss",
+        "embeddings.LegalEmbedder"
+      ],
+      "functions": [
+        {
+          "name": "encode",
+          "args": [
+            "self",
+            "texts"
+          ],
+          "lineno": 26
+        },
+        {
+          "name": "__init__",
+          "args": [
+            "self",
+            "index_path",
+            "docs_path",
+            "demo_mode"
+          ],
+          "lineno": 37
+        },
+        {
+          "name": "_load_index",
+          "args": [
+            "self"
+          ],
+          "lineno": 67
+        },
+        {
+          "name": "_create_demo_index",
+          "args": [
+            "self"
+          ],
+          "lineno": 86
+        },
+        {
+          "name": "_simple_search",
+          "args": [
+            "self",
+            "query_embedding",
+            "k"
+          ],
+          "lineno": 171
+        },
+        {
+          "name": "search",
+          "args": [
+            "self",
+            "query",
+            "k"
+          ],
+          "lineno": 185
+        },
+        {
+          "name": "_fallback_search",
+          "args": [
+            "self",
+            "query",
+            "k"
+          ],
+          "lineno": 237
+        }
+      ],
+      "classes": [
+        {
+          "name": "MockEmbedder",
+          "bases": [],
+          "methods": [
+            "encode"
+          ],
+          "lineno": 24
+        },
+        {
+          "name": "LegalSearchEngine",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "_load_index",
+            "_create_demo_index",
+            "_simple_search",
+            "search",
+            "_fallback_search"
+          ],
+          "lineno": 36
+        }
+      ]
+    },
+    "strategic_hf_integration.py": {
+      "content": "#!/usr/bin/env python3\n\"\"\"\nStrategic Hugging Face Corpus Integration\nMaximizes intelligence without overwhelming resources\n\"\"\"\n\nfrom datasets import load_dataset\nimport pickle\nfrom typing import Dict, List\nimport json\nfrom collections import defaultdict\nimport re\nfrom tqdm import tqdm\nimport numpy as np\n\nclass StrategicHFIntegration:\n    def __init__(self):\n        self.priority_jurisdictions = ['federal', 'high_court', 'nsw']\n        self.high_value_patterns = {\n            'landmark_cases': [\n...",
+      "size": 14878,
+      "imports": [
+        "datasets.load_dataset",
+        "pickle",
+        "typing.Dict",
+        "typing.List",
+        "json",
+        "collections.defaultdict",
+        "re",
+        "tqdm.tqdm",
+        "numpy",
+        "transformers.AutoModel",
+        "transformers.AutoTokenizer"
+      ],
+      "functions": [
+        {
+          "name": "__init__",
+          "args": [
+            "self"
+          ],
+          "lineno": 17
+        },
+        {
+          "name": "smart_stream_and_extract",
+          "args": [
+            "self",
+            "target_additions"
+          ],
+          "lineno": 33
+        },
+        {
+          "name": "_extract_document_intelligence",
+          "args": [
+            "self",
+            "doc"
+          ],
+          "lineno": 106
+        },
+        {
+          "name": "_extract_key_points",
+          "args": [
+            "self",
+            "text"
+          ],
+          "lineno": 149
+        },
+        {
+          "name": "_extract_outcome",
+          "args": [
+            "self",
+            "text"
+          ],
+          "lineno": 163
+        },
+        {
+          "name": "_extract_amounts",
+          "args": [
+            "self",
+            "text"
+          ],
+          "lineno": 173
+        },
+        {
+          "name": "_extract_precedents",
+          "args": [
+            "self",
+            "text"
+          ],
+          "lineno": 193
+        },
+        {
+          "name": "download_embeddings_only",
+          "args": [],
+          "lineno": 209
+        },
+        {
+          "name": "build_hybrid_system",
+          "args": [
+            "self",
+            "current_corpus_intel",
+            "hf_extracted_intel"
+          ],
+          "lineno": 234
+        },
+        {
+          "name": "_merge_patterns",
+          "args": [
+            "self",
+            "current_patterns",
+            "hf_intel"
+          ],
+          "lineno": 263
+        },
+        {
+          "name": "_enhance_settlement_data",
+          "args": [
+            "self",
+            "current_settlements",
+            "hf_settlements"
+          ],
+          "lineno": 288
+        },
+        {
+          "name": "_calculate_precedent_strength",
+          "args": [
+            "self",
+            "precedent_network"
+          ],
+          "lineno": 325
+        },
+        {
+          "name": "_build_outcome_predictor",
+          "args": [
+            "self",
+            "current_intel",
+            "outcome_patterns"
+          ],
+          "lineno": 347
+        }
+      ],
+      "classes": [
+        {
+          "name": "StrategicHFIntegration",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "smart_stream_and_extract",
+            "_extract_document_intelligence",
+            "_extract_key_points",
+            "_extract_outcome",
+            "_extract_amounts",
+            "_extract_precedents"
+          ],
+          "lineno": 16
+        },
+        {
+          "name": "IntelligentModelIntegration",
+          "bases": [],
+          "methods": [
+            "download_embeddings_only"
+          ],
+          "lineno": 205
+        },
+        {
+          "name": "HybridIntelligenceBuilder",
+          "bases": [],
+          "methods": [
+            "build_hybrid_system",
+            "_merge_patterns",
+            "_enhance_settlement_data",
+            "_calculate_precedent_strength",
+            "_build_outcome_predictor"
+          ],
+          "lineno": 231
+        }
+      ]
+    },
+    "test.py": {
+      "content": "import requests\n\n# Test local first\nlocal_url = \"http://localhost:8000/health\"\nresponse = requests.get(local_url)\nprint(f\"Local health check: {response.status_code}\")\nprint(response.text)\n\n# Test search locally\nsearch_url = \"http://localhost:8000/search\"\nheaders = {\"Authorization\": \"Bearer demo_key\"}\ndata = {\"query\": \"contract law\", \"num_results\": 3}\n\nresponse = requests.post(search_url, json=data, headers=headers)\nprint(f\"\\nLocal search status: {response.status_code}\")\nprint(response.text)",
+      "size": 495,
+      "imports": [
+        "requests"
+      ],
+      "functions": [],
+      "classes": []
+    },
+    "test_queries.py": {
+      "content": "# Save as test_queries.py\nimport requests\nimport json\n\nqueries = [\n    \"unfair dismissal Fair Work Act\",\n    \"directors duties Corporations Act\",\n    \"native title Mabo\",\n    \"contract law consideration\",\n    \"privacy act data breach\"\n]\n\nfor query in queries:\n    response = requests.post(\n        \"http://localhost:8000/search\",\n        json={\"query\": query, \"num_results\": 2},\n        headers={\"Authorization\": \"Bearer demo_key\"}\n    )\n    \n    result = response.json()\n    print(f\"\\n\ud83d\udd0d Query: '{que...",
+      "size": 665,
+      "imports": [
+        "requests",
+        "json"
+      ],
+      "functions": [],
+      "classes": []
+    },
+    "test_search_simple.py": {
+      "content": "#!/usr/bin/env python3\nimport pickle\nimport re\nfrom collections import Counter\nimport json\n\n# Load index\nwith open('data/simple_index.pkl', 'rb') as f:\n    data = pickle.load(f)\n\ndef search(query):\n    words = re.findall(r'\\w+', query.lower())\n    doc_scores = Counter()\n    \n    for word in words:\n        if word in data['keyword_index']:\n            for doc_id in data['keyword_index'][word]:\n                doc_scores[doc_id] += 1\n    \n    results = []\n    for doc_id, score in doc_scores.most_c...",
+      "size": 1146,
+      "imports": [
+        "pickle",
+        "re",
+        "collections.Counter",
+        "json"
+      ],
+      "functions": [
+        {
+          "name": "search",
+          "args": [
+            "query"
+          ],
+          "lineno": 11
+        }
+      ],
+      "classes": []
+    },
+    "tests/test_search.py": {
+      "content": "\"\"\"Test search functionality\"\"\"\nimport pytest\nfrom src.search import LegalSearchEngine\n\n\ndef test_search_returns_results():\n    # Test that search returns expected number of results\n    engine = LegalSearchEngine()\n    results = engine.search(\"contract requirements\", k=3)\n    assert len(results) == 3\n    assert all('document' in r for r in results)\n    assert all('relevance_score' in r for r in results)\n",
+      "size": 407,
+      "imports": [
+        "pytest",
+        "src.search.LegalSearchEngine"
+      ],
+      "functions": [
+        {
+          "name": "test_search_returns_results",
+          "args": [],
+          "lineno": 6
+        }
+      ],
+      "classes": []
+    },
+    "ultimate_ai.py": {
+      "content": "# [Copy the entire artifact content here - it's too long for terminal]\n# For now, let's create a shorter version that works\n",
+      "size": 124,
+      "imports": [],
+      "functions": [],
+      "classes": []
+    },
+    "ultimate_ai_quick.py": {
+      "content": "from fastapi import FastAPI\nfrom pydantic import BaseModel\nimport pickle\nimport re\nfrom collections import Counter\nimport uvicorn\nfrom datetime import datetime\n\napp = FastAPI(title=\"Ultimate Legal AI v2 - ALL Features\")\n\n# Load your search index\nwith open('data/simple_index.pkl', 'rb') as f:\n    search_data = pickle.load(f)\n    documents = search_data['documents']\n\nclass Request(BaseModel):\n    text: str\n\n# Combine all your features\n@app.post(\"/do-everything\")\nasync def do_everything(request: Re...",
+      "size": 2704,
+      "imports": [
+        "fastapi.FastAPI",
+        "pydantic.BaseModel",
+        "pickle",
+        "re",
+        "collections.Counter",
+        "uvicorn",
+        "datetime.datetime"
+      ],
+      "functions": [],
+      "classes": [
+        {
+          "name": "Request",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 16
+        }
+      ]
+    },
+    "ultimate_intelligent_legal_api.py": {
+      "content": "#!/usr/bin/env python3\n\"\"\"\nULTIMATE INTELLIGENT LEGAL API\nThe most advanced legal AI system in the world!\n\"\"\"\n\nfrom fastapi import FastAPI, HTTPException, WebSocket\nfrom pydantic import BaseModel\nfrom typing import List, Dict, Optional, Any\nimport json\nimport pickle\nimport re\nimport uvicorn\nfrom legal_rag import LegalRAG\nfrom datetime import datetime, timedelta\nimport asyncio\nfrom next_gen_legal_ai_features import (\n    PrecedentImpactAnalyzer,\n    SettlementTimingOptimizer,\n    ArgumentStrength...",
+      "size": 16243,
+      "imports": [
+        "fastapi.FastAPI",
+        "fastapi.HTTPException",
+        "fastapi.WebSocket",
+        "pydantic.BaseModel",
+        "typing.List",
+        "typing.Dict",
+        "typing.Optional",
+        "typing.Any",
+        "json",
+        "pickle",
+        "re",
+        "uvicorn",
+        "legal_rag.LegalRAG",
+        "datetime.datetime",
+        "datetime.timedelta",
+        "asyncio",
+        "next_gen_legal_ai_features.PrecedentImpactAnalyzer",
+        "next_gen_legal_ai_features.SettlementTimingOptimizer",
+        "next_gen_legal_ai_features.ArgumentStrengthScorer",
+        "next_gen_legal_ai_features.QuantumSuccessPredictor"
+      ],
+      "functions": [
+        {
+          "name": "adapt_strategy",
+          "args": [
+            "current_analysis",
+            "new_info"
+          ],
+          "lineno": 71
+        },
+        {
+          "name": "_generate_actions",
+          "args": [
+            "strategy",
+            "new_info"
+          ],
+          "lineno": 114
+        }
+      ],
+      "classes": [
+        {
+          "name": "IntelligentAnalysisRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 52
+        },
+        {
+          "name": "StrategicPlanRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 60
+        },
+        {
+          "name": "RealTimeStrategyEngine",
+          "bases": [],
+          "methods": [
+            "adapt_strategy",
+            "_generate_actions"
+          ],
+          "lineno": 67
+        },
+        {
+          "name": "CaseSuccessSimulator",
+          "bases": [],
+          "methods": [],
+          "lineno": 131
+        }
+      ]
+    },
+    "ultimate_legal_ai_supreme.py": {
+      "content": "#!/usr/bin/env python3\n\"\"\"\nULTIMATE LEGAL AI - SUPREME EDITION\nFixed + Enhanced with Quantum Features\n\"\"\"\n\nfrom fastapi import FastAPI, HTTPException, WebSocket, BackgroundTasks, File, UploadFile\nfrom fastapi.responses import StreamingResponse, JSONResponse\nfrom pydantic import BaseModel\nfrom typing import List, Dict, Optional, Tuple, Any\nimport pickle\nimport re\nfrom collections import Counter, defaultdict\nimport uvicorn\nfrom legal_rag import LegalRAG\nfrom datetime import datetime, timedelta\nimp...",
+      "size": 37939,
+      "imports": [
+        "fastapi.FastAPI",
+        "fastapi.HTTPException",
+        "fastapi.WebSocket",
+        "fastapi.BackgroundTasks",
+        "fastapi.File",
+        "fastapi.UploadFile",
+        "fastapi.responses.StreamingResponse",
+        "fastapi.responses.JSONResponse",
+        "pydantic.BaseModel",
+        "typing.List",
+        "typing.Dict",
+        "typing.Optional",
+        "typing.Tuple",
+        "typing.Any",
+        "pickle",
+        "re",
+        "collections.Counter",
+        "collections.defaultdict",
+        "uvicorn",
+        "legal_rag.LegalRAG",
+        "datetime.datetime",
+        "datetime.timedelta",
+        "json",
+        "functools.lru_cache",
+        "asyncio",
+        "concurrent.futures.ThreadPoolExecutor",
+        "numpy",
+        "hashlib",
+        "io",
+        "random",
+        "ultimate_legal_ai_ultra.PatternRecognitionEngine",
+        "ultimate_legal_ai_ultra.AutoDocumentGenerator",
+        "ultimate_legal_ai_ultra.RiskAnalysisEngine",
+        "ultimate_legal_ai_ultra.StrategicPlanner",
+        "ultimate_legal_api.keyword_search",
+        "ultimate_legal_api.predict_outcome",
+        "ultimate_smart_legal_ai_optimized.SettlementCalculatorOptimized",
+        "collections.Counter",
+        "collections.Counter",
+        "collections.Counter",
+        "ultimate_smart_legal_ai_optimized.SettlementCalculatorOptimized"
+      ],
+      "functions": [
+        {
+          "name": "keyword_search",
+          "args": [
+            "query",
+            "n_results"
+          ],
+          "lineno": 78
+        },
+        {
+          "name": "analyze",
+          "args": [
+            "self",
+            "case_details"
+          ],
+          "lineno": 100
+        },
+        {
+          "name": "__init__",
+          "args": [
+            "self"
+          ],
+          "lineno": 148
+        },
+        {
+          "name": "quantum_analyze",
+          "args": [
+            "self",
+            "case_details",
+            "iterations"
+          ],
+          "lineno": 161
+        },
+        {
+          "name": "_extract_quantum_features",
+          "args": [
+            "self",
+            "text"
+          ],
+          "lineno": 187
+        },
+        {
+          "name": "_quantum_simulation",
+          "args": [
+            "self",
+            "features"
+          ],
+          "lineno": 198
+        },
+        {
+          "name": "_collapse_wavefunction",
+          "args": [
+            "self",
+            "results"
+          ],
+          "lineno": 222
+        },
+        {
+          "name": "_get_probability_distribution",
+          "args": [
+            "self",
+            "results"
+          ],
+          "lineno": 228
+        },
+        {
+          "name": "_calculate_quantum_confidence",
+          "args": [
+            "self",
+            "results"
+          ],
+          "lineno": 235
+        },
+        {
+          "name": "_calculate_entanglement",
+          "args": [
+            "self",
+            "features"
+          ],
+          "lineno": 242
+        },
+        {
+          "name": "_quantum_recommendation",
+          "args": [
+            "self",
+            "state",
+            "confidence"
+          ],
+          "lineno": 250
+        },
+        {
+          "name": "__init__",
+          "args": [
+            "self"
+          ],
+          "lineno": 265
+        },
+        {
+          "name": "analyze_emotional_state",
+          "args": [
+            "self",
+            "text"
+          ],
+          "lineno": 292
+        },
+        {
+          "name": "_get_emotional_action_plan",
+          "args": [
+            "self",
+            "emotion",
+            "urgency"
+          ],
+          "lineno": 330
+        },
+        {
+          "name": "simulate_outcomes",
+          "args": [
+            "self",
+            "case_details",
+            "variables",
+            "iterations"
+          ],
+          "lineno": 362
+        },
+        {
+          "name": "_vary_probability",
+          "args": [
+            "self",
+            "base",
+            "variables"
+          ],
+          "lineno": 393
+        },
+        {
+          "name": "_simulate_single_outcome",
+          "args": [
+            "self",
+            "probability",
+            "variables"
+          ],
+          "lineno": 398
+        },
+        {
+          "name": "_analyze_outcomes",
+          "args": [
+            "self",
+            "outcomes"
+          ],
+          "lineno": 431
+        },
+        {
+          "name": "_calculate_confidence_interval",
+          "args": [
+            "self",
+            "outcomes"
+          ],
+          "lineno": 451
+        },
+        {
+          "name": "_get_most_likely_outcome",
+          "args": [
+            "self",
+            "outcomes"
+          ],
+          "lineno": 462
+        },
+        {
+          "name": "_sensitivity_analysis",
+          "args": [
+            "self",
+            "outcomes",
+            "variables"
+          ],
+          "lineno": 472
+        },
+        {
+          "name": "_simulation_recommendations",
+          "args": [
+            "self",
+            "outcomes"
+          ],
+          "lineno": 480
+        },
+        {
+          "name": "__init__",
+          "args": [
+            "self"
+          ],
+          "lineno": 503
+        },
+        {
+          "name": "_identify_command_type",
+          "args": [
+            "self",
+            "command"
+          ],
+          "lineno": 533
+        },
+        {
+          "name": "_extract_entities",
+          "args": [
+            "self",
+            "command"
+          ],
+          "lineno": 540
+        },
+        {
+          "name": "_calculate_simple_timeline",
+          "args": [
+            "self",
+            "dismissal_date"
+          ],
+          "lineno": 590
+        },
+        {
+          "name": "_generate_voice_response",
+          "args": [
+            "self",
+            "command_type",
+            "result"
+          ],
+          "lineno": 600
+        },
+        {
+          "name": "__init__",
+          "args": [
+            "self"
+          ],
+          "lineno": 624
+        },
+        {
+          "name": "__init__",
+          "args": [
+            "self",
+            "intelligence_file"
+          ],
+          "lineno": 847
+        },
+        {
+          "name": "predict_with_intelligence",
+          "args": [
+            "self",
+            "case_details"
+          ],
+          "lineno": 855
+        },
+        {
+          "name": "suggest_settlement_range",
+          "args": [
+            "self",
+            "salary",
+            "years",
+            "case_strength"
+          ],
+          "lineno": 885
+        },
+        {
+          "name": "_extract_factors",
+          "args": [
+            "self",
+            "text"
+          ],
+          "lineno": 918
+        }
+      ],
+      "classes": [
+        {
+          "name": "LegalReasoningEngineOptimized",
+          "bases": [],
+          "methods": [
+            "analyze"
+          ],
+          "lineno": 99
+        },
+        {
+          "name": "TextAnalysisRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 128
+        },
+        {
+          "name": "EmotionRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 131
+        },
+        {
+          "name": "SimulationRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 135
+        },
+        {
+          "name": "VoiceCommandRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 140
+        },
+        {
+          "name": "QuantumCaseAnalyzer",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "quantum_analyze",
+            "_extract_quantum_features",
+            "_quantum_simulation",
+            "_collapse_wavefunction",
+            "_get_probability_distribution",
+            "_calculate_quantum_confidence",
+            "_calculate_entanglement",
+            "_quantum_recommendation"
+          ],
+          "lineno": 145
+        },
+        {
+          "name": "EmotionDetectionEngine",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "analyze_emotional_state",
+            "_get_emotional_action_plan"
+          ],
+          "lineno": 262
+        },
+        {
+          "name": "CaseOutcomeSimulator",
+          "bases": [],
+          "methods": [
+            "simulate_outcomes",
+            "_vary_probability",
+            "_simulate_single_outcome",
+            "_analyze_outcomes",
+            "_calculate_confidence_interval",
+            "_get_most_likely_outcome",
+            "_sensitivity_analysis",
+            "_simulation_recommendations"
+          ],
+          "lineno": 359
+        },
+        {
+          "name": "VoiceCommandProcessor",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "_identify_command_type",
+            "_extract_entities",
+            "_calculate_simple_timeline",
+            "_generate_voice_response"
+          ],
+          "lineno": 500
+        },
+        {
+          "name": "CollaborationHub",
+          "bases": [],
+          "methods": [
+            "__init__"
+          ],
+          "lineno": 621
+        },
+        {
+          "name": "CorpusIntelligenceEngine",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "predict_with_intelligence",
+            "suggest_settlement_range",
+            "_extract_factors"
+          ],
+          "lineno": 846
+        }
+      ]
+    },
+    "ultimate_legal_ai_ultra.py": {
+      "content": "#!/usr/bin/env python3\n\"\"\"\nULTIMATE LEGAL AI - ULTRA SMART EDITION\nMaximum intelligence with advanced AI features\n\"\"\"\n\nfrom fastapi import FastAPI, HTTPException, WebSocket, BackgroundTasks, File, UploadFile\nfrom fastapi.responses import StreamingResponse, JSONResponse\nfrom pydantic import BaseModel\nfrom typing import List, Dict, Optional, Tuple, Any\nimport pickle\nimport re\nfrom collections import Counter, defaultdict\nimport uvicorn\nfrom legal_rag import LegalRAG\nfrom datetime import datetime, t...",
+      "size": 31262,
+      "imports": [
+        "fastapi.FastAPI",
+        "fastapi.HTTPException",
+        "fastapi.WebSocket",
+        "fastapi.BackgroundTasks",
+        "fastapi.File",
+        "fastapi.UploadFile",
+        "fastapi.responses.StreamingResponse",
+        "fastapi.responses.JSONResponse",
+        "pydantic.BaseModel",
+        "typing.List",
+        "typing.Dict",
+        "typing.Optional",
+        "typing.Tuple",
+        "typing.Any",
+        "pickle",
+        "re",
+        "collections.Counter",
+        "collections.defaultdict",
+        "uvicorn",
+        "legal_rag.LegalRAG",
+        "datetime.datetime",
+        "datetime.timedelta",
+        "json",
+        "functools.lru_cache",
+        "asyncio",
+        "concurrent.futures.ThreadPoolExecutor",
+        "numpy",
+        "hashlib",
+        "io"
+      ],
+      "functions": [
+        {
+          "name": "__init__",
+          "args": [
+            "self"
+          ],
+          "lineno": 61
+        },
+        {
+          "name": "analyze_patterns",
+          "args": [
+            "self",
+            "text"
+          ],
+          "lineno": 82
+        },
+        {
+          "name": "_find_similar_patterns",
+          "args": [
+            "self",
+            "text"
+          ],
+          "lineno": 132
+        },
+        {
+          "name": "_generate_insights",
+          "args": [
+            "self",
+            "patterns",
+            "evidence_score"
+          ],
+          "lineno": 154
+        },
+        {
+          "name": "__init__",
+          "args": [
+            "self"
+          ],
+          "lineno": 174
+        },
+        {
+          "name": "generate_suite",
+          "args": [
+            "self",
+            "case_details",
+            "case_analysis"
+          ],
+          "lineno": 183
+        },
+        {
+          "name": "_extract_info",
+          "args": [
+            "self",
+            "text"
+          ],
+          "lineno": 208
+        },
+        {
+          "name": "_f8c_template",
+          "args": [
+            "self",
+            "info",
+            "analysis"
+          ],
+          "lineno": 231
+        },
+        {
+          "name": "_witness_template",
+          "args": [
+            "self",
+            "info",
+            "analysis"
+          ],
+          "lineno": 266
+        },
+        {
+          "name": "_settlement_template",
+          "args": [
+            "self",
+            "info",
+            "analysis"
+          ],
+          "lineno": 284
+        },
+        {
+          "name": "_timeline_template",
+          "args": [
+            "self",
+            "info",
+            "text"
+          ],
+          "lineno": 309
+        },
+        {
+          "name": "_evidence_template",
+          "args": [
+            "self",
+            "analysis"
+          ],
+          "lineno": 336
+        },
+        {
+          "name": "_generate_key_facts",
+          "args": [
+            "self",
+            "analysis"
+          ],
+          "lineno": 368
+        },
+        {
+          "name": "analyze_risks",
+          "args": [
+            "self",
+            "case_analysis",
+            "employer_type"
+          ],
+          "lineno": 379
+        },
+        {
+          "name": "_calculate_risk_score",
+          "args": [
+            "self",
+            "risks",
+            "success_prob"
+          ],
+          "lineno": 440
+        },
+        {
+          "name": "_generate_mitigation_strategies",
+          "args": [
+            "self",
+            "risks",
+            "success_prob"
+          ],
+          "lineno": 467
+        },
+        {
+          "name": "create_battle_plan",
+          "args": [
+            "self",
+            "case_analysis",
+            "risk_analysis",
+            "timeline"
+          ],
+          "lineno": 487
+        },
+        {
+          "name": "_create_phases",
+          "args": [
+            "self",
+            "strategy",
+            "timeline"
+          ],
+          "lineno": 512
+        },
+        {
+          "name": "_negotiation_strategy",
+          "args": [
+            "self",
+            "success_prob",
+            "strategy"
+          ],
+          "lineno": 554
+        },
+        {
+          "name": "_communication_plan",
+          "args": [
+            "self",
+            "strategy"
+          ],
+          "lineno": 580
+        },
+        {
+          "name": "_contingency_plans",
+          "args": [
+            "self",
+            "strategy",
+            "risk_level"
+          ],
+          "lineno": 594
+        },
+        {
+          "name": "_define_success_metrics",
+          "args": [
+            "self",
+            "strategy"
+          ],
+          "lineno": 615
+        },
+        {
+          "name": "__init__",
+          "args": [
+            "self"
+          ],
+          "lineno": 629
+        }
+      ],
+      "classes": [
+        {
+          "name": "PatternRecognitionEngine",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "analyze_patterns",
+            "_find_similar_patterns",
+            "_generate_insights"
+          ],
+          "lineno": 60
+        },
+        {
+          "name": "AutoDocumentGenerator",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "generate_suite",
+            "_extract_info",
+            "_f8c_template",
+            "_witness_template",
+            "_settlement_template",
+            "_timeline_template",
+            "_evidence_template",
+            "_generate_key_facts"
+          ],
+          "lineno": 173
+        },
+        {
+          "name": "RiskAnalysisEngine",
+          "bases": [],
+          "methods": [
+            "analyze_risks",
+            "_calculate_risk_score",
+            "_generate_mitigation_strategies"
+          ],
+          "lineno": 378
+        },
+        {
+          "name": "StrategicPlanner",
+          "bases": [],
+          "methods": [
+            "create_battle_plan",
+            "_create_phases",
+            "_negotiation_strategy",
+            "_communication_plan",
+            "_contingency_plans",
+            "_define_success_metrics"
+          ],
+          "lineno": 486
+        },
+        {
+          "name": "CaseMonitor",
+          "bases": [],
+          "methods": [
+            "__init__"
+          ],
+          "lineno": 628
+        }
+      ]
+    },
+    "ultimate_legal_ai_v2.py": {
+      "content": "# [Copy the entire artifact content here - it's too long for terminal]\n# For now, let's create a shorter version that works\n",
+      "size": 124,
+      "imports": [],
+      "functions": [],
+      "classes": []
+    },
+    "ultimate_legal_api.py": {
+      "content": "#!/usr/bin/env python3\n\"\"\"\nULTIMATE Legal API - Combines ALL features:\n- Original search\n- Smart AI predictions\n- RAG with citations\n\"\"\"\n\nfrom fastapi import FastAPI, HTTPException\nfrom pydantic import BaseModel\nfrom typing import List, Dict, Optional\nimport pickle\nimport re\nfrom collections import Counter\nimport uvicorn\nfrom legal_rag import LegalRAG\n\napp = FastAPI(\n    title=\"Ultimate Australian Legal AI\",\n    description=\"\ud83d\ude80 Search + Smart AI + RAG = Complete Legal Solution\",\n    version=\"4.0\"...",
+      "size": 6393,
+      "imports": [
+        "fastapi.FastAPI",
+        "fastapi.HTTPException",
+        "pydantic.BaseModel",
+        "typing.List",
+        "typing.Dict",
+        "typing.Optional",
+        "pickle",
+        "re",
+        "collections.Counter",
+        "uvicorn",
+        "legal_rag.LegalRAG"
+      ],
+      "functions": [
+        {
+          "name": "keyword_search",
+          "args": [
+            "query",
+            "n_results"
+          ],
+          "lineno": 45
+        },
+        {
+          "name": "predict_outcome",
+          "args": [
+            "case_details"
+          ],
+          "lineno": 67
+        }
+      ],
+      "classes": [
+        {
+          "name": "SearchRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 33
+        },
+        {
+          "name": "PredictRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 37
+        },
+        {
+          "name": "RAGRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 40
+        }
+      ]
+    },
+    "ultimate_smart_legal_ai.py": {
+      "content": "#!/usr/bin/env python3\n\"\"\"\nULTIMATE SMART Legal AI - Combines ALL features:\n- Original search + RAG\n- Smart AI predictions  \n- Document Generation\n- Settlement Calculator\n- Legal Reasoning Engine\n- Timeline Analysis\n\"\"\"\n\nfrom fastapi import FastAPI, HTTPException, WebSocket\nfrom pydantic import BaseModel\nfrom typing import List, Dict, Optional\nimport pickle\nimport re\nfrom collections import Counter\nimport uvicorn\nfrom legal_rag import LegalRAG\nfrom datetime import datetime, timedelta\nimport json...",
+      "size": 7164,
+      "imports": [
+        "fastapi.FastAPI",
+        "fastapi.HTTPException",
+        "fastapi.WebSocket",
+        "pydantic.BaseModel",
+        "typing.List",
+        "typing.Dict",
+        "typing.Optional",
+        "pickle",
+        "re",
+        "collections.Counter",
+        "uvicorn",
+        "legal_rag.LegalRAG",
+        "datetime.datetime",
+        "datetime.timedelta",
+        "json"
+      ],
+      "functions": [
+        {
+          "name": "calculate",
+          "args": [
+            "salary",
+            "years",
+            "case_strength"
+          ],
+          "lineno": 41
+        },
+        {
+          "name": "generate_f8c",
+          "args": [
+            "details"
+          ],
+          "lineno": 66
+        },
+        {
+          "name": "generate_witness_statement",
+          "args": [
+            "details"
+          ],
+          "lineno": 81
+        },
+        {
+          "name": "analyze",
+          "args": [
+            "self",
+            "case_details"
+          ],
+          "lineno": 92
+        },
+        {
+          "name": "_get_next_steps",
+          "args": [
+            "self",
+            "claims",
+            "case_text"
+          ],
+          "lineno": 123
+        }
+      ],
+      "classes": [
+        {
+          "name": "SettlementCalculator",
+          "bases": [],
+          "methods": [
+            "calculate"
+          ],
+          "lineno": 39
+        },
+        {
+          "name": "DocumentGenerator",
+          "bases": [],
+          "methods": [
+            "generate_f8c",
+            "generate_witness_statement"
+          ],
+          "lineno": 64
+        },
+        {
+          "name": "LegalReasoningEngine",
+          "bases": [],
+          "methods": [
+            "analyze",
+            "_get_next_steps"
+          ],
+          "lineno": 91
+        },
+        {
+          "name": "SmartAnalysisRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 138
+        }
+      ]
+    },
+    "ultimate_smart_legal_ai_complete.py": {
+      "content": "#!/usr/bin/env python3\n\"\"\"\nULTIMATE SMART Legal AI - Complete Edition\n- Original search + RAG\n- Smart AI predictions  \n- Document Generation\n- Settlement Calculator\n- Legal Reasoning Engine\n- Timeline Analysis\n- Evidence Analysis\n\"\"\"\n\nfrom fastapi import FastAPI, HTTPException, WebSocket\nfrom pydantic import BaseModel\nfrom typing import List, Dict, Optional\nimport pickle\nimport re\nfrom collections import Counter\nimport uvicorn\nfrom legal_rag import LegalRAG\nfrom datetime import datetime, timedel...",
+      "size": 19628,
+      "imports": [
+        "fastapi.FastAPI",
+        "fastapi.HTTPException",
+        "fastapi.WebSocket",
+        "pydantic.BaseModel",
+        "typing.List",
+        "typing.Dict",
+        "typing.Optional",
+        "pickle",
+        "re",
+        "collections.Counter",
+        "uvicorn",
+        "legal_rag.LegalRAG",
+        "datetime.datetime",
+        "datetime.timedelta",
+        "json"
+      ],
+      "functions": [
+        {
+          "name": "keyword_search",
+          "args": [
+            "query",
+            "n_results"
+          ],
+          "lineno": 65
+        },
+        {
+          "name": "predict_outcome",
+          "args": [
+            "case_details"
+          ],
+          "lineno": 86
+        },
+        {
+          "name": "calculate",
+          "args": [
+            "salary",
+            "years",
+            "case_strength"
+          ],
+          "lineno": 122
+        },
+        {
+          "name": "generate_f8c",
+          "args": [
+            "details"
+          ],
+          "lineno": 147
+        },
+        {
+          "name": "generate_witness_statement",
+          "args": [
+            "details"
+          ],
+          "lineno": 162
+        },
+        {
+          "name": "analyze",
+          "args": [
+            "self",
+            "case_details"
+          ],
+          "lineno": 173
+        },
+        {
+          "name": "_get_next_steps",
+          "args": [
+            "self",
+            "claims",
+            "case_text"
+          ],
+          "lineno": 204
+        },
+        {
+          "name": "calculate_deadlines",
+          "args": [
+            "dismissal_date",
+            "claim_type"
+          ],
+          "lineno": 214
+        },
+        {
+          "name": "analyze_evidence",
+          "args": [
+            "evidence_items",
+            "case_type"
+          ],
+          "lineno": 272
+        }
+      ],
+      "classes": [
+        {
+          "name": "SearchRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 39
+        },
+        {
+          "name": "PredictRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 43
+        },
+        {
+          "name": "RAGRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 46
+        },
+        {
+          "name": "SmartAnalysisRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 50
+        },
+        {
+          "name": "TimelineRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 56
+        },
+        {
+          "name": "EvidenceRequest",
+          "bases": [
+            "BaseModel"
+          ],
+          "methods": [],
+          "lineno": 60
+        },
+        {
+          "name": "SettlementCalculator",
+          "bases": [],
+          "methods": [
+            "calculate"
+          ],
+          "lineno": 120
+        },
+        {
+          "name": "DocumentGenerator",
+          "bases": [],
+          "methods": [
+            "generate_f8c",
+            "generate_witness_statement"
+          ],
+          "lineno": 145
+        },
+        {
+          "name": "LegalReasoningEngine",
+          "bases": [],
+          "methods": [
+            "analyze",
+            "_get_next_steps"
+          ],
+          "lineno": 172
+        },
+        {
+          "name": "TimelineAnalyzer",
+          "bases": [],
+          "methods": [
+            "calculate_deadlines"
+          ],
+          "lineno": 212
+        },
+        {
+          "name": "EvidenceAnalyzer",
+          "bases": [],
+          "methods": [
+            "analyze_evidence"
+          ],
+          "lineno": 270
+        }
+      ]
+    },
+    "ultimate_smart_legal_ai_optimized.py": {
+      "content": "#!/usr/bin/env python3\n\"\"\"\nULTIMATE SMART Legal AI - OPTIMIZED EDITION\nAll features + Advanced optimizations\n\"\"\"\n\nfrom fastapi import FastAPI, HTTPException, WebSocket, BackgroundTasks\nfrom fastapi.responses import StreamingResponse\nfrom pydantic import BaseModel\nfrom typing import List, Dict, Optional, Tuple\nimport pickle\nimport re\nfrom collections import Counter, defaultdict\nimport uvicorn\nfrom legal_rag import LegalRAG\nfrom datetime import datetime, timedelta\nimport json\nfrom functools import...",
+      "size": 21560,
+      "imports": [
+        "fastapi.FastAPI",
+        "fastapi.HTTPException",
+        "fastapi.WebSocket",
+        "fastapi.BackgroundTasks",
+        "fastapi.responses.StreamingResponse",
+        "pydantic.BaseModel",
+        "typing.List",
+        "typing.Dict",
+        "typing.Optional",
+        "typing.Tuple",
+        "pickle",
+        "re",
+        "collections.Counter",
+        "collections.defaultdict",
+        "uvicorn",
+        "legal_rag.LegalRAG",
+        "datetime.datetime",
+        "datetime.timedelta",
+        "json",
+        "functools.lru_cache",
+        "asyncio",
+        "concurrent.futures.ThreadPoolExecutor",
+        "numpy"
+      ],
+      "functions": [
+        {
+          "name": "cached_keyword_search",
+          "args": [
+            "query",
+            "n_results"
+          ],
+          "lineno": 50
+        },
+        {
+          "name": "cached_case_analysis",
+          "args": [
+            "case_details"
+          ],
+          "lineno": 56
+        },
+        {
+          "name": "keyword_search_optimized",
+          "args": [
+            "query",
+            "n_results"
+          ],
+          "lineno": 62
+        },
+        {
+          "name": "__init__",
+          "args": [
+            "self"
+          ],
+          "lineno": 100
+        },
+        {
+          "name": "analyze",
+          "args": [
+            "self",
+            "case_details"
+          ],
+          "lineno": 149
+        },
+        {
+          "name": "_generate_strategy",
+          "args": [
+            "self",
+            "best_claim",
+            "case_text"
+          ],
+          "lineno": 194
+        },
+        {
+          "name": "_get_next_steps",
+          "args": [
+            "self",
+            "claims",
+            "case_text"
+          ],
+          "lineno": 223
+        },
+        {
+          "name": "calculate",
+          "args": [
+            "salary",
+            "years",
+            "case_strength"
+          ],
+          "lineno": 309
+        },
+        {
+          "name": "predict_timeline",
+          "args": [
+            "case_type",
+            "complexity"
+          ],
+          "lineno": 381
+        },
+        {
+          "name": "success_predictor",
+          "args": [
+            "factors"
+          ],
+          "lineno": 408
+        }
+      ],
+      "classes": [
+        {
+          "name": "LegalReasoningEngineOptimized",
+          "bases": [],
+          "methods": [
+            "__init__",
+            "analyze",
+            "_generate_strategy",
+            "_get_next_steps"
+          ],
+          "lineno": 99
+        },
+        {
+          "name": "SettlementCalculatorOptimized",
+          "bases": [],
+          "methods": [
+            "calculate"
+          ],
+          "lineno": 306
+        },
+        {
+          "name": "PredictiveAnalytics",
+          "bases": [],
+          "methods": [
+            "predict_timeline",
+            "success_predictor"
+          ],
+          "lineno": 379
+        }
+      ]
+    }
+  },
+  "import_graph": {
+    "api/legal_qa_light.py": [
+      [
+        "from",
+        "fastapi",
+        "FastAPI"
+      ],
+      [
+        "from",
+        "fastapi",
+        "HTTPException"
+      ],
+      [
+        "from",
+        "fastapi",
+        "Depends"
+      ],
+      [
+        "from",
+        "fastapi",
+        "Header"
+      ],
+      [
+        "from",
+        "fastapi.middleware.cors",
+        "CORSMiddleware"
+      ],
+      [
+        "from",
+        "fastapi.responses",
+        "HTMLResponse"
+      ],
+      [
+        "from",
+        "fastapi.security",
+        "HTTPBearer"
+      ],
+      [
+        "from",
+        "fastapi.security",
+        "HTTPAuthorizationCredentials"
+      ],
+      [
+        "from",
+        "pydantic",
+        "BaseModel"
+      ],
+      [
+        "from",
+        "typing",
+        "List"
+      ],
+      [
+        "from",
+        "typing",
+        "Dict"
+      ],
+      [
+        "from",
+        "typing",
+        "Optional"
+      ],
+      [
+        "import",
+        "os"
+      ],
+      [
+        "import",
+        "sys"
+      ],
+      [
+        "import",
+        "uuid"
+      ],
+      [
+        "from",
+        "datetime",
+        "datetime"
+      ],
+      [
+        "import",
+        "httpx"
+      ],
+      [
+        "from",
+        "src.search",
+        "LegalSearchEngine"
+      ],
+      [
+        "import",
+        "uvicorn"
+      ]
+    ],
+    "api/main.py": [
+      [
+        "from",
+        "fastapi",
+        "FastAPI"
+      ],
+      [
+        "from",
+        "fastapi",
+        "HTTPException"
+      ],
+      [
+        "from",
+        "fastapi",
+        "Depends"
+      ],
+      [
+        "from",
+        "fastapi.middleware.cors",
+        "CORSMiddleware"
+      ],
+      [
+        "from",
+        "pydantic",
+        "BaseModel"
+      ],
+      [
+        "from",
+        "typing",
+        "List"
+      ],
+      [
+        "from",
+        "typing",
+        "Dict"
+      ],
+      [
+        "from",
+        "typing",
+        "Any"
+      ],
+      [
+        "from",
+        "typing",
+        "Optional"
+      ],
+      [
+        "import",
+        "torch"
+      ],
+      [
+        "from",
+        "transformers",
+        "AutoModelForCausalLM"
+      ],
+      [
+        "from",
+        "transformers",
+        "AutoTokenizer"
+      ],
+      [
+        "import",
+        "os"
+      ],
+      [
+        "import",
+        "sys"
+      ],
+      [
+        "from",
+        "src.search",
+        "LegalSearchEngine"
+      ],
+      [
+        "import",
+        "uvicorn"
+      ]
+    ],
+    "app_analyzer.py": [
+      [
+        "import",
+        "os"
+      ],
+      [
+        "import",
+        "ast"
+      ],
+      [
+        "import",
+        "sys"
+      ],
+      [
+        "from",
+        "pathlib",
+        "Path"
+      ],
+      [
+        "from",
+        "collections",
+        "defaultdict"
+      ],
+      [
+        "import",
+        "json"
+      ]
+    ],
+    "build_hybrid_intelligence.py": [
+      [
+        "import",
+        "json"
+      ],
+      [
+        "import",
+        "numpy"
+      ],
+      [
+        "from",
+        "collections",
+        "defaultdict"
+      ]
+    ],
+    "check_index.py": [
+      [
+        "import",
+        "os"
+      ],
+      [
+        "import",
+        "json"
+      ]
+    ],
+    "cli.py": [
+      [
+        "import",
+        "click"
+      ],
+      [
+        "import",
+        "requests"
+      ],
+      [
+        "import",
+        "json"
+      ],
+      [
+        "import",
+        "os"
+      ]
+    ],
+    "corpus_intelligence_extractor.py": [
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "from",
+        "collections",
+        "defaultdict"
+      ],
+      [
+        "from",
+        "collections",
+        "Counter"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "from",
+        "typing",
+        "Dict"
+      ],
+      [
+        "from",
+        "typing",
+        "List"
+      ],
+      [
+        "from",
+        "typing",
+        "Tuple"
+      ],
+      [
+        "import",
+        "json"
+      ],
+      [
+        "from",
+        "datetime",
+        "datetime"
+      ],
+      [
+        "from",
+        "sentence_transformers",
+        "SentenceTransformer"
+      ],
+      [
+        "import",
+        "numpy"
+      ],
+      [
+        "from",
+        "tqdm",
+        "tqdm"
+      ],
+      [
+        "from",
+        "sklearn.cluster",
+        "KMeans"
+      ]
+    ],
+    "enhanced_legal_api_with_intelligence.py": [
+      [
+        "from",
+        "fastapi",
+        "FastAPI"
+      ],
+      [
+        "from",
+        "fastapi",
+        "HTTPException"
+      ],
+      [
+        "from",
+        "pydantic",
+        "BaseModel"
+      ],
+      [
+        "from",
+        "typing",
+        "List"
+      ],
+      [
+        "from",
+        "typing",
+        "Dict"
+      ],
+      [
+        "from",
+        "typing",
+        "Optional"
+      ],
+      [
+        "import",
+        "json"
+      ],
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "from",
+        "legal_rag",
+        "LegalRAG"
+      ],
+      [
+        "import",
+        "uvicorn"
+      ]
+    ],
+    "index_corpus.py": [
+      [
+        "import",
+        "os"
+      ],
+      [
+        "import",
+        "sys"
+      ],
+      [
+        "import",
+        "json"
+      ],
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "import",
+        "numpy"
+      ],
+      [
+        "import",
+        "faiss"
+      ],
+      [
+        "from",
+        "tqdm",
+        "tqdm"
+      ],
+      [
+        "from",
+        "typing",
+        "List"
+      ],
+      [
+        "from",
+        "typing",
+        "Dict"
+      ],
+      [
+        "from",
+        "typing",
+        "Any"
+      ],
+      [
+        "from",
+        "collections",
+        "defaultdict"
+      ],
+      [
+        "from",
+        "src.embeddings",
+        "LegalEmbedder"
+      ],
+      [
+        "import",
+        "argparse"
+      ]
+    ],
+    "intelligent_corpus_sampler.py": [
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "import",
+        "json"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "from",
+        "typing",
+        "List"
+      ],
+      [
+        "from",
+        "typing",
+        "Dict"
+      ],
+      [
+        "from",
+        "typing",
+        "Set"
+      ],
+      [
+        "import",
+        "random"
+      ],
+      [
+        "from",
+        "collections",
+        "defaultdict"
+      ],
+      [
+        "import",
+        "hashlib"
+      ],
+      [
+        "import",
+        "gzip"
+      ],
+      [
+        "import",
+        "numpy"
+      ],
+      [
+        "import",
+        "os"
+      ],
+      [
+        "from",
+        "collections",
+        "Counter"
+      ]
+    ],
+    "legal_qa_api.py": [
+      [
+        "from",
+        "fastapi",
+        "FastAPI"
+      ],
+      [
+        "from",
+        "fastapi",
+        "HTTPException"
+      ],
+      [
+        "from",
+        "fastapi",
+        "Depends"
+      ],
+      [
+        "from",
+        "fastapi",
+        "Request"
+      ],
+      [
+        "from",
+        "fastapi.middleware.cors",
+        "CORSMiddleware"
+      ],
+      [
+        "from",
+        "fastapi.responses",
+        "HTMLResponse"
+      ],
+      [
+        "from",
+        "fastapi.security",
+        "HTTPBearer"
+      ],
+      [
+        "from",
+        "fastapi.security",
+        "HTTPAuthorizationCredentials"
+      ],
+      [
+        "from",
+        "pydantic",
+        "BaseModel"
+      ],
+      [
+        "from",
+        "typing",
+        "List"
+      ],
+      [
+        "from",
+        "typing",
+        "Dict"
+      ],
+      [
+        "from",
+        "typing",
+        "Optional"
+      ],
+      [
+        "import",
+        "os"
+      ],
+      [
+        "import",
+        "time"
+      ],
+      [
+        "import",
+        "uuid"
+      ],
+      [
+        "from",
+        "datetime",
+        "datetime"
+      ],
+      [
+        "from",
+        "transformers",
+        "pipeline"
+      ],
+      [
+        "import",
+        "asyncio"
+      ],
+      [
+        "from",
+        "concurrent.futures",
+        "ThreadPoolExecutor"
+      ],
+      [
+        "import",
+        "uvicorn"
+      ]
+    ],
+    "legal_qa_enhanced.py": [
+      [
+        "from",
+        "fastapi",
+        "FastAPI"
+      ],
+      [
+        "from",
+        "fastapi",
+        "HTTPException"
+      ],
+      [
+        "from",
+        "pydantic",
+        "BaseModel"
+      ],
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "from",
+        "collections",
+        "Counter"
+      ],
+      [
+        "import",
+        "uvicorn"
+      ]
+    ],
+    "legal_qa_light.py": [
+      [
+        "from",
+        "fastapi",
+        "FastAPI"
+      ],
+      [
+        "from",
+        "fastapi",
+        "HTTPException"
+      ],
+      [
+        "from",
+        "fastapi",
+        "Depends"
+      ],
+      [
+        "from",
+        "fastapi",
+        "Header"
+      ],
+      [
+        "from",
+        "fastapi.middleware.cors",
+        "CORSMiddleware"
+      ],
+      [
+        "from",
+        "fastapi.responses",
+        "HTMLResponse"
+      ],
+      [
+        "from",
+        "fastapi.security",
+        "HTTPBearer"
+      ],
+      [
+        "from",
+        "fastapi.security",
+        "HTTPAuthorizationCredentials"
+      ],
+      [
+        "from",
+        "pydantic",
+        "BaseModel"
+      ],
+      [
+        "from",
+        "typing",
+        "List"
+      ],
+      [
+        "from",
+        "typing",
+        "Dict"
+      ],
+      [
+        "from",
+        "typing",
+        "Optional"
+      ],
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "from",
+        "collections",
+        "Counter"
+      ],
+      [
+        "import",
+        "os"
+      ],
+      [
+        "import",
+        "sys"
+      ],
+      [
+        "import",
+        "uuid"
+      ],
+      [
+        "from",
+        "datetime",
+        "datetime"
+      ],
+      [
+        "import",
+        "httpx"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "from",
+        "src.search",
+        "LegalSearchEngine"
+      ],
+      [
+        "import",
+        "uvicorn"
+      ],
+      [
+        "import",
+        "re"
+      ]
+    ],
+    "legal_qa_working.py": [
+      [
+        "from",
+        "fastapi",
+        "FastAPI"
+      ],
+      [
+        "from",
+        "fastapi",
+        "HTTPException"
+      ],
+      [
+        "from",
+        "pydantic",
+        "BaseModel"
+      ],
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "from",
+        "collections",
+        "Counter"
+      ],
+      [
+        "import",
+        "uvicorn"
+      ]
+    ],
+    "legal_rag.py": [
+      [
+        "from",
+        "sentence_transformers",
+        "SentenceTransformer"
+      ],
+      [
+        "import",
+        "chromadb"
+      ],
+      [
+        "from",
+        "typing",
+        "List"
+      ],
+      [
+        "from",
+        "typing",
+        "Dict"
+      ]
+    ],
+    "next_gen_legal_ai_features.py": [
+      [
+        "import",
+        "json"
+      ],
+      [
+        "import",
+        "numpy"
+      ],
+      [
+        "from",
+        "typing",
+        "Dict"
+      ],
+      [
+        "from",
+        "typing",
+        "List"
+      ],
+      [
+        "from",
+        "typing",
+        "Tuple"
+      ],
+      [
+        "from",
+        "collections",
+        "defaultdict"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "from",
+        "datetime",
+        "datetime"
+      ],
+      [
+        "import",
+        "networkx"
+      ],
+      [
+        "from",
+        "scipy",
+        "stats"
+      ]
+    ],
+    "rag_indexer.py": [
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "from",
+        "sentence_transformers",
+        "SentenceTransformer"
+      ],
+      [
+        "import",
+        "chromadb"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "from",
+        "tqdm",
+        "tqdm"
+      ]
+    ],
+    "rag_indexer_fixed.py": [
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "from",
+        "sentence_transformers",
+        "SentenceTransformer"
+      ],
+      [
+        "import",
+        "chromadb"
+      ],
+      [
+        "from",
+        "tqdm",
+        "tqdm"
+      ]
+    ],
+    "search_engine.py": [
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "from",
+        "collections",
+        "Counter"
+      ]
+    ],
+    "setup.py": [
+      [
+        "from",
+        "setuptools",
+        "setup"
+      ],
+      [
+        "from",
+        "setuptools",
+        "find_packages"
+      ]
+    ],
+    "simple_index.py": [
+      [
+        "import",
+        "json"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "from",
+        "collections",
+        "Counter"
+      ],
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "import",
+        "os"
+      ]
+    ],
+    "src/build_index.py": [
+      [
+        "import",
+        "os"
+      ],
+      [
+        "import",
+        "sys"
+      ],
+      [
+        "import",
+        "torch"
+      ],
+      [
+        "import",
+        "faiss"
+      ],
+      [
+        "import",
+        "numpy"
+      ],
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "from",
+        "datasets",
+        "load_from_disk"
+      ],
+      [
+        "from",
+        "transformers",
+        "AutoTokenizer"
+      ],
+      [
+        "from",
+        "tqdm",
+        "tqdm"
+      ],
+      [
+        "from",
+        "embeddings",
+        "LegalEmbedder"
+      ]
+    ],
+    "src/embeddings.py": [
+      [
+        "import",
+        "torch"
+      ],
+      [
+        "from",
+        "transformers",
+        "AutoTokenizer"
+      ],
+      [
+        "from",
+        "transformers",
+        "AutoModel"
+      ],
+      [
+        "import",
+        "numpy"
+      ],
+      [
+        "from",
+        "tqdm",
+        "tqdm"
+      ],
+      [
+        "from",
+        "typing",
+        "List"
+      ],
+      [
+        "from",
+        "typing",
+        "Tuple"
+      ]
+    ],
+    "src/search.py": [
+      [
+        "import",
+        "os"
+      ],
+      [
+        "import",
+        "sys"
+      ],
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "import",
+        "numpy"
+      ],
+      [
+        "from",
+        "typing",
+        "List"
+      ],
+      [
+        "from",
+        "typing",
+        "Dict"
+      ],
+      [
+        "from",
+        "typing",
+        "Any"
+      ],
+      [
+        "from",
+        "typing",
+        "Optional"
+      ],
+      [
+        "import",
+        "faiss"
+      ],
+      [
+        "from",
+        "embeddings",
+        "LegalEmbedder"
+      ]
+    ],
+    "strategic_hf_integration.py": [
+      [
+        "from",
+        "datasets",
+        "load_dataset"
+      ],
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "from",
+        "typing",
+        "Dict"
+      ],
+      [
+        "from",
+        "typing",
+        "List"
+      ],
+      [
+        "import",
+        "json"
+      ],
+      [
+        "from",
+        "collections",
+        "defaultdict"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "from",
+        "tqdm",
+        "tqdm"
+      ],
+      [
+        "import",
+        "numpy"
+      ],
+      [
+        "from",
+        "transformers",
+        "AutoModel"
+      ],
+      [
+        "from",
+        "transformers",
+        "AutoTokenizer"
+      ]
+    ],
+    "test.py": [
+      [
+        "import",
+        "requests"
+      ]
+    ],
+    "test_queries.py": [
+      [
+        "import",
+        "requests"
+      ],
+      [
+        "import",
+        "json"
+      ]
+    ],
+    "test_search_simple.py": [
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "from",
+        "collections",
+        "Counter"
+      ],
+      [
+        "import",
+        "json"
+      ]
+    ],
+    "tests/test_search.py": [
+      [
+        "import",
+        "pytest"
+      ],
+      [
+        "from",
+        "src.search",
+        "LegalSearchEngine"
+      ]
+    ],
+    "ultimate_ai_quick.py": [
+      [
+        "from",
+        "fastapi",
+        "FastAPI"
+      ],
+      [
+        "from",
+        "pydantic",
+        "BaseModel"
+      ],
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "from",
+        "collections",
+        "Counter"
+      ],
+      [
+        "import",
+        "uvicorn"
+      ],
+      [
+        "from",
+        "datetime",
+        "datetime"
+      ]
+    ],
+    "ultimate_intelligent_legal_api.py": [
+      [
+        "from",
+        "fastapi",
+        "FastAPI"
+      ],
+      [
+        "from",
+        "fastapi",
+        "HTTPException"
+      ],
+      [
+        "from",
+        "fastapi",
+        "WebSocket"
+      ],
+      [
+        "from",
+        "pydantic",
+        "BaseModel"
+      ],
+      [
+        "from",
+        "typing",
+        "List"
+      ],
+      [
+        "from",
+        "typing",
+        "Dict"
+      ],
+      [
+        "from",
+        "typing",
+        "Optional"
+      ],
+      [
+        "from",
+        "typing",
+        "Any"
+      ],
+      [
+        "import",
+        "json"
+      ],
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "import",
+        "uvicorn"
+      ],
+      [
+        "from",
+        "legal_rag",
+        "LegalRAG"
+      ],
+      [
+        "from",
+        "datetime",
+        "datetime"
+      ],
+      [
+        "from",
+        "datetime",
+        "timedelta"
+      ],
+      [
+        "import",
+        "asyncio"
+      ],
+      [
+        "from",
+        "next_gen_legal_ai_features",
+        "PrecedentImpactAnalyzer"
+      ],
+      [
+        "from",
+        "next_gen_legal_ai_features",
+        "SettlementTimingOptimizer"
+      ],
+      [
+        "from",
+        "next_gen_legal_ai_features",
+        "ArgumentStrengthScorer"
+      ],
+      [
+        "from",
+        "next_gen_legal_ai_features",
+        "QuantumSuccessPredictor"
+      ]
+    ],
+    "ultimate_legal_ai_supreme.py": [
+      [
+        "from",
+        "fastapi",
+        "FastAPI"
+      ],
+      [
+        "from",
+        "fastapi",
+        "HTTPException"
+      ],
+      [
+        "from",
+        "fastapi",
+        "WebSocket"
+      ],
+      [
+        "from",
+        "fastapi",
+        "BackgroundTasks"
+      ],
+      [
+        "from",
+        "fastapi",
+        "File"
+      ],
+      [
+        "from",
+        "fastapi",
+        "UploadFile"
+      ],
+      [
+        "from",
+        "fastapi.responses",
+        "StreamingResponse"
+      ],
+      [
+        "from",
+        "fastapi.responses",
+        "JSONResponse"
+      ],
+      [
+        "from",
+        "pydantic",
+        "BaseModel"
+      ],
+      [
+        "from",
+        "typing",
+        "List"
+      ],
+      [
+        "from",
+        "typing",
+        "Dict"
+      ],
+      [
+        "from",
+        "typing",
+        "Optional"
+      ],
+      [
+        "from",
+        "typing",
+        "Tuple"
+      ],
+      [
+        "from",
+        "typing",
+        "Any"
+      ],
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "from",
+        "collections",
+        "Counter"
+      ],
+      [
+        "from",
+        "collections",
+        "defaultdict"
+      ],
+      [
+        "import",
+        "uvicorn"
+      ],
+      [
+        "from",
+        "legal_rag",
+        "LegalRAG"
+      ],
+      [
+        "from",
+        "datetime",
+        "datetime"
+      ],
+      [
+        "from",
+        "datetime",
+        "timedelta"
+      ],
+      [
+        "import",
+        "json"
+      ],
+      [
+        "from",
+        "functools",
+        "lru_cache"
+      ],
+      [
+        "import",
+        "asyncio"
+      ],
+      [
+        "from",
+        "concurrent.futures",
+        "ThreadPoolExecutor"
+      ],
+      [
+        "import",
+        "numpy"
+      ],
+      [
+        "import",
+        "hashlib"
+      ],
+      [
+        "import",
+        "io"
+      ],
+      [
+        "import",
+        "random"
+      ],
+      [
+        "from",
+        "ultimate_legal_ai_ultra",
+        "PatternRecognitionEngine"
+      ],
+      [
+        "from",
+        "ultimate_legal_ai_ultra",
+        "AutoDocumentGenerator"
+      ],
+      [
+        "from",
+        "ultimate_legal_ai_ultra",
+        "RiskAnalysisEngine"
+      ],
+      [
+        "from",
+        "ultimate_legal_ai_ultra",
+        "StrategicPlanner"
+      ],
+      [
+        "from",
+        "ultimate_legal_api",
+        "keyword_search"
+      ],
+      [
+        "from",
+        "ultimate_legal_api",
+        "predict_outcome"
+      ],
+      [
+        "from",
+        "ultimate_smart_legal_ai_optimized",
+        "SettlementCalculatorOptimized"
+      ],
+      [
+        "from",
+        "collections",
+        "Counter"
+      ],
+      [
+        "from",
+        "collections",
+        "Counter"
+      ],
+      [
+        "from",
+        "collections",
+        "Counter"
+      ],
+      [
+        "from",
+        "ultimate_smart_legal_ai_optimized",
+        "SettlementCalculatorOptimized"
+      ]
+    ],
+    "ultimate_legal_ai_ultra.py": [
+      [
+        "from",
+        "fastapi",
+        "FastAPI"
+      ],
+      [
+        "from",
+        "fastapi",
+        "HTTPException"
+      ],
+      [
+        "from",
+        "fastapi",
+        "WebSocket"
+      ],
+      [
+        "from",
+        "fastapi",
+        "BackgroundTasks"
+      ],
+      [
+        "from",
+        "fastapi",
+        "File"
+      ],
+      [
+        "from",
+        "fastapi",
+        "UploadFile"
+      ],
+      [
+        "from",
+        "fastapi.responses",
+        "StreamingResponse"
+      ],
+      [
+        "from",
+        "fastapi.responses",
+        "JSONResponse"
+      ],
+      [
+        "from",
+        "pydantic",
+        "BaseModel"
+      ],
+      [
+        "from",
+        "typing",
+        "List"
+      ],
+      [
+        "from",
+        "typing",
+        "Dict"
+      ],
+      [
+        "from",
+        "typing",
+        "Optional"
+      ],
+      [
+        "from",
+        "typing",
+        "Tuple"
+      ],
+      [
+        "from",
+        "typing",
+        "Any"
+      ],
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "from",
+        "collections",
+        "Counter"
+      ],
+      [
+        "from",
+        "collections",
+        "defaultdict"
+      ],
+      [
+        "import",
+        "uvicorn"
+      ],
+      [
+        "from",
+        "legal_rag",
+        "LegalRAG"
+      ],
+      [
+        "from",
+        "datetime",
+        "datetime"
+      ],
+      [
+        "from",
+        "datetime",
+        "timedelta"
+      ],
+      [
+        "import",
+        "json"
+      ],
+      [
+        "from",
+        "functools",
+        "lru_cache"
+      ],
+      [
+        "import",
+        "asyncio"
+      ],
+      [
+        "from",
+        "concurrent.futures",
+        "ThreadPoolExecutor"
+      ],
+      [
+        "import",
+        "numpy"
+      ],
+      [
+        "import",
+        "hashlib"
+      ],
+      [
+        "import",
+        "io"
+      ]
+    ],
+    "ultimate_legal_api.py": [
+      [
+        "from",
+        "fastapi",
+        "FastAPI"
+      ],
+      [
+        "from",
+        "fastapi",
+        "HTTPException"
+      ],
+      [
+        "from",
+        "pydantic",
+        "BaseModel"
+      ],
+      [
+        "from",
+        "typing",
+        "List"
+      ],
+      [
+        "from",
+        "typing",
+        "Dict"
+      ],
+      [
+        "from",
+        "typing",
+        "Optional"
+      ],
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "from",
+        "collections",
+        "Counter"
+      ],
+      [
+        "import",
+        "uvicorn"
+      ],
+      [
+        "from",
+        "legal_rag",
+        "LegalRAG"
+      ]
+    ],
+    "ultimate_smart_legal_ai.py": [
+      [
+        "from",
+        "fastapi",
+        "FastAPI"
+      ],
+      [
+        "from",
+        "fastapi",
+        "HTTPException"
+      ],
+      [
+        "from",
+        "fastapi",
+        "WebSocket"
+      ],
+      [
+        "from",
+        "pydantic",
+        "BaseModel"
+      ],
+      [
+        "from",
+        "typing",
+        "List"
+      ],
+      [
+        "from",
+        "typing",
+        "Dict"
+      ],
+      [
+        "from",
+        "typing",
+        "Optional"
+      ],
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "from",
+        "collections",
+        "Counter"
+      ],
+      [
+        "import",
+        "uvicorn"
+      ],
+      [
+        "from",
+        "legal_rag",
+        "LegalRAG"
+      ],
+      [
+        "from",
+        "datetime",
+        "datetime"
+      ],
+      [
+        "from",
+        "datetime",
+        "timedelta"
+      ],
+      [
+        "import",
+        "json"
+      ]
+    ],
+    "ultimate_smart_legal_ai_complete.py": [
+      [
+        "from",
+        "fastapi",
+        "FastAPI"
+      ],
+      [
+        "from",
+        "fastapi",
+        "HTTPException"
+      ],
+      [
+        "from",
+        "fastapi",
+        "WebSocket"
+      ],
+      [
+        "from",
+        "pydantic",
+        "BaseModel"
+      ],
+      [
+        "from",
+        "typing",
+        "List"
+      ],
+      [
+        "from",
+        "typing",
+        "Dict"
+      ],
+      [
+        "from",
+        "typing",
+        "Optional"
+      ],
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "from",
+        "collections",
+        "Counter"
+      ],
+      [
+        "import",
+        "uvicorn"
+      ],
+      [
+        "from",
+        "legal_rag",
+        "LegalRAG"
+      ],
+      [
+        "from",
+        "datetime",
+        "datetime"
+      ],
+      [
+        "from",
+        "datetime",
+        "timedelta"
+      ],
+      [
+        "import",
+        "json"
+      ]
+    ],
+    "ultimate_smart_legal_ai_optimized.py": [
+      [
+        "from",
+        "fastapi",
+        "FastAPI"
+      ],
+      [
+        "from",
+        "fastapi",
+        "HTTPException"
+      ],
+      [
+        "from",
+        "fastapi",
+        "WebSocket"
+      ],
+      [
+        "from",
+        "fastapi",
+        "BackgroundTasks"
+      ],
+      [
+        "from",
+        "fastapi.responses",
+        "StreamingResponse"
+      ],
+      [
+        "from",
+        "pydantic",
+        "BaseModel"
+      ],
+      [
+        "from",
+        "typing",
+        "List"
+      ],
+      [
+        "from",
+        "typing",
+        "Dict"
+      ],
+      [
+        "from",
+        "typing",
+        "Optional"
+      ],
+      [
+        "from",
+        "typing",
+        "Tuple"
+      ],
+      [
+        "import",
+        "pickle"
+      ],
+      [
+        "import",
+        "re"
+      ],
+      [
+        "from",
+        "collections",
+        "Counter"
+      ],
+      [
+        "from",
+        "collections",
+        "defaultdict"
+      ],
+      [
+        "import",
+        "uvicorn"
+      ],
+      [
+        "from",
+        "legal_rag",
+        "LegalRAG"
+      ],
+      [
+        "from",
+        "datetime",
+        "datetime"
+      ],
+      [
+        "from",
+        "datetime",
+        "timedelta"
+      ],
+      [
+        "import",
+        "json"
+      ],
+      [
+        "from",
+        "functools",
+        "lru_cache"
+      ],
+      [
+        "import",
+        "asyncio"
+      ],
+      [
+        "from",
+        "concurrent.futures",
+        "ThreadPoolExecutor"
+      ],
+      [
+        "import",
+        "numpy"
+      ]
+    ]
+  },
+  "summary": {
+    "total_files": 43,
+    "total_functions": 211,
+    "total_classes": 76
+  }
+}

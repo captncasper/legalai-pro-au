@@ -1,0 +1,133 @@
+#!/usr/bin/env python3
+"""
+Analyze all Legal AI API versions to extract features and create optimization plan
+"""
+
+import os
+import ast
+import re
+from pathlib import Path
+from collections import defaultdict
+import json
+
+class APIVersionAnalyzer:
+    def __init__(self):
+        self.versions = {
+            'legal_qa_light.py': 'Basic/Light version',
+            'ultimate_legal_api.py': 'Version 1',
+            'ultimate_smart_legal_ai.py': 'Version 2',
+            'ultimate_intelligent_legal_api.py': 'Version 3 (Current)',
+            'ultimate_legal_ai_supreme.py': 'Version 4',
+            'ultimate_legal_ai_ultra.py': 'Version 5'
+        }
+        self.features = defaultdict(list)
+        self.endpoints = defaultdict(list)
+        self.classes = defaultdict(list)
+        
+    def analyze_file(self, filepath):
+        """Extract endpoints, classes, and features from a Python file"""
+        try:
+            with open(filepath, 'r', encoding='utf-8') as f:
+                content = f.read()
+                
+            # Find FastAPI endpoints
+            endpoint_pattern = r'@app\.(get|post|put|delete|websocket)\s*\(\s*["\']([^"\']+)["\']'
+            endpoints = re.findall(endpoint_pattern, content)
+            
+            # Find class definitions
+            class_pattern = r'class\s+(\w+)[:\(]'
+            classes = re.findall(class_pattern, content)
+            
+            # Find unique features (AI engines, calculators, etc.)
+            feature_keywords = [
+                'quantum', 'monte.?carlo', 'precedent', 'settlement',
+                'argument.?strength', 'risk.?analysis', 'strategy',
+                'pattern.?recognition', 'document.?generat', 'emotion',
+                'predict', 'optimize', 'simulat', 'analyz'
+            ]
+            
+            features = []
+            for keyword in feature_keywords:
+                if re.search(keyword, content, re.IGNORECASE):
+                    features.append(keyword)
+                    
+            return {
+                'endpoints': endpoints,
+                'classes': classes,
+                'features': features,
+                'size': len(content),
+                'imports': len(re.findall(r'^import|^from', content, re.MULTILINE))
+            }
+        except Exception as e:
+            print(f"Error analyzing {filepath}: {e}")
+            return None
+            
+    def generate_report(self):
+        """Generate analysis report"""
+        print("=== LEGAL AI API VERSIONS ANALYSIS ===\n")
+        
+        all_endpoints = set()
+        all_classes = set()
+        all_features = set()
+        
+        for filename, description in self.versions.items():
+            if os.path.exists(filename):
+                print(f"\n📁 {filename} ({description})")
+                print("-" * 50)
+                
+                analysis = self.analyze_file(filename)
+                if analysis:
+                    print(f"Size: {analysis['size']:,} bytes")
+                    print(f"Imports: {analysis['imports']}")
+                    
+                    if analysis['endpoints']:
+                        print(f"\nEndpoints ({len(analysis['endpoints'])}):")
+                        for method, path in analysis['endpoints']:
+                            print(f"  {method.upper():6} {path}")
+                            all_endpoints.add((method, path))
+                            
+                    if analysis['classes']:
+                        print(f"\nKey Classes ({len(analysis['classes'])}):")
+                        for cls in analysis['classes'][:10]:  # First 10
+                            print(f"  - {cls}")
+                            all_classes.add(cls)
+                            
+                    if analysis['features']:
+                        print(f"\nFeatures detected:")
+                        for feature in analysis['features']:
+                            print(f"  ✓ {feature}")
+                            all_features.add(feature)
+            else:
+                print(f"\n❌ {filename} not found")
+                
+        # Summary
+        print("\n\n=== CONSOLIDATION SUMMARY ===")
+        print(f"\nTotal unique endpoints: {len(all_endpoints)}")
+        print(f"Total unique classes: {len(all_classes)}")
+        print(f"Total unique features: {len(all_features)}")
+        
+        # Recommendations
+        print("\n\n=== OPTIMIZATION RECOMMENDATIONS ===")
+        print("1. Consolidate all endpoints into organized routers")
+        print("2. Create base classes for common functionality")
+        print("3. Implement feature flags for optional components")
+        print("4. Use dependency injection for modularity")
+        print("5. Standardize response models")
+        print("6. Add comprehensive error handling")
+        print("7. Implement caching for expensive operations")
+        print("8. Add rate limiting and authentication")
+        
+        return {
+            'endpoints': list(all_endpoints),
+            'classes': list(all_classes),
+            'features': list(all_features)
+        }
+
+if __name__ == "__main__":
+    analyzer = APIVersionAnalyzer()
+    summary = analyzer.generate_report()
+    
+    # Save summary for next steps
+    with open('api_analysis_summary.json', 'w') as f:
+        json.dump(summary, f, indent=2)
+    print("\n✅ Analysis saved to api_analysis_summary.json")

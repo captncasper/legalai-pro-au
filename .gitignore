@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+*.egg-info/
+
+# Data files (too large for git)
+data/*.pkl
+data/*.faiss
+data/*.bin
+data/*.safetensors
+models/
+*.pth
+*.pt
+
+# Datasets
+australian_legal_*_finetune_data/
+huggingface/
+.cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+training_log.txt
+
+# API keys and secrets
+.env
+config/secrets.yaml
+api_keys.db
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+main/
