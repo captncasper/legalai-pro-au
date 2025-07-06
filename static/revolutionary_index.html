@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Revolutionary Australian Legal AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .feature-card { transition: all 0.3s ease; }
+        .feature-card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .7; } }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <div class="gradient-bg text-white p-8">
+        <div class="container mx-auto text-center">
+            <h1 class="text-6xl font-bold mb-4">🚀 Revolutionary Legal AI</h1>
+            <p class="text-2xl mb-6">Features No Other Legal Tech Has</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                    <div class="text-green-300 pulse">●</div>
+                    <div>Outcome Prediction</div>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                    <div class="text-blue-300 pulse">●</div>
+                    <div>Strategy Generation</div>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                    <div class="text-purple-300 pulse">●</div>
+                    <div>Risk Analysis</div>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                    <div class="text-yellow-300 pulse">●</div>
+                    <div>Judge Analytics</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto p-8">
+        <!-- Revolutionary Features Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            
+            <!-- Outcome Prediction -->
+            <div class="feature-card bg-white rounded-xl shadow-lg p-6 border-l-4 border-green-500">
+                <div class="flex items-center mb-4">
+                    <div class="text-3xl mr-3">🔮</div>
+                    <h3 class="text-xl font-bold text-gray-800">Case Outcome Predictor</h3>
+                </div>
+                <p class="text-gray-600 mb-4">Predicts your case success probability with AI analysis of similar cases</p>
+                <button onclick="showOutcomePrediction()" class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700">
+                    Predict My Case Outcome
+                </button>
+            </div>
+
+            <!-- Strategy Generator -->
+            <div class="feature-card bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-500">
+                <div class="flex items-center mb-4">
+                    <div class="text-3xl mr-3">🎯</div>
+                    <h3 class="text-xl font-bold text-gray-800">Legal Strategy Generator</h3>
+                </div>
+                <p class="text-gray-600 mb-4">Generates complete legal strategies with timelines and resource requirements</p>
+                <button onclick="showStrategyGenerator()" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+                    Generate Legal Strategy
+                </button>
+            </div>
+
+            <!-- Risk Analysis -->
+            <div class="feature-card bg-white rounded-xl shadow-lg p-6 border-l-4 border-red-500">
+                <div class="flex items-center mb-4">
+                    <div class="text-3xl mr-3">⚡</div>
+                    <h3 class="text-xl font-bold text-gray-800">Document Risk Scanner</h3>
+                </div>
+                <p class="text-gray-600 mb-4">Scans contracts for hidden risks and suggests protective amendments</p>
+                <button onclick="showRiskAnalysis()" class="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700">
+                    Analyze Document Risk
+                </button>
+            </div>
+
+            <!-- Settlement Predictor -->
+            <div class="feature-card bg-white rounded-xl shadow-lg p-6 border-l-4 border-purple-500">
+                <div class="flex items-center mb-4">
+                    <div class="text-3xl mr-3">💰</div>
+                    <h3 class="text-xl font-bold text-gray-800">Settlement Predictor</h3>
+                </div>
+                <p class="text-gray-600 mb-4">Data-driven settlement range with negotiation strategy</p>
+                <button onclick="showSettlementPredictor()" class="w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-700">
+                    Predict Settlement Value
+                </button>
+            </div>
+
+            <!-- Judge Analytics -->
+            <div class="feature-card bg-white rounded-xl shadow-lg p-6 border-l-4 border-orange-500">
+                <div class="flex items-center mb-4">
+                    <div class="text-3xl mr-3">👨‍⚖️</div>
+                    <h3 class="text-xl font-bold text-gray-800">Judge Analytics</h3>
+                </div>
+                <p class="text-gray-600 mb-4">Analyzes judge patterns and recommends winning arguments</p>
+                <button onclick="showJudgeAnalytics()" class="w-full bg-orange-600 text-white py-2 rounded hover:bg-orange-700">
+                    Analyze Judge Profile
+                </button>
+            </div>
+
+            <!-- Coming Soon -->
+            <div class="feature-card bg-white rounded-xl shadow-lg p-6 border-l-4 border-gray-400">
+                <div class="flex items-center mb-4">
+                    <div class="text-3xl mr-3">🤖</div>
+                    <h3 class="text-xl font-bold text-gray-600">More Revolutionary Features</h3>
+                </div>
+                <p class="text-gray-500 mb-4">Discovery automation, precedent tracking, cost prediction...</p>
+                <button class="w-full bg-gray-400 text-white py-2 rounded cursor-not-allowed">
+                    Coming Soon
+                </button>
+            </div>
+        </div>
+
+        <!-- Dynamic Content Area -->
+        <div id="dynamicContent" class="bg-white rounded-xl shadow-lg p-8">
+            <div class="text-center text-gray-500">
+                <div class="text-6xl mb-4">⚖️</div>
+                <h2 class="text-2xl font-bold mb-4">Select a Revolutionary Feature Above</h2>
+                <p>Choose any feature to see AI capabilities no other legal tech offers</p>
+                <div class="mt-4">
+                    <button onclick="testButtons()" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+                        🔧 Test JavaScript
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log('🚀 JavaScript starting to load...');
+        
+        // Test function to verify JavaScript is working
+        function testButtons() {
+            console.log('✅ Test function called!');
+            alert('Buttons are working!');
+        }
+        
+        console.log('🔧 Functions defined, starting main functions...');
+        
+        async function showOutcomePrediction() {
+            console.log('🔮 Outcome Prediction clicked!');
+            const content = document.getElementById('dynamicContent');
+            console.log('Content element:', content);
+            content.innerHTML = `
+                <h2 class="text-2xl font-bold mb-6 text-green-800">🔮 Case Outcome Prediction Engine</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Case Type</label>
+                            <select id="caseType" class="w-full p-3 border rounded-lg">
+                                <option value="negligence">Negligence/Personal Injury</option>
+                                <option value="contract">Contract Dispute</option>
+                                <option value="employment">Employment</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Case Facts</label>
+                            <textarea id="caseFacts" placeholder="Describe your case facts, including key evidence, witnesses, and circumstances..." 
+                                     class="w-full p-3 border rounded-lg h-32"></textarea>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Jurisdiction</label>
+                                <select id="jurisdiction" class="w-full p-2 border rounded">
+                                    <option value="NSW">NSW</option>
+                                    <option value="VIC">Victoria</option>
+                                    <option value="QLD">Queensland</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Evidence Strength</label>
+                                <select id="evidenceStrength" class="w-full p-2 border rounded">
+                                    <option value="weak">Weak</option>
+                                    <option value="moderate">Moderate</option>
+                                    <option value="strong">Strong</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Claim Amount ($)</label>
+                            <input type="number" id="claimAmount" placeholder="100000" class="w-full p-3 border rounded-lg">
+                        </div>
+                        
+                        <button onclick="predictOutcome()" class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 text-lg font-semibold">
+                            🔮 Predict Case Outcome
+                        </button>
+                    </div>
+                    
+                    <div id="predictionResults" class="bg-gray-50 rounded-lg p-6">
+                        <div class="text-center text-gray-500">
+                            <div class="text-4xl mb-2">📊</div>
+                            <p>Enter case details and click predict to see AI analysis</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function predictOutcome() {
+            const resultsDiv = document.getElementById('predictionResults');
+            resultsDiv.innerHTML = '<div class="text-center"><div class="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div><p>AI analyzing case outcome...</p></div>';
+            
+            try {
+                const response = await fetch('/api/v1/predict-outcome', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        case_type: document.getElementById('caseType').value,
+                        facts: document.getElementById('caseFacts').value,
+                        jurisdiction: document.getElementById('jurisdiction').value,
+                        evidence_strength: document.getElementById('evidenceStrength').value,
+                        claim_amount: parseFloat(document.getElementById('claimAmount').value) || 100000
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.status === 'success' && data.case_outcome_analysis) {
+                    displayPredictionResults(data.case_outcome_analysis);
+                } else {
+                    resultsDiv.innerHTML = '<div class="text-red-600">Prediction failed: ' + (data.detail || 'Unknown error') + '</div>';
+                }
+                
+            } catch (error) {
+                console.error('Prediction error:', error);
+                resultsDiv.innerHTML = '<div class="text-red-600">Prediction failed. Check console for details.</div>';
+            }
+        }
+
+        function displayPredictionResults(prediction) {
+            const resultsDiv = document.getElementById('predictionResults');
+            const successProb = prediction.success_probability;
+            const color = successProb > 70 ? 'green' : successProb > 50 ? 'yellow' : 'red';
+            
+            resultsDiv.innerHTML = `
+                <div class="text-center mb-6">
+                    <div class="text-4xl mb-2">${successProb > 70 ? '🎯' : successProb > 50 ? '⚖️' : '⚠️'}</div>
+                    <div class="text-3xl font-bold text-${color}-600">${successProb}%</div>
+                    <div class="text-sm text-gray-600">Success Probability</div>
+                    <div class="text-xs text-gray-500 mt-2">Confidence: ${prediction.confidence_level}</div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="bg-blue-50 p-4 rounded border-l-4 border-blue-400">
+                        <h4 class="font-semibold text-blue-800">🧠 AI Analysis Summary</h4>
+                        <p class="text-sm">${prediction.legal_analysis.analysis_summary}</p>
+                    </div>
+                    
+                    ${prediction.similar_cases && prediction.similar_cases.length > 0 ? `
+                    <div class="bg-green-50 p-4 rounded">
+                        <h4 class="font-semibold text-green-800">📚 Similar Cases Found (${prediction.similar_cases_found})</h4>
+                        ${prediction.similar_cases.slice(0, 3).map(caseItem => `
+                            <div class="text-sm mt-2 p-2 bg-white rounded">
+                                <strong>${caseItem.case_reference}</strong><br>
+                                <span class="text-gray-600">${caseItem.jurisdiction} • ${Math.round(caseItem.similarity_score * 100)}% similar</span>
+                                ${caseItem.amounts_mentioned && caseItem.amounts_mentioned.length > 0 ? 
+                                    `<br><span class="text-green-600">Awards: ${caseItem.amounts_mentioned.join(', ')}</span>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                    
+                    ${prediction.key_legal_issues && prediction.key_legal_issues.length > 0 ? `
+                    <div class="bg-yellow-50 p-4 rounded">
+                        <h4 class="font-semibold text-yellow-800">⚠️ Key Legal Issues</h4>
+                        <ul class="text-sm space-y-1 mt-2">
+                            ${prediction.key_legal_issues.map(issue => `<li>• ${issue}</li>`).join('')}
+                        </ul>
+                    </div>
+                    ` : ''}
+                    
+                    <div class="bg-purple-50 p-4 rounded">
+                        <h4 class="font-semibold text-purple-800">📋 Evidence Required</h4>
+                        <ul class="text-sm space-y-1 mt-2">
+                            ${prediction.evidence_requirements.map(req => `<li>• ${req}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-100 p-3 rounded text-xs text-gray-600">
+                        <strong>Jurisdiction:</strong> ${prediction.jurisdiction_notes}<br>
+                        <strong>Disclaimer:</strong> ${prediction.disclaimer}
+                    </div>
+                </div>
+            `;
+        }
+
+        async function showStrategyGenerator() {
+            console.log('🎯 Strategy Generator clicked!');
+            const content = document.getElementById('dynamicContent');
+            console.log('Content element:', content);
+            content.innerHTML = `
+                <h2 class="text-2xl font-bold mb-6 text-blue-800">🎯 Legal Strategy Generator</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Case Facts</label>
+                            <textarea id="strategyFacts" placeholder="Describe your legal matter..." 
+                                     class="w-full p-3 border rounded-lg h-24"></textarea>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Desired Outcome</label>
+                            <input type="text" id="desiredOutcome" placeholder="e.g., Full damages plus costs" 
+                                  class="w-full p-3 border rounded-lg">
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Timeline</label>
+                                <select id="timeline" class="w-full p-2 border rounded">
+                                    <option value="urgent">Urgent (ASAP)</option>
+                                    <option value="normal">Normal</option>
+                                    <option value="flexible">Flexible</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Risk Tolerance</label>
+                                <select id="riskTolerance" class="w-full p-2 border rounded">
+                                    <option value="conservative">Conservative</option>
+                                    <option value="moderate">Moderate</option>
+                                    <option value="aggressive">Aggressive</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button onclick="generateStrategy()" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 text-lg font-semibold">
+                            🎯 Generate Strategy
+                        </button>
+                    </div>
+                    
+                    <div id="strategyResults" class="bg-gray-50 rounded-lg p-6">
+                        <div class="text-center text-gray-500">
+                            <div class="text-4xl mb-2">🗺️</div>
+                            <p>AI will generate a complete legal strategy with multiple options</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function generateStrategy() {
+            const resultsDiv = document.getElementById('strategyResults');
+            resultsDiv.innerHTML = '<div class="text-center"><div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div><p>Generating legal strategy...</p></div>';
+            
+            try {
+                const response = await fetch('/api/v1/generate-strategy', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        case_facts: document.getElementById('strategyFacts').value,
+                        case_type: "general",
+                        desired_outcome: document.getElementById('desiredOutcome').value,
+                        timeline_constraint: document.getElementById('timeline').value,
+                        risk_tolerance: document.getElementById('riskTolerance').value
+                    })
+                });
+                
+                const data = await response.json();
+                displayStrategyResults(data.strategy);
+                
+            } catch (error) {
+                resultsDiv.innerHTML = '<div class="text-red-600">Strategy generation failed. Try again.</div>';
+            }
+        }
+
+        function displayStrategyResults(strategy) {
+            const resultsDiv = document.getElementById('strategyResults');
+            const optimal = strategy.optimal_strategy;
+            
+            resultsDiv.innerHTML = `
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold text-blue-800 mb-2">🎯 Optimal Strategy</h3>
+                    <div class="bg-blue-100 p-4 rounded">
+                        <h4 class="font-semibold">${optimal.name}</h4>
+                        <p class="text-sm mb-2">${optimal.description}</p>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <div><strong>Timeline:</strong> ${optimal.timeline}</div>
+                            <div><strong>Cost:</strong> ${optimal.cost}</div>
+                            <div><strong>Success Rate:</strong> ${Math.round(optimal.success_probability * 100)}%</div>
+                            <div><strong>Score:</strong> ${optimal.score}/5</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-green-800 mb-2">✅ Pros</h4>
+                    <ul class="text-sm space-y-1">
+                        ${optimal.pros.map(pro => `<li>• ${pro}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-red-800 mb-2">⚠️ Cons</h4>
+                    <ul class="text-sm space-y-1">
+                        ${optimal.cons.map(con => `<li>• ${con}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="bg-yellow-50 p-3 rounded">
+                    <h4 class="font-semibold text-yellow-800">Alternative Strategies Available</h4>
+                    <p class="text-sm">${strategy.alternative_strategies.length} other strategic approaches analyzed</p>
+                </div>
+            `;
+        }
+
+        async function showRiskAnalysis() {
+            const content = document.getElementById('dynamicContent');
+            content.innerHTML = `
+                <h2 class="text-2xl font-bold mb-6 text-red-800">⚡ Document Risk Scanner</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Document Type</label>
+                            <select id="docType" class="w-full p-3 border rounded-lg">
+                                <option value="contract">Contract/Agreement</option>
+                                <option value="email">Email Communication</option>
+                                <option value="policy">Company Policy</option>
+                                <option value="letter">Legal Letter</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Document Text</label>
+                            <textarea id="documentText" placeholder="Paste your document text here for AI risk analysis..." 
+                                     class="w-full p-3 border rounded-lg h-40"></textarea>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Your Role</label>
+                            <select id="yourRole" class="w-full p-3 border rounded-lg">
+                                <option value="party">Contract Party</option>
+                                <option value="advisor">Legal Advisor</option>
+                                <option value="reviewer">Document Reviewer</option>
+                            </select>
+                        </div>
+                        
+                        <button onclick="analyzeRisk()" class="w-full bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 text-lg font-semibold">
+                            ⚡ Analyze Legal Risks
+                        </button>
+                    </div>
+                    
+                    <div id="riskResults" class="bg-gray-50 rounded-lg p-6">
+                        <div class="text-center text-gray-500">
+                            <div class="text-4xl mb-2">🔍</div>
+                            <p>AI will scan for hidden legal risks and suggest protective amendments</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function analyzeRisk() {
+            const resultsDiv = document.getElementById('riskResults');
+            resultsDiv.innerHTML = '<div class="text-center"><div class="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto mb-4"></div><p>Scanning for legal risks...</p></div>';
+            
+            try {
+                const response = await fetch('/api/v1/analyze-risk', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        document_text: document.getElementById('documentText').value,
+                        document_type: document.getElementById('docType').value,
+                        your_role: document.getElementById('yourRole').value
+                    })
+                });
+                
+                const data = await response.json();
+                displayRiskResults(data.risk_analysis);
+                
+            } catch (error) {
+                resultsDiv.innerHTML = '<div class="text-red-600">Risk analysis failed. Try again.</div>';
+            }
+        }
+
+        function displayRiskResults(analysis) {
+            const resultsDiv = document.getElementById('riskResults');
+            const riskLevel = analysis.overall_risk_level;
+            const riskColor = riskLevel.includes('CRITICAL') ? 'red' : 
+                            riskLevel.includes('HIGH') ? 'orange' : 
+                            riskLevel.includes('MEDIUM') ? 'yellow' : 'green';
+            
+            resultsDiv.innerHTML = `
+                <div class="text-center mb-6">
+                    <div class="text-4xl mb-2">${riskLevel.includes('CRITICAL') ? '🚨' : riskLevel.includes('HIGH') ? '⚠️' : '✅'}</div>
+                    <div class="text-lg font-bold text-${riskColor}-600">${riskLevel}</div>
+                    <div class="text-sm text-gray-600">Risk Score: ${analysis.risk_score}/100</div>
+                </div>
+                
+                ${analysis.identified_risks.length > 0 ? `
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-red-800 mb-2">🚨 Identified Risks</h4>
+                        ${analysis.identified_risks.map(risk => `
+                            <div class="bg-red-50 border-l-4 border-red-400 p-3 mb-2">
+                                <div class="font-medium text-red-800">${risk.type}</div>
+                                <div class="text-sm text-red-600">${risk.description}</div>
+                                <div class="text-xs text-red-500">Impact: ${risk.potential_impact}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : ''}
+                
+                <div class="bg-blue-50 p-4 rounded mb-4">
+                    <h4 class="font-semibold text-blue-800">💰 Financial Exposure</h4>
+                    <p class="text-sm">Maximum: ${analysis.financial_exposure.estimated_maximum}</p>
+                    <p class="text-sm">Likely: ${analysis.financial_exposure.likely_exposure}</p>
+                </div>
+                
+                ${analysis.recommended_amendments.length > 0 ? `
+                    <div class="bg-green-50 p-4 rounded">
+                        <h4 class="font-semibold text-green-800">✏️ Recommended Amendments</h4>
+                        ${analysis.recommended_amendments.map(amendment => `
+                            <div class="text-sm mb-2">
+                                <strong>${amendment.clause}:</strong> ${amendment.recommended_change}
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : ''}
+            `;
+        }
+
+        async function showSettlementPredictor() {
+            const content = document.getElementById('dynamicContent');
+            content.innerHTML = `
+                <h2 class="text-2xl font-bold mb-6 text-purple-800">💰 Settlement Value Predictor</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Case Type</label>
+                            <select id="settlementCaseType" class="w-full p-3 border rounded-lg">
+                                <option value="negligence">Personal Injury</option>
+                                <option value="contract">Contract Dispute</option>
+                                <option value="employment">Employment</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Claim Amount ($)</label>
+                            <input type="number" id="settlementClaimAmount" placeholder="250000" 
+                                  class="w-full p-3 border rounded-lg">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Liability Strength</label>
+                            <select id="liabilityStrength" class="w-full p-3 border rounded-lg">
+                                <option value="weak">Weak (30% liable)</option>
+                                <option value="moderate">Moderate (60% liable)</option>
+                                <option value="strong">Strong (90% liable)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Jurisdiction</label>
+                            <select id="settlementJurisdiction" class="w-full p-3 border rounded-lg">
+                                <option value="NSW">NSW</option>
+                                <option value="VIC">Victoria</option>
+                                <option value="QLD">Queensland</option>
+                            </select>
+                        </div>
+                        
+                        <button onclick="predictSettlement()" class="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 text-lg font-semibold">
+                            💰 Predict Settlement
+                        </button>
+                    </div>
+                    
+                    <div id="settlementResults" class="bg-gray-50 rounded-lg p-6">
+                        <div class="text-center text-gray-500">
+                            <div class="text-4xl mb-2">💲</div>
+                            <p>Get data-driven settlement predictions with negotiation strategy</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+
+        function displaySettlementResults(prediction) {
+            const resultsDiv = document.getElementById('settlementResults');
+            
+            resultsDiv.innerHTML = `
+                <div class="text-center mb-6">
+                    <div class="text-4xl mb-2">💰</div>
+                    <div class="text-2xl font-bold text-purple-600">${prediction.expected_settlement}</div>
+                    <div class="text-sm text-gray-600">Expected Settlement</div>
+                </div>
+                
+                <div class="bg-purple-50 p-4 rounded mb-4">
+                    <h4 class="font-semibold text-purple-800 mb-2">📊 Settlement Range</h4>
+                    <div class="space-y-1 text-sm">
+                        <div>Minimum: ${prediction.settlement_range.minimum}</div>
+                        <div>Likely: ${prediction.settlement_range.likely}</div>
+                        <div>Maximum: ${prediction.settlement_range.maximum}</div>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-50 p-4 rounded mb-4">
+                    <h4 class="font-semibold text-blue-800 mb-2">🎯 Negotiation Strategy</h4>
+                    <div class="space-y-1 text-sm">
+                        <div><strong>Opening:</strong> ${prediction.negotiation_strategy.opening_demand}</div>
+                        <div><strong>First Move:</strong> ${prediction.negotiation_strategy.first_concession}</div>
+                        <div><strong>Walk Away:</strong> ${prediction.negotiation_strategy.walk_away_point}</div>
+                    </div>
+                </div>
+                
+                <div class="bg-green-50 p-4 rounded">
+                    <h4 class="font-semibold text-green-800 mb-2">📈 Success Rate</h4>
+                    <p class="text-sm">${prediction.success_probability}</p>
+                </div>
+            `;
+        }
+
+
+        async function showJudgeAnalytics() {
+            const content = document.getElementById('dynamicContent');
+            content.innerHTML = `
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">👨‍⚖️ Judge Analytics</h2>
+                    
+                    <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Judge Name</label>
+                                <input type="text" id="judgeName" placeholder="e.g., Justice Smith" class="w-full p-3 border rounded-lg">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Case Type</label>
+                                <select id="judgesCaseType" class="w-full p-3 border rounded-lg">
+                                    <option value="negligence">Negligence</option>
+                                    <option value="contract">Contract</option>
+                                    <option value="employment">Employment</option>
+                                    <option value="constitutional">Constitutional</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Jurisdiction</label>
+                                <select id="judgesJurisdiction" class="w-full p-3 border rounded-lg">
+                                    <option value="NSW">NSW</option>
+                                    <option value="VIC">Victoria</option>
+                                    <option value="QLD">Queensland</option>
+                                    <option value="WA">Western Australia</option>
+                                    <option value="SA">South Australia</option>
+                                    <option value="TAS">Tasmania</option>
+                                    <option value="HCA">High Court</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button onclick="analyzeJudge()" class="w-full bg-orange-600 text-white py-3 rounded-lg hover:bg-orange-700 text-lg font-semibold">
+                            👨‍⚖️ Analyze Judge
+                        </button>
+                    </div>
+                    
+                    <div id="judgeResults" class="bg-gray-50 rounded-lg p-6">
+                        <div class="text-center text-gray-500">
+                            <div class="text-4xl mb-2">⚖️</div>
+                            <p>Enter judge details and click analyze to see patterns</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function predictSettlement() {
+            const resultsDiv = document.getElementById('settlementResults');
+            resultsDiv.innerHTML = '<div class="text-center"><div class="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div><p>Predicting settlement range...</p></div>';
+            
+            try {
+                const response = await fetch('/api/v1/analyze-settlement', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        case_type: document.getElementById('settlementCaseType').value,
+                        claim_amount: parseFloat(document.getElementById('settlementAmount').value),
+                        liability_assessment: document.getElementById('liabilityAssessment').value,
+                        jurisdiction: document.getElementById('settlementJurisdiction').value
+                    })
+                });
+                
+                const data = await response.json();
+                if (data.status === 'success' && data.settlement_analysis) {
+                    displaySettlementResults(data.settlement_analysis);
+                } else {
+                    resultsDiv.innerHTML = '<div class="text-red-600">Settlement prediction failed: ' + (data.detail || 'Unknown error') + '</div>';
+                }
+                
+            } catch (error) {
+                console.error('Settlement prediction error:', error);
+                resultsDiv.innerHTML = '<div class="text-red-600">Settlement prediction failed. Check console for details.</div>';
+            }
+        }
+
+        async function analyzeJudge() {
+            const resultsDiv = document.getElementById('judgeResults');
+            resultsDiv.innerHTML = '<div class="text-center"><div class="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 mx-auto mb-4"></div><p>Analyzing judge patterns...</p></div>';
+            
+            try {
+                const response = await fetch('/api/v1/judge-analytics', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        judge_name: document.getElementById('judgeName').value,
+                        case_type: document.getElementById('judgesCaseType').value,
+                        jurisdiction: document.getElementById('judgesJurisdiction').value
+                    })
+                });
+                
+                const data = await response.json();
+                displayJudgeResults(data.judge_analytics);
+                
+            } catch (error) {
+                resultsDiv.innerHTML = '<div class="text-red-600">Judge analysis failed. Try again.</div>';
+            }
+        }
+
+        function displayJudgeResults(analytics) {
+            const resultsDiv = document.getElementById('judgeResults');
+            const patterns = analytics.decision_patterns;
+            
+            resultsDiv.innerHTML = `
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold text-orange-800 mb-2">👨‍⚖️ Judge Profile</h3>
+                    <div class="bg-orange-50 p-4 rounded">
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <div><strong>Total Cases:</strong> ${analytics.judge_profile.total_cases}</div>
+                            <div><strong>This Case Type:</strong> ${analytics.judge_profile.case_type_experience}</div>
+                            <div><strong>Plaintiff Success:</strong> ${patterns.plaintiff_success_rate}</div>
+                            <div><strong>Avg Award:</strong> ${patterns.average_award}</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-green-800 mb-2">✅ Winning Arguments</h4>
+                    ${analytics.winning_arguments.map(arg => `
+                        <div class="bg-green-50 p-2 rounded mb-1 text-sm">
+                            <strong>${arg.argument}</strong> - ${arg.success_rate} success
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold text-red-800 mb-2">❌ Avoid These</h4>
+                    ${analytics.avoid_these.map(arg => `
+                        <div class="bg-red-50 p-2 rounded mb-1 text-sm">
+                            <strong>${arg.argument}</strong> - Only ${arg.success_rate} success
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="bg-blue-50 p-4 rounded">
+                    <h4 class="font-semibold text-blue-800 mb-2">🎯 Strategic Recommendations</h4>
+                    <ul class="text-sm space-y-1">
+                        ${analytics.strategic_recommendations.map(rec => `<li>• ${rec}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        // Initialize page
+        window.onload = async function() {
+            try {
+                const response = await fetch('/api');
+                const data = await response.json();
+                console.log('Revolutionary Legal AI loaded:', data);
+            } catch (error) {
+                console.error('Failed to load API info:', error);
+            }
+        };
+    </script>
+</body>
+</html>

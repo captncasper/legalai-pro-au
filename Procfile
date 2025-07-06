@@ -1,1 +1,1 @@
-web: uvicorn main:app --host 0.0.0.0 --port $PORT
+web: uvicorn real_revolutionary_ai:app --host 0.0.0.0 --port $PORT

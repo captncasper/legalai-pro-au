@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Australian Legal AI - Professional Legal Brief Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 100%); }
+        .legal-paper { background: #fdfdfd; border-left: 4px solid #1e3a8a; }
+        .citation { font-family: "Times New Roman", serif; color: #4a5568; }
+        @media print { .no-print { display: none; } }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Professional Header -->
+    <div class="gradient-bg text-white p-6">
+        <div class="container mx-auto">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-4xl font-bold">⚖️ Australian Legal AI</h1>
+                    <p class="text-xl">Professional Legal Brief Generator</p>
+                    <p class="text-sm opacity-80">AI-Powered Legal Document Creation for Australian Lawyers</p>
+                </div>
+                <div class="text-right">
+                    <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                        <div class="text-green-300 text-lg">●</div>
+                        <div class="text-sm">PROFESSIONAL GRADE</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto p-6">
+        <!-- Input Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Input Form -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">📝 Legal Brief Details</h2>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-bold mb-2">Matter Type *</label>
+                        <select id="matterType" class="w-full p-3 border rounded-lg">
+                            <option value="negligence">Personal Injury / Negligence</option>
+                            <option value="contract">Commercial Contract Dispute</option>
+                            <option value="employment">Employment Law Matter</option>
+                            <option value="property">Property Dispute</option>
+                            <option value="family">Family Law Matter</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold mb-2">Client Name *</label>
+                        <input type="text" id="clientName" placeholder="e.g., John Smith" class="w-full p-3 border rounded-lg">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold mb-2">Opposing Party *</label>
+                        <input type="text" id="opposingParty" placeholder="e.g., ABC Corporation Pty Ltd" class="w-full p-3 border rounded-lg">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold mb-2">Jurisdiction</label>
+                            <select id="jurisdiction" class="w-full p-3 border rounded-lg">
+                                <option value="NSW">New South Wales</option>
+                                <option value="VIC">Victoria</option>
+                                <option value="QLD">Queensland</option>
+                                <option value="WA">Western Australia</option>
+                                <option value="SA">South Australia</option>
+                                <option value="TAS">Tasmania</option>
+                                <option value="NT">Northern Territory</option>
+                                <option value="ACT">Australian Capital Territory</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold mb-2">Court Level</label>
+                            <select id="courtLevel" class="w-full p-3 border rounded-lg">
+                                <option value="district">District/County Court</option>
+                                <option value="supreme">Supreme Court</option>
+                                <option value="federal">Federal Court</option>
+                                <option value="magistrates">Magistrates Court</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold mb-2">Case Facts & Circumstances *</label>
+                        <textarea id="caseFacts" placeholder="Provide detailed facts of the matter, including chronology of events, key evidence, witness information, and legal issues to be addressed..." 
+                                 class="w-full p-3 border rounded-lg h-32"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold mb-2">Legal Issues & Claims *</label>
+                        <textarea id="legalIssues" placeholder="Outline the specific legal issues, causes of action, and relief sought..." 
+                                 class="w-full p-3 border rounded-lg h-24"></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold mb-2">Damages Sought ($)</label>
+                            <input type="number" id="damagesSought" placeholder="250000" class="w-full p-3 border rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold mb-2">Brief Type</label>
+                            <select id="briefType" class="w-full p-3 border rounded-lg">
+                                <option value="pleading">Statement of Claim</option>
+                                <option value="defense">Defense</option>
+                                <option value="summary">Legal Summary</option>
+                                <option value="advice">Legal Advice Memo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button onclick="generateBrief()" 
+                            class="w-full bg-blue-600 text-white py-4 rounded-lg text-lg font-bold hover:bg-blue-700 transition-colors">
+                        ⚖️ Generate Professional Legal Brief
+                    </button>
+                </div>
+            </div>
+
+            <!-- Output Section -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-gray-800">📄 Generated Legal Document</h2>
+                    <button onclick="printBrief()" class="no-print bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700" style="display:none;" id="printBtn">
+                        🖨️ Print
+                    </button>
+                </div>
+                
+                <div id="briefOutput" class="legal-paper min-h-96 p-6 rounded border">
+                    <div class="text-center text-gray-500 py-12">
+                        <div class="text-6xl mb-4">📄</div>
+                        <h3 class="text-xl font-bold mb-2">Professional Legal Brief</h3>
+                        <p>Complete the form and click "Generate Professional Legal Brief" to create a comprehensive legal document with:</p>
+                        <ul class="text-sm mt-4 space-y-1">
+                            <li>• Proper legal formatting and structure</li>
+                            <li>• Relevant case law and precedents</li>
+                            <li>• Professional legal language</li>
+                            <li>• Citation of Australian statutes</li>
+                            <li>• Court-ready document formatting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                <div class="text-4xl mb-4">📚</div>
+                <h3 class="font-bold text-lg mb-2">Real Legal Precedents</h3>
+                <p class="text-sm text-gray-600">AI analyzes 1000+ Australian cases to include relevant precedents and citations</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                <div class="text-4xl mb-4">⚖️</div>
+                <h3 class="font-bold text-lg mb-2">Court-Ready Format</h3>
+                <p class="text-sm text-gray-600">Professional legal document structure following Australian court requirements</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                <div class="text-4xl mb-4">🎯</div>
+                <h3 class="font-bold text-lg mb-2">Jurisdiction Specific</h3>
+                <p class="text-sm text-gray-600">Tailored to specific Australian state laws and court procedures</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log('🚀 Professional Legal AI loaded');
+        
+        async function generateBrief() {
+            console.log('📝 Generating legal brief...');
+            
+            const outputDiv = document.getElementById('briefOutput');
+            const printBtn = document.getElementById('printBtn');
+            
+            // Validation
+            const required = ['clientName', 'opposingParty', 'caseFacts', 'legalIssues'];
+            for (let field of required) {
+                if (!document.getElementById(field).value.trim()) {
+                    outputDiv.innerHTML = '<div class="text-red-600 text-center py-12"><div class="text-4xl mb-4">❌</div><p class="text-lg">Please complete all required fields marked with *</p></div>';
+                    return;
+                }
+            }
+            
+            outputDiv.innerHTML = '<div class="text-center py-12"><div class="animate-spin text-4xl mb-4">⚖️</div><p class="text-lg">Generating professional legal brief...</p><p class="text-sm text-gray-600 mt-2">AI is analyzing case law and creating your document...</p></div>';
+            
+            try {
+                const response = await fetch('/api/v1/generate-legal-brief', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        matter_type: document.getElementById('matterType').value,
+                        client_name: document.getElementById('clientName').value,
+                        opposing_party: document.getElementById('opposingParty').value,
+                        jurisdiction: document.getElementById('jurisdiction').value,
+                        court_level: document.getElementById('courtLevel').value,
+                        case_facts: document.getElementById('caseFacts').value,
+                        legal_issues: document.getElementById('legalIssues').value,
+                        damages_sought: parseFloat(document.getElementById('damagesSought').value) || 0,
+                        brief_type: document.getElementById('briefType').value
+                    })
+                });
+                
+                const data = await response.json();
+                console.log('API Response:', data);
+                
+                if (data.status === 'success' && data.legal_brief) {
+                    displayBrief(data.legal_brief);
+                    printBtn.style.display = 'inline-block';
+                } else {
+                    outputDiv.innerHTML = '<div class="text-red-600 text-center py-12"><div class="text-4xl mb-4">❌</div><p class="text-lg">Brief generation failed: ' + (data.detail || 'Unknown error') + '</p></div>';
+                }
+                
+            } catch (error) {
+                console.error('Brief generation error:', error);
+                outputDiv.innerHTML = '<div class="text-red-600 text-center py-12"><div class="text-4xl mb-4">❌</div><p class="text-lg">Brief generation failed. Please check your connection and try again.</p></div>';
+            }
+        }
+
+        function displayBrief(brief) {
+            const outputDiv = document.getElementById('briefOutput');
+            
+            outputDiv.innerHTML = `
+                <div class="legal-document">
+                    <!-- Header -->
+                    <div class="text-center border-b-2 border-gray-300 pb-4 mb-6">
+                        <h1 class="text-2xl font-bold citation mb-2">${brief.document_header.title}</h1>
+                        <p class="text-lg citation">${brief.document_header.court}</p>
+                        <p class="citation">${brief.document_header.matter_details}</p>
+                    </div>
+
+                    <!-- Parties -->
+                    <div class="mb-6">
+                        <h2 class="text-lg font-bold mb-3 border-b border-gray-200 pb-1">PARTIES</h2>
+                        <div class="citation text-sm">
+                            <p><strong>Plaintiff:</strong> ${brief.parties.plaintiff}</p>
+                            <p><strong>Defendant:</strong> ${brief.parties.defendant}</p>
+                        </div>
+                    </div>
+
+                    <!-- Statement of Facts -->
+                    <div class="mb-6">
+                        <h2 class="text-lg font-bold mb-3 border-b border-gray-200 pb-1">STATEMENT OF FACTS</h2>
+                        <div class="citation text-sm space-y-2">
+                            ${brief.statement_of_facts.map((fact, i) => `<p>${i + 1}. ${fact}</p>`).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Legal Issues -->
+                    <div class="mb-6">
+                        <h2 class="text-lg font-bold mb-3 border-b border-gray-200 pb-1">LEGAL ISSUES</h2>
+                        <div class="citation text-sm">
+                            ${brief.legal_issues.map((issue, i) => `<p>${String.fromCharCode(97 + i)}. ${issue}</p>`).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Legal Analysis -->
+                    <div class="mb-6">
+                        <h2 class="text-lg font-bold mb-3 border-b border-gray-200 pb-1">LEGAL ANALYSIS</h2>
+                        <div class="citation text-sm space-y-3">
+                            ${brief.legal_analysis.map(section => `
+                                <div>
+                                    <h3 class="font-semibold">${section.heading}</h3>
+                                    <p>${section.content}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Case Authorities -->
+                    ${brief.case_authorities && brief.case_authorities.length > 0 ? `
+                    <div class="mb-6">
+                        <h2 class="text-lg font-bold mb-3 border-b border-gray-200 pb-1">CASE AUTHORITIES</h2>
+                        <div class="citation text-sm">
+                            ${brief.case_authorities.map(auth => `
+                                <p class="mb-2"><em>${auth.case_name}</em> ${auth.citation} - ${auth.relevance}</p>
+                            `).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    <!-- Relief Sought -->
+                    <div class="mb-6">
+                        <h2 class="text-lg font-bold mb-3 border-b border-gray-200 pb-1">RELIEF SOUGHT</h2>
+                        <div class="citation text-sm">
+                            ${brief.relief_sought.map((relief, i) => `<p>${i + 1}. ${relief}</p>`).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="mt-8 pt-4 border-t border-gray-300">
+                        <div class="citation text-sm text-gray-600">
+                            <p><strong>Generated:</strong> ${new Date().toLocaleDateString('en-AU')}</p>
+                            <p><strong>Jurisdiction:</strong> ${brief.jurisdiction_info}</p>
+                            <p class="mt-2 text-xs"><em>This document was generated using Australian Legal AI. Professional legal review recommended before filing.</em></p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function printBrief() {
+            window.print();
+        }
+
+        // Initialize page
+        window.onload = async function() {
+            try {
+                const response = await fetch('/api');
+                const data = await response.json();
+                console.log('✅ Professional Legal AI connected:', data);
+            } catch (error) {
+                console.error('❌ Failed to connect to Legal AI API:', error);
+            }
+        };
+    </script>
+</body>
+</html>

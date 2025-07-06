@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Australian Legal AI - Case Outcome Predictor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .7; } }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <div class="gradient-bg text-white p-8">
+        <div class="container mx-auto text-center">
+            <h1 class="text-6xl font-bold mb-4">⚖️ Australian Legal AI</h1>
+            <p class="text-2xl mb-6">AI-Powered Case Outcome Prediction</p>
+            <div class="bg-white bg-opacity-20 rounded-lg p-4 inline-block">
+                <div class="text-green-300 pulse text-2xl">●</div>
+                <div class="text-lg">Real Australian Legal Analysis</div>
+                <div class="text-sm">1000+ Legal Documents • HuggingFace AI • Semantic Search</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto p-8">
+        <!-- Main Feature -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+            <div class="text-center mb-8">
+                <div class="text-6xl mb-4">🔮</div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Case Outcome Prediction Engine</h2>
+                <p class="text-lg text-gray-600">Get AI-powered predictions for your legal case with real Australian legal precedents</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Input Form -->
+                <div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-bold mb-2 text-gray-700">Case Type</label>
+                        <select id="caseType" class="w-full p-4 border-2 rounded-lg text-lg">
+                            <option value="negligence">Personal Injury / Negligence</option>
+                            <option value="contract">Contract Dispute</option>
+                            <option value="employment">Employment Law</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-bold mb-2 text-gray-700">Case Facts</label>
+                        <textarea id="caseFacts" placeholder="Describe your case facts in detail. Include key evidence, witnesses, circumstances, damages, and any relevant legal elements..." 
+                                 class="w-full p-4 border-2 rounded-lg h-32 text-lg"></textarea>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <label class="block text-sm font-bold mb-2 text-gray-700">Jurisdiction</label>
+                            <select id="jurisdiction" class="w-full p-4 border-2 rounded-lg">
+                                <option value="NSW">NSW</option>
+                                <option value="VIC">Victoria</option>
+                                <option value="QLD">Queensland</option>
+                                <option value="WA">Western Australia</option>
+                                <option value="SA">South Australia</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold mb-2 text-gray-700">Evidence Strength</label>
+                            <select id="evidenceStrength" class="w-full p-4 border-2 rounded-lg">
+                                <option value="strong">Strong Evidence</option>
+                                <option value="moderate">Moderate Evidence</option>
+                                <option value="weak">Weak Evidence</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-bold mb-2 text-gray-700">Claim Amount ($)</label>
+                        <input type="number" id="claimAmount" placeholder="100000" 
+                              class="w-full p-4 border-2 rounded-lg text-lg">
+                    </div>
+                    
+                    <button onclick="predictOutcome()" 
+                            class="w-full bg-blue-600 text-white py-4 rounded-lg text-xl font-bold hover:bg-blue-700 transition-colors">
+                        🔮 Predict Case Outcome
+                    </button>
+                </div>
+
+                <!-- Results -->
+                <div id="results" class="bg-gray-50 rounded-lg p-6">
+                    <div class="text-center text-gray-500">
+                        <div class="text-4xl mb-4">📊</div>
+                        <h3 class="text-xl font-bold mb-2">AI Analysis Results</h3>
+                        <p>Enter your case details and click "Predict Case Outcome" to get your AI-powered legal analysis</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- How It Works -->
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <h3 class="text-2xl font-bold text-center mb-6">How It Works</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="text-center">
+                    <div class="text-4xl mb-4">🤖</div>
+                    <h4 class="font-bold mb-2">AI Analysis</h4>
+                    <p class="text-sm text-gray-600">Advanced HuggingFace AI models analyze your case facts against real Australian legal precedents</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-4">📚</div>
+                    <h4 class="font-bold mb-2">Legal Database</h4>
+                    <p class="text-sm text-gray-600">1000+ real Australian legal documents provide the foundation for accurate predictions</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-4">📈</div>
+                    <h4 class="font-bold mb-2">Smart Predictions</h4>
+                    <p class="text-sm text-gray-600">Get success probability, similar cases, legal issues, and evidence requirements</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log('🚀 Australian Legal AI loaded');
+        
+        async function predictOutcome() {
+            console.log('🔮 Predicting case outcome...');
+            
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<div class="text-center"><div class="animate-spin text-4xl mb-4">⚖️</div><p class="text-lg">Analyzing your case with AI...</p></div>';
+            
+            try {
+                const response = await fetch('/api/v1/predict-outcome', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        case_type: document.getElementById('caseType').value,
+                        facts: document.getElementById('caseFacts').value,
+                        jurisdiction: document.getElementById('jurisdiction').value,
+                        evidence_strength: document.getElementById('evidenceStrength').value,
+                        claim_amount: parseFloat(document.getElementById('claimAmount').value) || 100000
+                    })
+                });
+                
+                const data = await response.json();
+                console.log('API Response:', data);
+                
+                if (data.status === 'success' && data.case_outcome_analysis) {
+                    displayResults(data.case_outcome_analysis);
+                } else {
+                    resultsDiv.innerHTML = '<div class="text-red-600 text-center"><div class="text-4xl mb-4">❌</div><p class="text-lg">Analysis failed: ' + (data.detail || 'Unknown error') + '</p></div>';
+                }
+                
+            } catch (error) {
+                console.error('Prediction error:', error);
+                resultsDiv.innerHTML = '<div class="text-red-600 text-center"><div class="text-4xl mb-4">❌</div><p class="text-lg">Analysis failed. Please check your connection and try again.</p></div>';
+            }
+        }
+
+        function displayResults(prediction) {
+            const resultsDiv = document.getElementById('results');
+            const successProb = prediction.success_probability;
+            const color = successProb > 70 ? 'green' : successProb > 50 ? 'yellow' : 'red';
+            const emoji = successProb > 70 ? '🎯' : successProb > 50 ? '⚖️' : '⚠️';
+            
+            resultsDiv.innerHTML = `
+                <div class="space-y-6">
+                    <!-- Success Probability -->
+                    <div class="text-center bg-white rounded-lg p-6 border-2 border-${color}-200">
+                        <div class="text-5xl mb-4">${emoji}</div>
+                        <div class="text-4xl font-bold text-${color}-600 mb-2">${successProb}%</div>
+                        <div class="text-lg text-gray-600 mb-2">Success Probability</div>
+                        <div class="text-sm text-gray-500">Confidence: ${prediction.confidence_level}</div>
+                    </div>
+                    
+                    <!-- AI Analysis -->
+                    <div class="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-400">
+                        <h4 class="font-bold text-blue-800 mb-2">🧠 AI Analysis Summary</h4>
+                        <p class="text-sm text-blue-700">${prediction.legal_analysis.analysis_summary}</p>
+                    </div>
+                    
+                    ${prediction.similar_cases && prediction.similar_cases.length > 0 ? `
+                    <div class="bg-green-50 rounded-lg p-4">
+                        <h4 class="font-bold text-green-800 mb-3">📚 Similar Cases Found (${prediction.similar_cases_found})</h4>
+                        <div class="space-y-2">
+                            ${prediction.similar_cases.slice(0, 3).map(caseItem => `
+                                <div class="bg-white rounded p-3 border">
+                                    <div class="font-semibold text-sm">${caseItem.case_reference}</div>
+                                    <div class="text-xs text-gray-600">${caseItem.jurisdiction} • ${Math.round(caseItem.similarity_score * 100)}% similar</div>
+                                    ${caseItem.amounts_mentioned && caseItem.amounts_mentioned.length > 0 ? 
+                                        `<div class="text-xs text-green-600 mt-1">Awards: ${caseItem.amounts_mentioned.join(', ')}</div>` : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${prediction.key_legal_issues && prediction.key_legal_issues.length > 0 ? `
+                    <div class="bg-yellow-50 rounded-lg p-4">
+                        <h4 class="font-bold text-yellow-800 mb-3">⚠️ Key Legal Issues</h4>
+                        <ul class="text-sm space-y-1">
+                            ${prediction.key_legal_issues.map(issue => `<li class="flex items-start"><span class="text-yellow-600 mr-2">•</span><span>${issue}</span></li>`).join('')}
+                        </ul>
+                    </div>
+                    ` : ''}
+                    
+                    <div class="bg-purple-50 rounded-lg p-4">
+                        <h4 class="font-bold text-purple-800 mb-3">📋 Evidence Required</h4>
+                        <ul class="text-sm space-y-1">
+                            ${prediction.evidence_requirements.map(req => `<li class="flex items-start"><span class="text-purple-600 mr-2">•</span><span>${req}</span></li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-100 rounded-lg p-3 text-xs text-gray-600">
+                        <div class="mb-1"><strong>Jurisdiction:</strong> ${prediction.jurisdiction_notes}</div>
+                        <div><strong>Disclaimer:</strong> ${prediction.disclaimer}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize page
+        window.onload = async function() {
+            try {
+                const response = await fetch('/api');
+                const data = await response.json();
+                console.log('✅ Australian Legal AI connected:', data);
+            } catch (error) {
+                console.error('❌ Failed to connect to Legal AI API:', error);
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,9 +1,18 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 app = FastAPI(title="Australian Legal AI", version="1.0.0")
 
+# Mount static files
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 @app.get("/")
 def root():
+    return FileResponse("static/index.html")
+
+@app.get("/api")
+def api_root():
     return {
         "message": "🏛️ Australian Legal AI is LIVE!",
         "status": "operational",
