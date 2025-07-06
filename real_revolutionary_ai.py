@@ -1714,6 +1714,7 @@ def load_real_corpus():
             
             # Just test the connection - don't load anything
             try:
+                logger.info(f"🔍 Attempting to connect with split: corpus[:1]")
                 dataset = load_dataset(
                     "umarbutler/open-australian-legal-corpus", 
                     split="corpus[:1]",  # Just load 1 doc to test - correct split name
@@ -1858,7 +1859,7 @@ def full_features():
 
 @app.get("/health")
 def health_check():
-    """Health check endpoint for Railway"""
+    """Health check endpoint for Railway deployment"""
     return {
         "status": "healthy",
         "service": "Australian Legal AI",
@@ -1873,33 +1874,37 @@ def health_check():
 
 @app.get("/api")
 def api_info():
-    return {
-        "name": "🚀 ENHANCED REAL Revolutionary Australian Legal AI",
-        "version": "6.0.0-ENHANCED-REAL",
-        "data_source": "REAL Australian legal corpus",
-        "ai_technology": "HuggingFace semantic analysis" if semantic_model else "Enhanced keyword analysis",
-        "analysis_method": "Semantic similarity + legal element scoring",
-        "no_simulations": True,
-        "revolutionary_features": [
-            "🤖 AI-Powered Case Similarity Matching" + (" (HuggingFace)" if semantic_model else " (Enhanced)"),
-            "💼 Comprehensive Employment Law Risk Detection",
-            "⚖️ Specialized Constitutional Analysis",
-            "🔍 Enhanced Semantic Document Search",
-            "📊 Real-time Legal Element Scoring",
-            "🎯 Australian-Specific Legal Pattern Recognition"
-        ],
-        "corpus_size": len(legal_corpus),
-        "ai_models_loaded": semantic_model is not None,
-        "hf_corpus_available": hf_corpus_available,
-        "hf_token_provided": HF_TOKEN is not None,
-        "enhancement_status": {
-            "employment_risk_detection": "✅ Enhanced with Fair Work Act patterns",
-            "constitutional_analysis": "✅ Added specialized constitutional elements", 
-            "case_similarity": "✅ Semantic + keyword hybrid matching",
-            "ai_integration": "✅ Ready for HuggingFace token" if not semantic_model else "✅ HuggingFace active"
-        },
-        "disclaimer": "Enhanced analysis using real AI and legal data. Not a substitute for qualified legal advice."
-    }
+    try:
+        return {
+            "name": "🚀 ENHANCED REAL Revolutionary Australian Legal AI",
+            "version": "6.0.0-ENHANCED-REAL",
+            "data_source": "REAL Australian legal corpus",
+            "ai_technology": "HuggingFace semantic analysis" if semantic_model else "Enhanced keyword analysis",
+            "analysis_method": "Semantic similarity + legal element scoring",
+            "no_simulations": True,
+            "revolutionary_features": [
+                "🤖 AI-Powered Case Similarity Matching" + (" (HuggingFace)" if semantic_model else " (Enhanced)"),
+                "💼 Comprehensive Employment Law Risk Detection",
+                "⚖️ Specialized Constitutional Analysis",
+                "🔍 Enhanced Semantic Document Search",
+                "📊 Real-time Legal Element Scoring",
+                "🎯 Australian-Specific Legal Pattern Recognition"
+            ],
+            "corpus_size": len(legal_corpus),
+            "ai_models_loaded": semantic_model is not None,
+            "hf_corpus_available": hf_corpus_available,
+            "hf_token_provided": bool(HF_TOKEN),
+            "enhancement_status": {
+                "employment_risk_detection": "✅ Enhanced with Fair Work Act patterns",
+                "constitutional_analysis": "✅ Added specialized constitutional elements", 
+                "case_similarity": "✅ Semantic + keyword hybrid matching",
+                "ai_integration": "✅ Ready for HuggingFace token" if not semantic_model else "✅ HuggingFace active"
+            },
+            "disclaimer": "Enhanced analysis using real AI and legal data. Not a substitute for qualified legal advice."
+        }
+    except Exception as e:
+        logger.error(f"API info error: {e}")
+        raise HTTPException(status_code=500, detail=f"API info error: {str(e)}")
 
 @app.post("/api/v1/predict-outcome")
 async def predict_case_outcome(request: CaseOutcomePredictionRequest):
