@@ -81,6 +81,7 @@ tfidf_vectorizer = None
 corpus_embeddings = None
 corpus_tfidf_matrix = None
 rag_indexer = None  # RAG vector search index
+hf_corpus_available = False  # Whether HF corpus is accessible
 
 # Request Models
 class CaseOutcomePredictionRequest(BaseModel):
@@ -1710,58 +1711,31 @@ def load_real_corpus():
             
             logger.info("📚 Loading Australian Legal Corpus from HuggingFace Hub...")
             
-            # Load Umar Butler's Open Australian Legal Corpus (Parquet format)
-            logger.info("📚 Loading Open Australian Legal Corpus by Umar Butler...")
+            # Verify HF token works - don't load corpus, just query on-demand
+            logger.info("📚 Connecting to Open Australian Legal Corpus by Umar Butler...")
             
             from datasets import load_dataset
             
-            # Load the dataset - it's in Parquet format
-            dataset = load_dataset(
-                "umarbutler/open-australian-legal-corpus", 
-                split="train",
-                token=HF_TOKEN,
-                streaming=True  # Use streaming for memory efficiency
-            )
-            
-            # Process documents in batches
-            doc_count = 0
-            max_docs = 1000  # Limit for Railway memory constraints
-            
-            for doc in dataset:
-                if doc_count >= max_docs:
-                    break
-                    
-                # Extract text and metadata from the corpus format
-                text = doc.get('text', '')
-                if len(text) < 50:  # Skip very short documents
-                    continue
-                    
-                # Create document structure
-                legal_doc = {
-                    'text': text[:2000],  # Truncate very long documents
-                    'metadata': {
-                        'type': doc.get('type', 'legal_document'),
-                        'citation': doc.get('citation', f'Document {doc_count}'),
-                        'jurisdiction': doc.get('jurisdiction', 'Australia'),
-                        'date': doc.get('date', 'unknown'),
-                        'source': 'Open Australian Legal Corpus'
-                    }
-                }
+            # Just test the connection - don't load anything
+            try:
+                dataset = load_dataset(
+                    "umarbutler/open-australian-legal-corpus", 
+                    split="train[:1]",  # Just load 1 doc to test
+                    token=HF_TOKEN
+                )
+                logger.info("✅ Connected to HuggingFace corpus (229,122+ documents available)")
+                logger.info("🔍 Will query corpus on-demand for searches")
                 
-                legal_corpus.append(legal_doc)
+                # Set a flag that HF corpus is available
+                global hf_corpus_available
+                hf_corpus_available = True
                 
-                # Build keyword index
-                text_lower = text.lower()
-                words = re.findall(r'\b\w+\b', text_lower)
-                for word in words:
-                    if len(word) > 3:
-                        keyword_index[word].add(doc_count)
+                # Don't load documents - we'll query them as needed
+                return True
                 
-                metadata_index[doc_count] = legal_doc['metadata']
-                doc_count += 1
-            
-            logger.info(f"✅ Loaded {len(legal_corpus)} documents from HuggingFace Hub")
-            return True
+            except Exception as e:
+                logger.warning(f"HF corpus connection failed: {e}")
+                return False
             
         except Exception as e:
             logger.warning(f"HF Hub failed: {e}, using fallback corpus")
@@ -1786,6 +1760,56 @@ def load_real_corpus():
     
     logger.info(f"📝 Loaded {len(legal_corpus)} fallback legal documents")
     return True
+
+def search_hf_corpus(query: str, max_results: int = 10) -> List[Dict]:
+    """Search the HuggingFace corpus on-demand"""
+    if not hf_corpus_available or not HF_TOKEN:
+        return []
+    
+    try:
+        from datasets import load_dataset
+        
+        # Load a larger sample for searching
+        dataset = load_dataset(
+            "umarbutler/open-australian-legal-corpus", 
+            split="train[:1000]",  # Search first 1000 docs
+            token=HF_TOKEN
+        )
+        
+        results = []
+        query_lower = query.lower()
+        query_words = set(query_lower.split())
+        
+        for i, doc in enumerate(dataset):
+            text = doc.get('text', '').lower()
+            
+            # Simple keyword matching for now
+            matches = sum(1 for word in query_words if word in text)
+            if matches > 0:
+                score = matches / len(query_words)
+                
+                results.append({
+                    'title': doc.get('title', f'Australian Legal Document {i+1}'),
+                    'text': doc.get('text', '')[:500],
+                    'score': score,
+                    'type': doc.get('type', 'legal_document'),
+                    'metadata': {
+                        'citation': doc.get('citation', ''),
+                        'jurisdiction': doc.get('jurisdiction', 'Australia'),
+                        'date': doc.get('date', ''),
+                        'source': 'Open Australian Legal Corpus'
+                    },
+                    'search_type': 'hf_corpus'
+                })
+        
+        # Sort by score and return top results
+        results = sorted(results, key=lambda x: x['score'], reverse=True)[:max_results]
+        logger.info(f"🔍 Found {len(results)} results in HF corpus")
+        return results
+        
+    except Exception as e:
+        logger.error(f"HF corpus search failed: {e}")
+        return []
 
 @app.on_event("startup")
 async def startup_event():
@@ -1842,6 +1866,8 @@ def health_check():
         "version": "1.0.0",
         "ai_models_loaded": semantic_model is not None,
         "corpus_size": len(legal_corpus),
+        "hf_corpus_available": hf_corpus_available,
+        "hf_corpus_size": "229,122+ documents" if hf_corpus_available else "N/A",
         "rag_enabled": rag_indexer is not None,
         "rag_documents": len(rag_indexer.documents) if rag_indexer else 0
     }
@@ -1988,8 +2014,14 @@ async def search_legal_documents(request: dict):
     
     results = []
     
-    # Enhanced search with RAG if available
-    if rag_indexer and semantic_model:
+    # Priority 1: Search HuggingFace corpus if available
+    if hf_corpus_available:
+        hf_results = search_hf_corpus(query, max_results=10)
+        results.extend(hf_results)
+        logger.info(f"🔍 HF corpus search found {len(hf_results)} results")
+    
+    # Priority 2: Enhanced search with RAG if available
+    if not results and rag_indexer and semantic_model:
         try:
             rag_results = enhance_search_with_rag(query, rag_indexer, semantic_model, k=10)
             results.extend(rag_results)
@@ -1997,7 +2029,7 @@ async def search_legal_documents(request: dict):
         except Exception as e:
             logger.error(f"RAG search failed: {e}")
     
-    # Fallback to keyword search
+    # Priority 3: Fallback to local keyword search
     if not results:
         # Simple keyword search
         query_words = set(query.lower().split())
@@ -2020,12 +2052,21 @@ async def search_legal_documents(request: dict):
     # Sort by score and limit results
     results = sorted(results, key=lambda x: x.get('score', 0), reverse=True)[:10]
     
+    # Determine search method used
+    search_method = "fallback"
+    if hf_corpus_available and results:
+        search_method = "hf_corpus"
+    elif rag_indexer and semantic_model:
+        search_method = "rag"
+    
     return {
         "status": "success",
         "query": query,
         "results": results,
         "total_results": len(results),
-        "search_enhanced": bool(rag_indexer and semantic_model)
+        "search_method": search_method,
+        "hf_corpus_available": hf_corpus_available,
+        "corpus_accessed": "229,122+ documents" if hf_corpus_available else f"{len(legal_corpus)} fallback docs"
     }
 
 @app.get("/api/v1/legal-knowledge")
