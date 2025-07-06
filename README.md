@@ -6,12 +6,12 @@
 
 ## 🚀 What This Actually Does
 
-✅ **Searches 229k+ Real Australian Legal Documents** on-demand  
+✅ **Accesses Australian Legal Corpus** (229k+ documents, sampled for efficiency)  
 ✅ **Generates Professional Legal Briefs** with proper Australian formatting  
 ✅ **Creates Statements of Claim** for NSW, VIC, QLD, and other jurisdictions  
 ✅ **Understands Australian Legal Principles** (not US/UK law)  
-✅ **AI-Powered Semantic Search** over real legal precedents  
-✅ **Vector Similarity Matching** for finding relevant cases  
+✅ **AI-Powered Document Generation** using real legal knowledge  
+✅ **Memory-Optimized Search** of Australian legal precedents  
 
 ## 🏛️ Built With Real Australian Legal Data
 
@@ -36,15 +36,16 @@ Powered by **Umar Butler's Open Australian Legal Corpus**:
 ### ✅ What Works:
 - Professional document generation
 - Australian jurisdiction awareness
-- Real legal corpus search
+- Real legal corpus access (sampled for efficiency)
 - Court-ready formatting
-- Semantic similarity search
+- AI-powered legal knowledge integration
 
 ### ❌ What's Missing (Yet):
+- Comprehensive case law search (limited to samples for memory optimization)
 - Real-time legal updates
 - Integration with Westlaw/LexisNexis
 - Lawyer verification system
-- Full case law citations
+- Full case law citations with precise references
 - Practice management features
 
 ## 💰 Pricing (Future)

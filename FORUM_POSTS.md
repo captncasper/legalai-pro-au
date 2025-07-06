@@ -15,7 +15,7 @@ After seeing colleagues struggle with repetitive document drafting, I've built a
 - Suggests relevant case law and strategies
 - All based on Australian law (no US/UK confusion!)
 
-**Built with:** Umar Butler's Open Australian Legal Corpus (229,122+ documents) - special thanks for making Australian legal data accessible!
+**Built with:** Umar Butler's Open Australian Legal Corpus (229k+ documents, sampled for efficiency) - special thanks for making Australian legal data accessible!
 
 **Real test scenarios to try:**
 1. **Employment**: "Employee dismissed for reporting safety violations"
@@ -29,9 +29,9 @@ After seeing colleagues struggle with repetitive document drafting, I've built a
 - Is the document quality actually useful for practice?
 - Would you pay $39/month for this if polished?
 - What features would make it genuinely valuable?
-- Too complex or too simple?
+- Limitations: Currently samples corpus for memory efficiency
 
-Not trying to replace legal expertise - just want to build something genuinely useful for Australian practice. The legal industry deserves better tech than overpriced US solutions.
+Not trying to replace legal expertise - just want to build something genuinely useful for Australian practice. Being honest about current limitations while building toward comprehensive solution.
 
 Cheers!
 ```

@@ -3,18 +3,20 @@
 ## What We Actually Have (Be Honest!)
 
 ### Current Capabilities:
-✅ **229,122+ REAL Australian Legal Documents** (Umar Butler's Open Corpus)  
-✅ **On-demand corpus search** - queries real Australian cases  
+✅ **Access to Australian Legal Corpus** (Umar Butler's 229k+ documents, sampled for efficiency)  
 ✅ **Professional document generation** (Statement of Claim, briefs)  
 ✅ **Australian jurisdiction awareness** (NSW, VIC, QLD, etc.)  
-✅ **AI-powered semantic search** with HuggingFace models  
-✅ **Vector similarity search** (RAG) over legal precedents  
+✅ **AI-powered document creation** with real legal knowledge  
+✅ **Memory-optimized search** of Australian legal precedents  
+✅ **Court-ready formatting** for Australian courts  
 
 ### What We DON'T Have (Yet):
-❌ Full case law citations (working on it)  
+❌ Comprehensive case law search (limited by memory constraints)  
+❌ Full case law citations with precise references  
 ❌ Real-time legal updates  
 ❌ Integration with legal databases like Westlaw  
 ❌ Lawyer verification system  
+❌ Large-scale corpus analysis (samples used for efficiency)  
 
 ## Target Forums & Communities
 
