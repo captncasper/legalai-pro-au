@@ -15,13 +15,23 @@ After seeing colleagues struggle with repetitive document drafting, I've built a
 - Suggests relevant case law and strategies
 - All based on Australian law (no US/UK confusion!)
 
-**Built with:** The Australian Legal Corpus on HuggingFace - special thanks to the corpus contributors for making Australian legal data accessible!
+**Built with:** Umar Butler's Open Australian Legal Corpus (229,122+ documents) - special thanks for making Australian legal data accessible!
 
-**Example:** Input "client injured at shopping centre" → Full Statement of Claim with proper pleadings, particulars, and prayers for relief.
+**Real test scenarios to try:**
+1. **Employment**: "Employee dismissed for reporting safety violations"
+2. **Contract**: "Building contractor abandoned project, kept deposit"
+3. **Negligence**: "Elderly customer slipped on unmarked wet floor"
+4. **Property**: "Neighbour's tree damaged fence during storm"
 
-**Try it:** [YOUR-URL]
+**Try it:** https://legalai-pro-au-production.up.railway.app/
 
-Not trying to replace lawyers - just help with the tedious first draft. Would really appreciate feedback on accuracy and what features would actually help your practice.
+**Honest feedback wanted:**
+- Is the document quality actually useful for practice?
+- Would you pay $39/month for this if polished?
+- What features would make it genuinely valuable?
+- Too complex or too simple?
+
+Not trying to replace legal expertise - just want to build something genuinely useful for Australian practice. The legal industry deserves better tech than overpriced US solutions.
 
 Cheers!
 ```

@@ -1,22 +1,60 @@
-# 🦘 Australian Legal AI System
+# ⚖️ Australian Legal AI
 
-The **ONLY** AI system with access to 220,000+ Australian legal documents, providing semantic search and legal document analysis.
+**AI-powered legal document generation for Australian lawyers, built on 229,122+ real Australian legal documents.**
 
-## 🎯 Unique Value Proposition
+*Currently in beta - seeking feedback from Australian legal professionals.*
 
-- **Exclusive Dataset**: 220,000+ Australian legal documents (federal & state legislation, case law, regulations)
-- **Semantic Search**: State-of-the-art embedding-based search
-- **Commercial Ready**: RESTful API with usage-based billing
-- **No Competition**: First and only comprehensive Australian legal AI
+## 🚀 What This Actually Does
 
-## 💰 Monetization Strategy
+✅ **Searches 229k+ Real Australian Legal Documents** on-demand  
+✅ **Generates Professional Legal Briefs** with proper Australian formatting  
+✅ **Creates Statements of Claim** for NSW, VIC, QLD, and other jurisdictions  
+✅ **Understands Australian Legal Principles** (not US/UK law)  
+✅ **AI-Powered Semantic Search** over real legal precedents  
+✅ **Vector Similarity Matching** for finding relevant cases  
 
-| Customer Type | Pricing | Use Case |
-|--------------|---------|----------|
-| Law Firms | $500/month | Unlimited searches, precedent finding |
-| Legal Tech Startups | $0.10/query | API integration |
-| Government | Enterprise | Compliance checking, policy analysis |
-| Solo Practitioners | $50/month | Limited searches |
+## 🏛️ Built With Real Australian Legal Data
+
+Powered by **Umar Butler's Open Australian Legal Corpus**:
+- 229,122+ Australian legal documents
+- Statutes, regulations, and case law
+- Commonwealth, NSW, QLD, WA, SA, TAS, and Norfolk Island
+- [View the corpus](https://huggingface.co/datasets/umarbutler/open-australian-legal-corpus)
+
+## 🧪 Try It Live
+
+**Production URL**: https://legalai-pro-au-production.up.railway.app/
+
+### Quick Test:
+1. Visit the URL above
+2. Select matter type (negligence, contract, employment, etc.)
+3. Enter case facts and client details
+4. Generate professional legal brief
+
+## 📊 Current Capabilities vs Limitations
+
+### ✅ What Works:
+- Professional document generation
+- Australian jurisdiction awareness
+- Real legal corpus search
+- Court-ready formatting
+- Semantic similarity search
+
+### ❌ What's Missing (Yet):
+- Real-time legal updates
+- Integration with Westlaw/LexisNexis
+- Lawyer verification system
+- Full case law citations
+- Practice management features
+
+## 💰 Pricing (Future)
+
+Currently **FREE** during beta while gathering feedback.
+
+**Planned pricing** (based on market research):
+- **Basic**: Free (limited searches/month)
+- **Professional**: $39/month (unlimited + premium features)
+- **Enterprise**: $99/month (API access + integrations)
 
 ## 🚀 Quick Start
 
