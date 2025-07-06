@@ -1716,7 +1716,7 @@ def load_real_corpus():
             try:
                 dataset = load_dataset(
                     "umarbutler/open-australian-legal-corpus", 
-                    split="train[:1]",  # Just load 1 doc to test
+                    split="corpus[:1]",  # Just load 1 doc to test - correct split name
                     token=HF_TOKEN,
                     streaming=True  # Streaming for minimal memory
                 )
@@ -1769,7 +1769,7 @@ def search_hf_corpus(query: str, max_results: int = 10) -> List[Dict]:
         # Load a small sample for searching - Railway memory limit
         dataset = load_dataset(
             "umarbutler/open-australian-legal-corpus", 
-            split="train[:100]",  # Only 100 docs to avoid memory issues
+            split="corpus[:50]",  # Only 50 docs to avoid memory issues - correct split name
             token=HF_TOKEN,
             streaming=True  # Use streaming to minimize memory
         )
@@ -1833,15 +1833,15 @@ async def startup_event():
     logger.info("🔍 RAG disabled to optimize Railway memory usage")
     
     if corpus_loaded:
-        if ai_loaded:
+        if ai_loaded and hf_corpus_available:
             logger.info("✅ ENHANCED REAL legal AI ready with HuggingFace semantic analysis!")
-            if rag_indexer:
-                logger.info("🚀 RAG vector search active!")
+        elif ai_loaded:
+            logger.info("✅ ENHANCED REAL legal AI ready with AI models (HF corpus unavailable)")
         else:
             logger.info("✅ ENHANCED REAL legal AI ready with enhanced keyword analysis!")
             logger.info("🔑 Add HF_TOKEN to enable full AI semantic analysis")
     else:
-        logger.error("❌ Failed to initialize Enhanced Legal AI")
+        logger.info("✅ Legal AI ready with fallback corpus (HF corpus unavailable)")
 
 # Routes
 @app.get("/")
@@ -1890,7 +1890,7 @@ def api_info():
         ],
         "corpus_size": len(legal_corpus),
         "ai_models_loaded": semantic_model is not None,
-        "semantic_embeddings": corpus_embeddings is not None,
+        "hf_corpus_available": hf_corpus_available,
         "hf_token_provided": HF_TOKEN is not None,
         "enhancement_status": {
             "employment_risk_detection": "✅ Enhanced with Fair Work Act patterns",
