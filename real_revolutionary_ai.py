@@ -75,12 +75,10 @@ metadata_index = {}
 case_patterns = {}
 legal_principles = {}
 
-# AI Enhancement variables
+# AI Enhancement variables (memory optimized for Railway)
 semantic_model = None
 tfidf_vectorizer = None
-corpus_embeddings = None
 corpus_tfidf_matrix = None
-rag_indexer = None  # RAG vector search index
 hf_corpus_available = False  # Whether HF corpus is accessible
 
 # Request Models
@@ -1630,7 +1628,7 @@ class RealLegalStrategyGenerator:
 # AI Enhancement Functions
 def load_ai_models():
     """Load HuggingFace models for enhanced semantic analysis"""
-    global semantic_model, corpus_embeddings
+    global semantic_model
     
     if not HF_TOKEN:
         logger.info("📝 No HuggingFace token provided - using enhanced keyword analysis")
@@ -1641,7 +1639,7 @@ def load_ai_models():
         
         if SENTENCE_TRANSFORMERS_AVAILABLE:
             from sentence_transformers import SentenceTransformer
-            # Use small model optimized for Railway deployment
+            # Use smallest possible model for Railway memory constraints
             semantic_model = SentenceTransformer('all-MiniLM-L6-v2', 
                                                device='cpu',  # Force CPU
                                                cache_folder='/tmp/models')  # Railway temp storage
@@ -1650,12 +1648,10 @@ def load_ai_models():
             logger.warning("⚠️ sentence-transformers not available, install with: pip install sentence-transformers")
             return False
         
-        # Build corpus embeddings if corpus loaded
+        # Skip corpus embeddings to save memory on Railway
         if legal_corpus and semantic_model:
-            logger.info("🔄 Building semantic embeddings for corpus...")
-            corpus_texts = [doc['text'][:1000] for doc in legal_corpus]  # First 1000 chars
-            corpus_embeddings = semantic_model.encode(corpus_texts, show_progress_bar=True)
-            logger.info(f"✅ Built embeddings for {len(corpus_embeddings)} documents")
+            logger.info("🔄 Skipping corpus embeddings to save Railway memory")
+            logger.info(f"✅ AI models ready for on-demand use")
         
         return True
         
@@ -1721,7 +1717,8 @@ def load_real_corpus():
                 dataset = load_dataset(
                     "umarbutler/open-australian-legal-corpus", 
                     split="train[:1]",  # Just load 1 doc to test
-                    token=HF_TOKEN
+                    token=HF_TOKEN,
+                    streaming=True  # Streaming for minimal memory
                 )
                 logger.info("✅ Connected to HuggingFace corpus (229,122+ documents available)")
                 logger.info("🔍 Will query corpus on-demand for searches")
@@ -1769,18 +1766,23 @@ def search_hf_corpus(query: str, max_results: int = 10) -> List[Dict]:
     try:
         from datasets import load_dataset
         
-        # Load a larger sample for searching
+        # Load a small sample for searching - Railway memory limit
         dataset = load_dataset(
             "umarbutler/open-australian-legal-corpus", 
-            split="train[:1000]",  # Search first 1000 docs
-            token=HF_TOKEN
+            split="train[:100]",  # Only 100 docs to avoid memory issues
+            token=HF_TOKEN,
+            streaming=True  # Use streaming to minimize memory
         )
         
         results = []
         query_lower = query.lower()
         query_words = set(query_lower.split())
         
-        for i, doc in enumerate(dataset):
+        doc_count = 0
+        for doc in dataset:
+            if doc_count >= 50:  # Process max 50 docs to avoid memory issues
+                break
+                
             text = doc.get('text', '').lower()
             
             # Simple keyword matching for now
@@ -1789,8 +1791,8 @@ def search_hf_corpus(query: str, max_results: int = 10) -> List[Dict]:
                 score = matches / len(query_words)
                 
                 results.append({
-                    'title': doc.get('title', f'Australian Legal Document {i+1}'),
-                    'text': doc.get('text', '')[:500],
+                    'title': doc.get('title', f'Australian Legal Document {doc_count+1}'),
+                    'text': doc.get('text', '')[:300],  # Shorter snippets
                     'score': score,
                     'type': doc.get('type', 'legal_document'),
                     'metadata': {
@@ -1801,6 +1803,8 @@ def search_hf_corpus(query: str, max_results: int = 10) -> List[Dict]:
                     },
                     'search_type': 'hf_corpus'
                 })
+            
+            doc_count += 1
         
         # Sort by score and return top results
         results = sorted(results, key=lambda x: x['score'], reverse=True)[:max_results]
@@ -1824,14 +1828,9 @@ async def startup_event():
     # Try to load AI models
     ai_loaded = load_ai_models()
     
-    # Initialize RAG if available
+    # Skip RAG initialization to save memory on Railway
     global rag_indexer
-    if RAG_AVAILABLE and ai_loaded and corpus_loaded:
-        try:
-            rag_indexer = add_rag_to_app(app, legal_corpus, semantic_model)
-            logger.info("🔍 RAG vector search enabled!")
-        except Exception as e:
-            logger.warning(f"RAG initialization failed: {e}")
+    logger.info("🔍 RAG disabled to optimize Railway memory usage")
     
     if corpus_loaded:
         if ai_loaded:
@@ -1867,9 +1866,9 @@ def health_check():
         "ai_models_loaded": semantic_model is not None,
         "corpus_size": len(legal_corpus),
         "hf_corpus_available": hf_corpus_available,
-        "hf_corpus_size": "229,122+ documents" if hf_corpus_available else "N/A",
-        "rag_enabled": rag_indexer is not None,
-        "rag_documents": len(rag_indexer.documents) if rag_indexer else 0
+        "hf_corpus_size": "229,122+ documents (sampled for memory)" if hf_corpus_available else "N/A",
+        "rag_enabled": False,  # Disabled for Railway memory optimization
+        "memory_optimized": True
     }
 
 @app.get("/api")
