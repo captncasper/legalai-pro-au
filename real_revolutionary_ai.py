@@ -1714,13 +1714,17 @@ def load_real_corpus():
             
             # Just test the connection - don't load anything
             try:
-                logger.info(f"🔍 Attempting to connect with split: corpus[:1]")
+                logger.info(f"🔍 Attempting to connect with split: corpus")
                 dataset = load_dataset(
                     "umarbutler/open-australian-legal-corpus", 
-                    split="corpus[:1]",  # Just load 1 doc to test - correct split name
+                    split="corpus",  # Load full corpus split - can't slice this dataset
                     token=HF_TOKEN,
                     streaming=True  # Streaming for minimal memory
                 )
+                
+                # Test that we can iterate through at least one document
+                first_doc = next(iter(dataset))
+                logger.info(f"🔍 Test document found: {first_doc.get('text', '')[:100]}...")
                 logger.info("✅ Connected to HuggingFace corpus (229,122+ documents available)")
                 logger.info("🔍 Will query corpus on-demand for searches")
                 
@@ -1767,10 +1771,10 @@ def search_hf_corpus(query: str, max_results: int = 10) -> List[Dict]:
     try:
         from datasets import load_dataset
         
-        # Load a small sample for searching - Railway memory limit
+        # Load corpus for searching - Railway memory limit
         dataset = load_dataset(
             "umarbutler/open-australian-legal-corpus", 
-            split="corpus[:50]",  # Only 50 docs to avoid memory issues - correct split name
+            split="corpus",  # Full corpus but we'll limit iteration
             token=HF_TOKEN,
             streaming=True  # Use streaming to minimize memory
         )
