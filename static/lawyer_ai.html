@@ -296,6 +296,7 @@
                             <p><strong>Generated:</strong> ${new Date().toLocaleDateString('en-AU')}</p>
                             <p><strong>Jurisdiction:</strong> ${brief.jurisdiction_info}</p>
                             <p class="mt-2 text-xs"><em>This document was generated using Australian Legal AI. Professional legal review recommended before filing.</em></p>
+                            <p class="mt-2 text-xs text-gray-500"><em>Powered by the Australian Legal Corpus on HuggingFace. Special thanks to the corpus contributors for making Australian legal data accessible.</em></p>
                         </div>
                     </div>
                 </div>
@@ -317,5 +318,20 @@
             }
         };
     </script>
+    <!-- Credits Footer -->
+    <div class="bg-gray-800 text-white py-6 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-sm mb-2">⚖️ Australian Legal AI - Professional Legal Document Generator</p>
+            <p class="text-xs text-gray-400">
+                This tool utilizes the <a href="https://huggingface.co/datasets" class="text-blue-400 hover:text-blue-300" target="_blank">Australian Legal Corpus on HuggingFace</a>
+            </p>
+            <p class="text-xs text-gray-400 mt-1">
+                Special thanks to the corpus contributors for making Australian legal data openly accessible
+            </p>
+            <p class="text-xs text-gray-500 mt-2">
+                AI-powered analysis should always be reviewed by qualified legal professionals
+            </p>
+        </div>
+    </div>
 </body>
 </html>
