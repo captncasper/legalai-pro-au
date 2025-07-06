@@ -41,6 +41,14 @@ try:
 except ImportError:
     SENTENCE_TRANSFORMERS_AVAILABLE = False
 
+# Import RAG integration
+try:
+    from rag_integration import LegalRAGIndexer, enhance_search_with_rag, add_rag_to_app
+    RAG_AVAILABLE = True
+except ImportError:
+    RAG_AVAILABLE = False
+    logger.warning("RAG integration not available")
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -72,6 +80,7 @@ semantic_model = None
 tfidf_vectorizer = None
 corpus_embeddings = None
 corpus_tfidf_matrix = None
+rag_indexer = None  # RAG vector search index
 
 # Request Models
 class CaseOutcomePredictionRequest(BaseModel):
@@ -1763,9 +1772,20 @@ async def startup_event():
     # Try to load AI models
     ai_loaded = load_ai_models()
     
+    # Initialize RAG if available
+    global rag_indexer
+    if RAG_AVAILABLE and ai_loaded and corpus_loaded:
+        try:
+            rag_indexer = add_rag_to_app(app, legal_corpus, semantic_model)
+            logger.info("🔍 RAG vector search enabled!")
+        except Exception as e:
+            logger.warning(f"RAG initialization failed: {e}")
+    
     if corpus_loaded:
         if ai_loaded:
             logger.info("✅ ENHANCED REAL legal AI ready with HuggingFace semantic analysis!")
+            if rag_indexer:
+                logger.info("🚀 RAG vector search active!")
         else:
             logger.info("✅ ENHANCED REAL legal AI ready with enhanced keyword analysis!")
             logger.info("🔑 Add HF_TOKEN to enable full AI semantic analysis")
@@ -1793,7 +1813,9 @@ def health_check():
         "service": "Australian Legal AI",
         "version": "1.0.0",
         "ai_models_loaded": semantic_model is not None,
-        "corpus_size": len(legal_corpus)
+        "corpus_size": len(legal_corpus),
+        "rag_enabled": rag_indexer is not None,
+        "rag_documents": len(rag_indexer.documents) if rag_indexer else 0
     }
 
 @app.get("/api")
@@ -1927,6 +1949,56 @@ async def generate_legal_brief(request: LegalBriefRequest):
     except Exception as e:
         logger.error(f"Legal brief generation error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/v1/search")
+async def search_legal_documents(request: dict):
+    """Enhanced legal document search with RAG support"""
+    query = request.get("query", "")
+    
+    if not query:
+        raise HTTPException(status_code=400, detail="Query is required")
+    
+    results = []
+    
+    # Enhanced search with RAG if available
+    if rag_indexer and semantic_model:
+        try:
+            rag_results = enhance_search_with_rag(query, rag_indexer, semantic_model, k=10)
+            results.extend(rag_results)
+            logger.info(f"🔍 RAG search found {len(rag_results)} results")
+        except Exception as e:
+            logger.error(f"RAG search failed: {e}")
+    
+    # Fallback to keyword search
+    if not results:
+        # Simple keyword search
+        query_words = set(query.lower().split())
+        for i, doc in enumerate(legal_corpus[:50]):  # Limit for performance
+            text = doc.get('text', '').lower()
+            
+            # Calculate relevance score
+            matches = sum(1 for word in query_words if word in text)
+            if matches > 0:
+                score = matches / len(query_words)
+                results.append({
+                    'title': f'Legal Document {i+1}',
+                    'text': doc.get('text', '')[:300],
+                    'score': score,
+                    'type': 'legal_document',
+                    'metadata': doc.get('metadata', {}),
+                    'search_type': 'keyword'
+                })
+    
+    # Sort by score and limit results
+    results = sorted(results, key=lambda x: x.get('score', 0), reverse=True)[:10]
+    
+    return {
+        "status": "success",
+        "query": query,
+        "results": results,
+        "total_results": len(results),
+        "search_enhanced": bool(rag_indexer and semantic_model)
+    }
 
 @app.get("/api/v1/legal-knowledge")
 def get_legal_knowledge():
