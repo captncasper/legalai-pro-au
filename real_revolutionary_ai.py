@@ -32,7 +32,7 @@ except ImportError:
     logger.warning("HuggingFace not installed - using enhanced keyword analysis")
 
 # === HUGGINGFACE TOKEN FROM ENVIRONMENT ===
-HF_TOKEN = os.getenv("HF_TOKEN", "")  # Set this in Railway environment variables
+HF_TOKEN = os.getenv("HF_TOKEN", "")  # NEVER commit tokens to git!
 
 # Try sentence-transformers if available
 try:
@@ -1631,8 +1631,10 @@ def load_ai_models():
         
         if SENTENCE_TRANSFORMERS_AVAILABLE:
             from sentence_transformers import SentenceTransformer
-            # Use legal-focused model or general semantic model
-            semantic_model = SentenceTransformer('all-MiniLM-L6-v2')
+            # Use small model optimized for Railway deployment
+            semantic_model = SentenceTransformer('all-MiniLM-L6-v2', 
+                                               device='cpu',  # Force CPU
+                                               cache_folder='/tmp/models')  # Railway temp storage
             logger.info("✅ Sentence transformer model loaded")
         else:
             logger.warning("⚠️ sentence-transformers not available, install with: pip install sentence-transformers")
@@ -1686,32 +1688,68 @@ real_legal_strategy_generator = RealLegalStrategyGenerator()
 professional_brief_generator = ProfessionalLegalBriefGenerator()
 
 def load_real_corpus():
-    """Load real legal corpus"""
+    """Load real legal corpus from HuggingFace Hub or fallback"""
     global legal_corpus, keyword_index, metadata_index
     
-    try:
-        logger.info("Loading REAL legal corpus...")
-        with open('corpus_export/australian_legal_corpus.jsonl', 'r') as f:
-            for i, line in enumerate(f):
-                if i >= 1000:
-                    break
-                doc = json.loads(line.strip())
-                legal_corpus.append(doc)
-                
-                # Build keyword index for real searches
-                text = doc['text'].lower()
-                words = re.findall(r'\b\w+\b', text)
-                for word in words:
-                    if len(word) > 3:
-                        keyword_index[word].add(i)
-                
-                metadata_index[i] = doc.get('metadata', {})
-        
-        logger.info(f"Loaded {len(legal_corpus)} REAL legal documents")
-        return True
-    except Exception as e:
-        logger.error(f"Failed to load corpus: {e}")
-        return False
+    legal_corpus.clear()
+    keyword_index.clear() 
+    metadata_index.clear()
+    
+    if HF_TOKEN:
+        try:
+            from huggingface_hub import hf_hub_download
+            
+            logger.info("📚 Loading Australian Legal Corpus from HuggingFace Hub...")
+            
+            # Try to download from HuggingFace Hub
+            corpus_file = hf_hub_download(
+                repo_id="aussie-legal/legal-corpus",  # Public repo
+                filename="australian_legal_corpus.jsonl",
+                token=HF_TOKEN,
+                cache_dir="/tmp/hf_cache"
+            )
+            
+            with open(corpus_file, 'r', encoding='utf-8') as f:
+                for i, line in enumerate(f):
+                    if i >= 800:  # Railway memory limit
+                        break
+                    doc = json.loads(line.strip())
+                    legal_corpus.append(doc)
+                    
+                    text = doc['text'].lower()
+                    words = re.findall(r'\b\w+\b', text)
+                    for word in words:
+                        if len(word) > 3:
+                            keyword_index[word].add(i)
+                    
+                    metadata_index[i] = doc.get('metadata', {})
+            
+            logger.info(f"✅ Loaded {len(legal_corpus)} documents from HuggingFace Hub")
+            return True
+            
+        except Exception as e:
+            logger.warning(f"HF Hub failed: {e}, using fallback corpus")
+    
+    # Fallback: built-in minimal corpus
+    sample_docs = [
+        {"text": "Donoghue v Stevenson [1932] AC 562 established the neighbour principle in negligence law. The case held that a manufacturer owes a duty of care to the ultimate consumer.", "metadata": {"type": "case_law", "citation": "Donoghue v Stevenson [1932] AC 562", "jurisdiction": "UK"}},
+        {"text": "Civil Liability Act 2002 (NSW) s 5B requires that for negligence, the plaintiff must prove that a reasonable person in the defendant's position would have foreseen the risk of harm.", "metadata": {"type": "legislation", "citation": "Civil Liability Act 2002 (NSW)", "jurisdiction": "NSW"}},
+        {"text": "In contract law, consideration must be sufficient but need not be adequate. This principle was established in Thomas v Thomas (1842) and remains good law in Australia.", "metadata": {"type": "case_law", "citation": "Thomas v Thomas (1842)", "jurisdiction": "Australia"}},
+        {"text": "The Fair Work Act 2009 (Cth) provides the framework for employment relationships in Australia, including unfair dismissal protections under Part 3-2.", "metadata": {"type": "legislation", "citation": "Fair Work Act 2009 (Cth)", "jurisdiction": "Australia"}},
+        {"text": "Australian Consumer Law under Schedule 2 of the Competition and Consumer Act 2010 provides consumer guarantees for goods and services.", "metadata": {"type": "legislation", "citation": "Competition and Consumer Act 2010 (Cth)", "jurisdiction": "Australia"}}
+    ]
+    
+    for i, doc in enumerate(sample_docs):
+        legal_corpus.append(doc)
+        text = doc['text'].lower()
+        words = re.findall(r'\b\w+\b', text)
+        for word in words:
+            if len(word) > 3:
+                keyword_index[word].add(i)
+        metadata_index[i] = doc.get('metadata', {})
+    
+    logger.info(f"📝 Loaded {len(legal_corpus)} fallback legal documents")
+    return True
 
 @app.on_event("startup")
 async def startup_event():
