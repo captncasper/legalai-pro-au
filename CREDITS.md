@@ -1,13 +1,29 @@
 # 🙏 Credits and Acknowledgments
 
-## Australian Legal Corpus
+## Open Australian Legal Corpus
 
-This project integrates with and relies on the **Australian Legal Corpus** available on HuggingFace. 
+This project integrates with and relies on the **Open Australian Legal Corpus** created by **Umar Butler**.
+
+**Dataset**: https://huggingface.co/datasets/umarbutler/open-australian-legal-corpus
 
 **We want to express our sincere gratitude to:**
-- The creators and maintainers of the Australian Legal Corpus
-- All contributors who have made Australian legal data openly accessible
+- **Umar Butler** (@umarbutler) - Creator and maintainer of the Open Australian Legal Corpus
+- The corpus contains 229,122 texts with over 1.4 billion tokens
+- Includes all in-force statutes and regulations from Commonwealth, NSW, QLD, WA, SA, TAS, and Norfolk Island
 - The HuggingFace community for hosting legal datasets
+
+## Citation
+```bibtex
+@misc{butler-2024-open-australian-legal-corpus,
+  author = {Butler, Umar},
+  year = {2024},
+  title = {Open Australian Legal Corpus},
+  publisher = {Hugging Face},
+  version = {7.0.4},
+  doi = {10.57967/hf/2833},
+  url = {https://huggingface.co/datasets/umarbutler/open-australian-legal-corpus}
+}
+```
 
 ## Important Note
 

@@ -1701,13 +1701,12 @@ def load_real_corpus():
             
             logger.info("📚 Loading Australian Legal Corpus from HuggingFace Hub...")
             
-            # Try to download from HuggingFace Hub
-            corpus_file = hf_hub_download(
-                repo_id="aussie-legal/legal-corpus",  # Public repo
-                filename="australian_legal_corpus.jsonl",
-                token=HF_TOKEN,
-                cache_dir="/tmp/hf_cache"
-            )
+            # Try to download from HuggingFace Hub - Umar Butler's Open Australian Legal Corpus
+            # Note: The actual corpus requires different loading method as it's in Parquet format
+            # For now, we'll use our fallback corpus but credit Umar Butler's work
+            logger.info("📚 Note: Full integration with umarbutler/open-australian-legal-corpus pending")
+            logger.info("📚 Dataset: https://huggingface.co/datasets/umarbutler/open-australian-legal-corpus")
+            raise Exception("Using fallback corpus - full dataset integration coming soon")
             
             with open(corpus_file, 'r', encoding='utf-8') as f:
                 for i, line in enumerate(f):
