@@ -1710,27 +1710,55 @@ def load_real_corpus():
             
             logger.info("📚 Loading Australian Legal Corpus from HuggingFace Hub...")
             
-            # Try to download from HuggingFace Hub - Umar Butler's Open Australian Legal Corpus
-            # Note: The actual corpus requires different loading method as it's in Parquet format
-            # For now, we'll use our fallback corpus but credit Umar Butler's work
-            logger.info("📚 Note: Full integration with umarbutler/open-australian-legal-corpus pending")
-            logger.info("📚 Dataset: https://huggingface.co/datasets/umarbutler/open-australian-legal-corpus")
-            raise Exception("Using fallback corpus - full dataset integration coming soon")
+            # Load Umar Butler's Open Australian Legal Corpus (Parquet format)
+            logger.info("📚 Loading Open Australian Legal Corpus by Umar Butler...")
             
-            with open(corpus_file, 'r', encoding='utf-8') as f:
-                for i, line in enumerate(f):
-                    if i >= 800:  # Railway memory limit
-                        break
-                    doc = json.loads(line.strip())
-                    legal_corpus.append(doc)
+            from datasets import load_dataset
+            
+            # Load the dataset - it's in Parquet format
+            dataset = load_dataset(
+                "umarbutler/open-australian-legal-corpus", 
+                split="train",
+                token=HF_TOKEN,
+                streaming=True  # Use streaming for memory efficiency
+            )
+            
+            # Process documents in batches
+            doc_count = 0
+            max_docs = 1000  # Limit for Railway memory constraints
+            
+            for doc in dataset:
+                if doc_count >= max_docs:
+                    break
                     
-                    text = doc['text'].lower()
-                    words = re.findall(r'\b\w+\b', text)
-                    for word in words:
-                        if len(word) > 3:
-                            keyword_index[word].add(i)
+                # Extract text and metadata from the corpus format
+                text = doc.get('text', '')
+                if len(text) < 50:  # Skip very short documents
+                    continue
                     
-                    metadata_index[i] = doc.get('metadata', {})
+                # Create document structure
+                legal_doc = {
+                    'text': text[:2000],  # Truncate very long documents
+                    'metadata': {
+                        'type': doc.get('type', 'legal_document'),
+                        'citation': doc.get('citation', f'Document {doc_count}'),
+                        'jurisdiction': doc.get('jurisdiction', 'Australia'),
+                        'date': doc.get('date', 'unknown'),
+                        'source': 'Open Australian Legal Corpus'
+                    }
+                }
+                
+                legal_corpus.append(legal_doc)
+                
+                # Build keyword index
+                text_lower = text.lower()
+                words = re.findall(r'\b\w+\b', text_lower)
+                for word in words:
+                    if len(word) > 3:
+                        keyword_index[word].add(doc_count)
+                
+                metadata_index[doc_count] = legal_doc['metadata']
+                doc_count += 1
             
             logger.info(f"✅ Loaded {len(legal_corpus)} documents from HuggingFace Hub")
             return True
