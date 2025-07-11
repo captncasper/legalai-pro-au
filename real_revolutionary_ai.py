@@ -60,10 +60,21 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "*",  # Allow all origins for development
+        "https://prestigecorp.au",
+        "https://www.prestigecorp.au",
+        "https://prestigecorp-portfolio.vercel.app",
+        "https://prestigecorp-portfolio-pujwm04hc-prestigecorp4s-projects.vercel.app",
+        "http://localhost:3000",
+        "http://localhost:5000",
+        "http://localhost:8000"
+    ],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=3600
 )
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
